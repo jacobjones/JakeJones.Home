@@ -6,6 +6,6 @@ namespace JakeJones.Home.Music.Repositories
 {
 	public interface IRecentTracksRepository
 	{
-		Task<IList<ITrack>> GetRecentlyListenedTracks(int limit);
+		Task<IReadOnlyCollection<ITrack>> GetRecentlyListenedTracks(int limit);
 	}
 }

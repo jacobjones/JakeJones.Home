@@ -2,7 +2,7 @@
 using JakeJones.Home.Music.Managers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JakeJones.Home.Music.Implementation.Bootstrapper
+namespace JakeJones.Home.Music.Implementation.Bootstrappers
 {
 	public static class MusicImplementationBootstrapper
 	{

@@ -1,13 +1,14 @@
-﻿using System.Net.Cache;
+﻿using System;
+using System.Net.Cache;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.DataAccess.LastFm.Configuration;
 using JakeJones.Home.Music.DataAccess.LastFm.Connector.UrlParameters;
 using JakeJones.Home.Music.DataAccess.LastFm.Models;
 using RestSharp;
 
-namespace JakeJones.Home.Music.DataAccess.LastFm.Connector
+namespace JakeJones.Home.Music.DataAccess.LastFm.Clients
 {
-	internal class LastFmApiConnector : ILastFmApiConnector
+	internal class LastFmClient : ILastFmClient
 	{
 		private readonly ILastFmOptions _lastFmOptions;
 		private readonly IRestClient _restClient;
@@ -15,7 +16,7 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Connector
 
 		private const string BaseUrl = "http://ws.audioscrobbler.com/2.0/";
 
-		public LastFmApiConnector(ILastFmOptions lastFmOptions)
+		public LastFmClient(ILastFmOptions lastFmOptions)
 		{
 			_lastFmOptions = lastFmOptions;
 
@@ -27,7 +28,7 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Connector
 
 		}
 
-		public async Task<RecentTracksResult> GetRecentTracks(string user, int limit)
+		public async Task<RecentTracksResult> GetRecentTracks(string user, int limit, DateTime? from = null)
 		{
 			var request = new RestRequest(Method.GET);
 
@@ -39,6 +40,11 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Connector
 
 			request.AddParameter("user", user);
 			request.AddParameter("limit", limit);
+
+			if (from.HasValue)
+			{
+				request.AddParameter("from", ((DateTimeOffset)from).ToUnixTimeSeconds());
+			}
 
 			var response = await _restClient.ExecuteGetTaskAsync<RecentTracksResult>(request);
 

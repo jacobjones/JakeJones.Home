@@ -1,4 +1,4 @@
-﻿namespace JakeJones.Home.Music.DataAccess.Discogs.Connectors.UrlParameters
+﻿namespace JakeJones.Home.Music.DataAccess.Discogs.Clients.UrlParameters
 {
 	/// <summary>
 	/// Discogs API Methods

@@ -1,6 +1,6 @@
-﻿using JakeJones.Home.Music.DataAccess.Discogs.Bootstrapper;
-using JakeJones.Home.Music.DataAccess.LastFm.Bootstrapper;
-using JakeJones.Home.Music.Implementation.Bootstrapper;
+﻿using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
+using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
+using JakeJones.Home.Music.Implementation.Bootstrappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;

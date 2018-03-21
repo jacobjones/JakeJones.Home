@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Music.DataAc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Website", "JakeJones.Home.Website\JakeJones.Home.Website.csproj", "{70374F40-D1F5-4449-B141-D15F776DBEDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakeJones.Home.Music.Implementation", "JakeJones.Home.Music.Implementation\JakeJones.Home.Music.Implementation.csproj", "{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Music.Implementation", "JakeJones.Home.Music.Implementation\JakeJones.Home.Music.Implementation.csproj", "{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

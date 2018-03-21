@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using JakeJones.Home.Music.Managers;
+using JakeJones.Home.Music.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JakeJones.Home.Website.Controllers.Api
@@ -17,7 +19,9 @@ namespace JakeJones.Home.Website.Controllers.Api
 		[Route("test")]
 		public async Task<IActionResult> Test()
 		{
-			return Ok(await _recentMusicManager.GetRecentTracks(50));
+			var tracks = await _recentMusicManager.GetRecentTracks(50);
+
+			return Ok(tracks.Select(x => new { x.Key.Artist, x.Key.Title, Tracks = x.Value.Select(t => t.Title).ToArray() }));
 		}
 	}
 }

@@ -1,12 +1,12 @@
-﻿using JakeJones.Home.Music.DataAccess.Discogs.Configuration;
-using JakeJones.Home.Music.DataAccess.Discogs.Connectors;
+﻿using JakeJones.Home.Music.DataAccess.Discogs.Clients;
+using JakeJones.Home.Music.DataAccess.Discogs.Configuration;
 using JakeJones.Home.Music.DataAccess.Discogs.Repositories;
 using JakeJones.Home.Music.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
-namespace JakeJones.Home.Music.DataAccess.Discogs.Bootstrapper
+namespace JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers
 {
 	public static class MusicAlbumsDataAccessBootstrapper
 	{
@@ -16,8 +16,8 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Bootstrapper
 			services.Configure<DiscogsOptions>(configuration.GetSection("discogs"));
 			services.AddSingleton<IDiscogsOptions>(x => x.GetService<IOptions<DiscogsOptions>>().Value);
 
-			services.AddSingleton<IAlbumRepository, AlbumRepository>();
-			services.AddSingleton<IDiscogsApiConnector, DiscogsApiConnector>();
+			services.AddSingleton<IAlbumRepository, AlbumCachingRepository>();
+			services.AddSingleton<IDiscogsClient, DiscogsClient>();
 		}
 	}
 }

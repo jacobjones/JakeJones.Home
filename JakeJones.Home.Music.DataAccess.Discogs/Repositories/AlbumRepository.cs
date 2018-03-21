@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using JakeJones.Home.Music.DataAccess.Discogs.Connectors;
+using JakeJones.Home.Music.DataAccess.Discogs.Clients;
 using JakeJones.Home.Music.Models;
 using JakeJones.Home.Music.Repositories;
 
@@ -8,17 +8,17 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Repositories
 {
 	internal class AlbumRepository : IAlbumRepository
 	{
-		private readonly IDiscogsApiConnector _discogsApiConnector;
+		private readonly IDiscogsClient _discogsClient;
 
-		public AlbumRepository(IDiscogsApiConnector discogsApiConnector)
+		public AlbumRepository(IDiscogsClient discogsClient)
 		{
-			_discogsApiConnector = discogsApiConnector;
+			_discogsClient = discogsClient;
 		}
 
-		public async Task<IAlbum> GetAlbum(string artist, string title)
+		public virtual async Task<IAlbum> GetAlbum(string artist, string title)
 		{
 			// Should only return one result
-			var searchResult = await _discogsApiConnector.SearchByAlbum(artist, title, 1, 1);
+			var searchResult = await _discogsClient.SearchByAlbum(artist, title, 1, 1);
 
 			var albumResult = searchResult?.Results.FirstOrDefault();
 

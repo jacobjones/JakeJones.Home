@@ -1,4 +1,6 @@
-﻿namespace JakeJones.Home.Music.Models
+﻿using System;
+
+namespace JakeJones.Home.Music.Models
 {
 	public interface ITrack
 	{
