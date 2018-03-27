@@ -1,19 +1,21 @@
 ﻿/// <binding AfterBuild='sass, js' />
-var gulp = require("gulp"),
-	concat = require("gulp-concat"),
-	cssmin = require("gulp-cssmin"),
-	htmlmin = require("gulp-htmlmin"),
-	uglify = require("gulp-uglify"),
-	merge = require("merge-stream"),
-	del = require("del"),
-	fs = require("fs"),
-	sass = require("gulp-sass"),
-	config = require("./gulp.config.json");
-	
+var gulp	= require("gulp"),
+	concat	= require("gulp-concat"),
+	cssmin	= require("gulp-cssmin"),
+	htmlmin	= require("gulp-htmlmin"),
+	uglify	= require("gulp-uglify"),
+	merge	= require("merge-stream"),
+	del		= require("del"),
+	fs		= require("fs"),
+	sass	= require("gulp-sass"),
+	neat	= require("bourbon-neat").includePaths,
+	config	= require("./gulp.config.json");
 
 gulp.task("sass:compile", function () {
 	return gulp.src(config.sass.src)
-		.pipe(sass())
+		.pipe(sass({
+			includePaths: [neat]
+		}))
 		.pipe(concat(config.css.concat))
 		.pipe(gulp.dest(config.css.path));
 });

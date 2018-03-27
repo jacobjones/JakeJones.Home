@@ -1,5 +1,12 @@
 body {
+  width: calc(100% - 40px);
+  float: left;
+  margin-left: 20px;
   background-color: #CC0000; }
+  body::after {
+    clear: both;
+    content: "";
+    display: block; }
 
 .jake {
   color: white; }

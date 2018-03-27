@@ -1,6 +1,10 @@
-﻿$base: #CC0000;
+﻿@import "neat";
+
+$base: #CC0000;
 
 body {
+	@include grid-container;
+	@include grid-column;
 	background-color: $base;
 }
 
