@@ -1,13 +1,15 @@
 ﻿@import "neat";
 
-$base: #CC0000;
-
 body {
-	@include grid-container;
-	@include grid-column;
-	background-color: $base;
+	height: 100%;
 }
 
-.jake {
-	color: white;
+.floater {
+	max-width: calc(800px - (30px * 2));
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 30px;
+	padding-left: 30px;
+	width: calc(100% - 30px);
+	max-height: 100%;
 }

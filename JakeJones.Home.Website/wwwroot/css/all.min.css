@@ -1,1 +1,1 @@
-html{box-sizing:border-box}*,::after,::before{box-sizing:inherit}body{background-color:#C00;width:100%}.jake{color:#fff}
+body{background-color:#C00}.row{background-color:#ff0}.jake{color:#fff}.floater{max-width:calc(800px - (30px * 2));margin-right:auto;margin-left:auto;padding-right:30px;padding-left:30px;width:calc(100% - 30px);max-height:100%}body{width:100%}

@@ -1,15 +1,14 @@
 body {
-  width: calc(100% - 40px);
-  float: left;
-  margin-left: 20px;
-  background-color: #CC0000; }
-  body::after {
-    clear: both;
-    content: "";
-    display: block; }
+  height: 100%; }
 
-.jake {
-  color: white; }
+.floater {
+  max-width: calc(800px - (30px * 2));
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 30px;
+  padding-left: 30px;
+  width: calc(100% - 30px);
+  max-height: 100%; }
 
 body {
   width: 100%; }
