@@ -323,5 +323,7 @@ ASALocalRun/
 # NVidia Nsight GPU debugger configuration file
 *.nvuser
 
-# All JSON settings files
+# JSON settings files
 *.json
+!gulp.config.json
+!package.json

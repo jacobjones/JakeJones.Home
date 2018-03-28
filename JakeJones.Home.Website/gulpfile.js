@@ -6,7 +6,6 @@ var gulp	= require("gulp"),
 	uglify	= require("gulp-uglify"),
 	merge	= require("merge-stream"),
 	del		= require("del"),
-	fs		= require("fs"),
 	sass	= require("gulp-sass"),
 	neat	= require("bourbon-neat").includePaths,
 	config	= require("./gulp.config.json");

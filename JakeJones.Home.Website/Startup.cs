@@ -1,4 +1,6 @@
-﻿using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
+﻿using JakeJones.Home.Blog.DataAccess.SqlServer;
+using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
+using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
 using JakeJones.Home.Music.Implementation.Bootstrappers;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +23,8 @@ namespace JakeJones.Home.Website
 		public void ConfigureServices(IServiceCollection services)
 		{
 			services.AddMvc();
+
+			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
 
 			MusicAlbumsDataAccessBootstrapper.Register(services);
 			MusicTracksDataAccessBootstrapper.Register(services);

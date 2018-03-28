@@ -1,0 +1,18 @@
+﻿{
+	"sass": {
+		"src": "Content/sass/**/*.scss"
+	},
+	"css": {
+		"all": [ "wwwroot/css/**/*.css", "!wwwroot/css/**/*.min.css" ],
+		"concat": "all.css",
+		"min": "all.min.css",
+		"path": "wwwroot/css/"
+	},
+	"js": {
+		"all": [ "wwwroot/js/**/*.js", "!wwwroot/js/**/*.min.js" ],
+		"src": "Content/js/**/*.js",
+		"concat": "all.js",
+		"min": "all.min.js",
+		"path": "wwwroot/js/"
+	}
+}

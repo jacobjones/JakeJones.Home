@@ -13,6 +13,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Website", "J
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Music.Implementation", "JakeJones.Home.Music.Implementation\JakeJones.Home.Music.Implementation.csproj", "{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Blog", "JakeJones.Home.Blog\JakeJones.Home.Blog.csproj", "{8714AC4C-99C8-4BCB-A324-B4E4440D006F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Blog.DataAccess.SqlServer", "JakeJones.Home.Blog.DataAccess.SqlServer\JakeJones.Home.Blog.DataAccess.SqlServer.csproj", "{FFDB2943-B65D-4E87-BF30-BBF3F5E9C7DE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BE50E6DC-D8E2-47AD-8B4A-BC3AFDD4BFFC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8714AC4C-99C8-4BCB-A324-B4E4440D006F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8714AC4C-99C8-4BCB-A324-B4E4440D006F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8714AC4C-99C8-4BCB-A324-B4E4440D006F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8714AC4C-99C8-4BCB-A324-B4E4440D006F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFDB2943-B65D-4E87-BF30-BBF3F5E9C7DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFDB2943-B65D-4E87-BF30-BBF3F5E9C7DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFDB2943-B65D-4E87-BF30-BBF3F5E9C7DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFDB2943-B65D-4E87-BF30-BBF3F5E9C7DE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

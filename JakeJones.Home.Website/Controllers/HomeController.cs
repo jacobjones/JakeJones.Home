@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using JakeJones.Home.Blog.Models;
+using JakeJones.Home.Blog.Services;
 using JakeJones.Home.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,6 +8,10 @@ namespace JakeJones.Home.Website.Controllers
 {
 	public class HomeController : Controller
 	{
+		public HomeController(IBlogService blogService)
+		{
+		}
+
 		public IActionResult Index()
 		{
 			return View();
