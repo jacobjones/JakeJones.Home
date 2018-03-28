@@ -8,6 +8,8 @@ namespace JakeJones.Home.Blog.Models
 {
 	public class Post : IPost
 	{
+		public Post() {}
+
 		public Post(string title, string excerpt, string content)
 		{
 			Title = title;
