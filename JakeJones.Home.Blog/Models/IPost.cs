@@ -5,11 +5,11 @@ namespace JakeJones.Home.Blog.Models
 {
 	public interface IPost
 	{
-		string Id { get; set; }
+		Guid Id { get; set; }
 
 		string Title { get; set; }
 
-		string Slug { get; set; }
+		string Segment { get; set; }
 
 		string Excerpt { get; set; }
 
@@ -21,6 +21,6 @@ namespace JakeJones.Home.Blog.Models
 
 		bool IsPublished { get; set; }
 
-		IList<string> Categories { get; set; }
+		IList<string> Tags { get; set; }
 	}
 }

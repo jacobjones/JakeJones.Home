@@ -3,19 +3,34 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Globalization;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace JakeJones.Home.Blog.Models
 {
 	public class Post : IPost
 	{
+		public Post(string title, string excerpt, string content)
+		{
+			Title = title;
+			Segment = CreateSegment(title);
+			Excerpt = excerpt;
+			Content = content;
+		}
+
+		public Post(string title, string segment, string excerpt, string content)
+		{
+			Title = title;
+			Segment = segment;
+			Excerpt = excerpt;
+			Content = content;
+		}
+
 		[Required]
-		public string Id { get; set; } = DateTime.UtcNow.Ticks.ToString();
+		public Guid Id { get; set; } = Guid.NewGuid();
 
 		[Required]
 		public string Title { get; set; }
 
-		public string Slug { get; set; }
+		public string Segment { get; set; }
 
 		[Required]
 		public string Excerpt { get; set; }
@@ -29,33 +44,29 @@ namespace JakeJones.Home.Blog.Models
 
 		public bool IsPublished { get; set; } = true;
 
-		public IList<string> Categories { get; set; } = new List<string>();
+		public IList<string> Tags { get; set; } = new List<string>();
 
 		// TODO: Comments
 		//public IList<Comment> Comments { get; } = new List<Comment>();
 
-		public string GetLink()
+
+		//public bool AreCommentsOpen(int commentsCloseAfterDays)
+		//{
+		//	return PublishDate.AddDays(commentsCloseAfterDays) >= DateTime.UtcNow;
+		//}
+
+		private static string CreateSegment(string segment)
 		{
-			return $"/blog/{Slug}/";
+			segment = segment.ToLowerInvariant().Replace(" ", "-");
+			segment = RemoveDiacritics(segment);
+			segment = RemoveReservedUrlCharacters(segment);
+
+			return segment.ToLowerInvariant();
 		}
 
-		public bool AreCommentsOpen(int commentsCloseAfterDays)
+		private static string RemoveReservedUrlCharacters(string text)
 		{
-			return PublishDate.AddDays(commentsCloseAfterDays) >= DateTime.UtcNow;
-		}
-
-		public static string CreateSlug(string title)
-		{
-			title = title.ToLowerInvariant().Replace(" ", "-");
-			title = RemoveDiacritics(title);
-			title = RemoveReservedUrlCharacters(title);
-
-			return title.ToLowerInvariant();
-		}
-
-		static string RemoveReservedUrlCharacters(string text)
-		{
-			var reservedCharacters = new List<string> { "!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\", "^", "_", "'", "{", "}", "|", "~", "`", "+" };
+			var reservedCharacters = new [] { "!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\", "^", "_", "'", "{", "}", "|", "~", "`", "+" };
 
 			foreach (var chr in reservedCharacters)
 			{
@@ -65,7 +76,7 @@ namespace JakeJones.Home.Blog.Models
 			return text;
 		}
 
-		static string RemoveDiacritics(string text)
+		private static string RemoveDiacritics(string text)
 		{
 			var normalizedString = text.Normalize(NormalizationForm.FormD);
 			var stringBuilder = new StringBuilder();
@@ -80,20 +91,6 @@ namespace JakeJones.Home.Blog.Models
 			}
 
 			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
-		}
-
-		public string RenderContent()
-		{
-			var result = Content;
-
-			// Set up lazy loading of images/iframes
-			result = result.Replace(" src=\"", " src=\"data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==\" data-src=\"");
-
-			// Youtube content embedded using this syntax: [youtube:xyzAbc123]
-			var video = "<div class=\"video\"><iframe width=\"560\" height=\"315\" title=\"YouTube embed\" src=\"about:blank\" data-src=\"https://www.youtube-nocookie.com/embed/{0}?modestbranding=1&amp;hd=1&amp;rel=0&amp;theme=light\" allowfullscreen></iframe></div>";
-			result = Regex.Replace(result, @"\[youtube:(.*?)\]", m => string.Format(video, m.Groups[1].Value));
-
-			return result;
 		}
 	}
 }
