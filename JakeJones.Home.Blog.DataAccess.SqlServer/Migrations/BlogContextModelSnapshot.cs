@@ -22,8 +22,9 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("JakeJones.Home.Blog.DataAccess.SqlServer.Models.PostEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .IsRequired();

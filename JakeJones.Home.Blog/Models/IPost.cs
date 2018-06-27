@@ -5,7 +5,7 @@ namespace JakeJones.Home.Blog.Models
 {
 	public interface IPost
 	{
-		Guid Id { get; set; }
+		int Id { get; set; }
 
 		string Title { get; set; }
 

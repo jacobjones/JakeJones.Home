@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using JakeJones.Home.Blog.DataAccess.SqlServer.Models;
-using JakeJones.Home.Blog.DataAccess.SqlServer.Repositories;
-using JakeJones.Home.Blog.Models;
+﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Repositories;
 using JakeJones.Home.Blog.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,12 +11,6 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
 		{
 			services.AddDbContext<BlogContext>(options => options.UseMySql(connectionString));
 
-			services.AddAutoMapper(cfg =>
-			{
-				cfg.CreateMap<IPost, PostEntity>();
-				cfg.CreateMap<PostEntity, IPost>().As<Post>();
-			});
-			
 			services.AddScoped<IPostRepository, PostRepository>();
 		}
 	}

@@ -13,9 +13,9 @@ namespace JakeJones.Home.Blog.Repositories
 
 		Task<IPost> GetBySegment(string segment);
 
-		Task<IPost> GetById(Guid id);
+		Task<IPost> GetById(int id);
 
-		Task Create(IPost post);
+		Task Add(IPost post);
 
 		Task Update(IPost post);
 

@@ -8,7 +8,9 @@ namespace JakeJones.Home.Blog.Models
 {
 	public class Post : IPost
 	{
-		public Post() {}
+		public Post()
+		{
+		}
 
 		public Post(string title, string excerpt, string content)
 		{
@@ -26,8 +28,8 @@ namespace JakeJones.Home.Blog.Models
 			Content = content;
 		}
 
-		[Required]
-		public Guid Id { get; set; } = Guid.NewGuid();
+	    [Required]
+        public int Id { get; set; }
 
 		[Required]
 		public string Title { get; set; }
@@ -68,7 +70,11 @@ namespace JakeJones.Home.Blog.Models
 
 		private static string RemoveReservedUrlCharacters(string text)
 		{
-			var reservedCharacters = new [] { "!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\", "^", "_", "'", "{", "}", "|", "~", "`", "+" };
+			var reservedCharacters = new[]
+			{
+				"!", "#", "$", "&", "'", "(", ")", "*", ",", "/", ":", ";", "=", "?", "@", "[", "]", "\"", "%", ".", "<", ">", "\\",
+				"^", "_", "'", "{", "}", "|", "~", "`", "+"
+			};
 
 			foreach (var chr in reservedCharacters)
 			{

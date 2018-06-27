@@ -11,8 +11,8 @@ using System;
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20180328013458_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20180627031638_JakeJones.Home.Blog.DataAccess.SqlServer")]
+    partial class JakeJonesHomeBlogDataAccessSqlServer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,8 +23,9 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 
             modelBuilder.Entity("JakeJones.Home.Blog.DataAccess.SqlServer.Models.PostEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Content")
                         .IsRequired();

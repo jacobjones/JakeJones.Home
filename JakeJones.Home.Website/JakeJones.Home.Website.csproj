@@ -30,6 +30,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\JakeJones.Home.Blog.DataAccess.SqlServer\JakeJones.Home.Blog.DataAccess.SqlServer.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Blog.Implementation\JakeJones.Home.Blog.Implementation.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Blog\JakeJones.Home.Blog.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Core.Implementation\JakeJones.Home.Core.Implementation.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Core\JakeJones.Home.Core.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music.DataAccess.Discogs\JakeJones.Home.Music.DataAccess.Discogs.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music.DataAccess.LastFm\JakeJones.Home.Music.DataAccess.LastFm.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music.Implementation\JakeJones.Home.Music.Implementation.csproj" />

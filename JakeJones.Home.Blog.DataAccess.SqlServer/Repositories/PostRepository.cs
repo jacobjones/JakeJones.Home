@@ -37,14 +37,14 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 				await _context.Posts.FirstOrDefaultAsync(x => x.Segment.Equals(segment, StringComparison.OrdinalIgnoreCase)));
 		}
 
-		public async Task<IPost> GetById(Guid id)
+		public async Task<IPost> GetById(int id)
 		{
 			var postEntity = await _context.Posts.FindAsync(id);
 
 			return postEntity == null ? null : _mapper.Map<IPost>(postEntity);
 		}
 
-		public async Task Create(IPost post)
+		public async Task Add(IPost post)
 		{
 			var postEntity = _mapper.Map<PostEntity>(post);
 

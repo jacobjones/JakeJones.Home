@@ -1,7 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.Managers;
-using JakeJones.Home.Music.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JakeJones.Home.Website.Controllers.Api

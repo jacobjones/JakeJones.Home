@@ -8,18 +8,8 @@ namespace JakeJones.Home.Website.Controllers
 {
 	public class HomeController : Controller
 	{
-		private readonly IPostRepository _postRepository;
-
-		public HomeController(IPostRepository postRepository)
-		{
-			_postRepository = postRepository;
-		}
-
 		public IActionResult Index()
 		{
-			var post = new Post("Hello, this is a new post!", "Read more", "blah blah blah");
-			_postRepository.Create(post);
-
 			return View();
 		}
 

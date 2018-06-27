@@ -1,5 +1,4 @@
 ﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Models;
-using JakeJones.Home.Blog.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace JakeJones.Home.Blog.DataAccess.SqlServer

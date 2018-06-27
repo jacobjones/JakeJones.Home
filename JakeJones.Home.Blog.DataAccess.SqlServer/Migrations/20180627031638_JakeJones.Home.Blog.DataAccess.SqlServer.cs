@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class JakeJonesHomeBlogDataAccessSqlServer : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -12,7 +13,8 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
                 name: "Posts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(nullable: false),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: false),
                     Excerpt = table.Column<string>(nullable: false),
                     IsPublished = table.Column<bool>(nullable: false),

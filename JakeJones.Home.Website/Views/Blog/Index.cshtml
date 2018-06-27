@@ -1,4 +1,4 @@
-﻿@model IEnumerable<JakeJones.Home.Blog.Models.IPost>
+﻿@model IEnumerable<JakeJones.Home.Blog.Implementation.Models.PostViewModel>
 
 @{
 	int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");

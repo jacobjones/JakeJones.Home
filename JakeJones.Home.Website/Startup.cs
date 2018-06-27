@@ -1,11 +1,18 @@
-﻿using JakeJones.Home.Blog.Bootstrappers;
-using JakeJones.Home.Blog.DataAccess.SqlServer;
+﻿using AutoMapper;
 using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
+using JakeJones.Home.Blog.Implementation.Bootstrappers;
+using JakeJones.Home.Blog.Models;
+using JakeJones.Home.Core.Implementation.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
 using JakeJones.Home.Music.Implementation.Bootstrappers;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -25,7 +32,26 @@ namespace JakeJones.Home.Website
 		{
 			services.AddMvc();
 
-			BlogBootstrapper.Register(services);
+		    // Cookie authentication.
+		    services
+		        .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+		        .AddCookie(options =>
+		        {
+		            options.LoginPath = "/login/";
+		            options.LogoutPath = "/logout/";
+		        });
+
+            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+
+            // Add all out AutoMapper configurations
+            services.AddAutoMapper(cfg =>
+		    {
+		        cfg.AddProfile<BlogDataAccessMapConfiguration>();
+		        cfg.AddProfile<BlogImplemenatationMapConfiguration>();
+            });
+
+            CoreImplementationBootstrapper.Register(services);
+            BlogImplementationBootstrapper.Register(services);
 			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
 
 			MusicAlbumsDataAccessBootstrapper.Register(services);
@@ -48,7 +74,9 @@ namespace JakeJones.Home.Website
 
 			app.UseStaticFiles();
 
-			app.UseMvc(routes =>
+		    app.UseAuthentication();
+
+            app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",
