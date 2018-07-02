@@ -28,8 +28,8 @@ namespace JakeJones.Home.Blog.Models
 			Content = content;
 		}
 
-	    [Required]
-        public int Id { get; set; }
+		[Required]
+		public int Id { get; set; }
 
 		[Required]
 		public string Title { get; set; }
@@ -42,11 +42,11 @@ namespace JakeJones.Home.Blog.Models
 		[Required]
 		public string Content { get; set; }
 
-		public DateTime PublishDate { get; set; } = DateTime.UtcNow;
+		public DateTime? PublishDate { get; set; }
 
-		public DateTime LastModified { get; set; } = DateTime.UtcNow;
+		public DateTime LastModified { get; set; }
 
-		public bool IsPublished { get; set; } = true;
+		public bool IsPublished { get; set; }
 
 		public IList<string> Tags { get; set; } = new List<string>();
 

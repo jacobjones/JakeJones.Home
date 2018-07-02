@@ -7,14 +7,25 @@ html {
 body {
   height: 100%; }
 
+.body-content {
+  @inlcude outer-container(); }
+
+.cool {
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 100%; }
+  .cool:last-child {
+    margin-right: 0; }
+
 .floater {
-  max-width: calc(800px - (30px * 2));
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 30px;
-  padding-left: 30px;
-  width: calc(100% - 30px);
-  max-height: 100%; }
+  background-color: red;
+  float: left;
+  display: block;
+  margin-right: 2.35765%;
+  width: 48.82117%; }
+  .floater:last-child {
+    margin-right: 0; }
 
 body {
   width: 100%; }

@@ -11,7 +11,7 @@ using System;
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20180627031638_JakeJones.Home.Blog.DataAccess.SqlServer")]
+    [Migration("20180702161416_JakeJones.Home.Blog.DataAccess.SqlServer")]
     partial class JakeJonesHomeBlogDataAccessSqlServer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<DateTime>("PublishDate");
+                    b.Property<DateTime?>("PublishDate");
 
                     b.Property<string>("Segment")
                         .IsRequired();

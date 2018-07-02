@@ -15,7 +15,7 @@ namespace JakeJones.Home.Blog.Models
 
 		string Content { get; set; }
 
-		DateTime PublishDate { get; set; }
+		DateTime? PublishDate { get; set; }
 
 		DateTime LastModified { get; set; }
 

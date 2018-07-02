@@ -1,6 +1,4 @@
 ﻿using System.Diagnostics;
-using JakeJones.Home.Blog.Models;
-using JakeJones.Home.Blog.Repositories;
 using JakeJones.Home.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 

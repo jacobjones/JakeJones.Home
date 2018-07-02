@@ -1,5 +1,7 @@
 ﻿using JakeJones.Home.Blog.Configuration;
+using JakeJones.Home.Blog.Implementation.Managers;
 using JakeJones.Home.Blog.Implementation.Resolvers;
+using JakeJones.Home.Blog.Managers;
 using JakeJones.Home.Blog.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -11,6 +13,7 @@ namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 		{
 			services.AddSingleton<IBlogOptions, BlogOptions>();
 			services.AddSingleton<IBlogUrlResolver, BlogUrlResolver>();
+			services.AddScoped<IBlogManager, BlogManager>();
 		}
 	}
 }

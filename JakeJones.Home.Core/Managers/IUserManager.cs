@@ -1,9 +1,9 @@
-﻿using System;
-
-namespace JakeJones.Home.Core
+﻿namespace JakeJones.Home.Core.Managers
 {
-    public interface IUserManager
-    {
-        bool ValidateUser(string username, string password);
-    }
+	public interface IUserManager
+	{
+		bool ValidateUser(string username, string password);
+
+		bool IsAdmin();
+	}
 }

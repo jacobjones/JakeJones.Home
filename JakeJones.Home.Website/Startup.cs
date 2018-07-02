@@ -32,26 +32,26 @@ namespace JakeJones.Home.Website
 		{
 			services.AddMvc();
 
-		    // Cookie authentication.
-		    services
-		        .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-		        .AddCookie(options =>
-		        {
-		            options.LoginPath = "/login/";
-		            options.LogoutPath = "/logout/";
-		        });
+			// Cookie authentication.
+			services
+				.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+				.AddCookie(options =>
+				{
+					options.LoginPath = "/login/";
+					options.LogoutPath = "/logout/";
+				});
 
-            services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+			services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-            // Add all out AutoMapper configurations
-            services.AddAutoMapper(cfg =>
-		    {
-		        cfg.AddProfile<BlogDataAccessMapConfiguration>();
-		        cfg.AddProfile<BlogImplemenatationMapConfiguration>();
-            });
+			// Add all out AutoMapper configurations
+			services.AddAutoMapper(cfg =>
+			{
+				cfg.AddProfile<BlogDataAccessMapConfiguration>();
+				cfg.AddProfile<BlogImplemenatationMapConfiguration>();
+			});
 
-            CoreImplementationBootstrapper.Register(services);
-            BlogImplementationBootstrapper.Register(services);
+			CoreImplementationBootstrapper.Register(services);
+			BlogImplementationBootstrapper.Register(services);
 			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
 
 			MusicAlbumsDataAccessBootstrapper.Register(services);
@@ -74,9 +74,9 @@ namespace JakeJones.Home.Website
 
 			app.UseStaticFiles();
 
-		    app.UseAuthentication();
+			app.UseAuthentication();
 
-            app.UseMvc(routes =>
+			app.UseMvc(routes =>
 			{
 				routes.MapRoute(
 					name: "default",

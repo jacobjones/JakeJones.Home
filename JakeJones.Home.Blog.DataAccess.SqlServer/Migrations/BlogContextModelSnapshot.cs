@@ -36,7 +36,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 
                     b.Property<DateTime>("LastModified");
 
-                    b.Property<DateTime>("PublishDate");
+                    b.Property<DateTime?>("PublishDate");
 
                     b.Property<string>("Segment")
                         .IsRequired();

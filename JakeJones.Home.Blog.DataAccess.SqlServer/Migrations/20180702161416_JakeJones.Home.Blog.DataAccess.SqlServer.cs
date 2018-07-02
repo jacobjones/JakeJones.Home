@@ -19,7 +19,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
                     Excerpt = table.Column<string>(nullable: false),
                     IsPublished = table.Column<bool>(nullable: false),
                     LastModified = table.Column<DateTime>(nullable: false),
-                    PublishDate = table.Column<DateTime>(nullable: false),
+                    PublishDate = table.Column<DateTime>(nullable: true),
                     Segment = table.Column<string>(nullable: false),
                     Title = table.Column<string>(nullable: false)
                 },

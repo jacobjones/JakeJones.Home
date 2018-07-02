@@ -10,7 +10,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Models
 		[Key]
 		[Required]
 		[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int Id { get; set; }
+		public int Id { get; set; }
 
 		[Required]
 		public string Title { get; set; }
@@ -24,7 +24,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Models
 		[Required]
 		public string Content { get; set; }
 
-		public DateTime PublishDate { get; set; }
+		public DateTime? PublishDate { get; set; }
 
 		public DateTime LastModified { get; set; }
 

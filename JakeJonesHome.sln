@@ -19,9 +19,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Blog.DataAcc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Blog.Implementation", "JakeJones.Home.Blog.Implementation\JakeJones.Home.Blog.Implementation.csproj", "{7B90BE80-956C-4F15-834E-A2308AF15DD0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakeJones.Home.Core", "JakeJones.Home.Core\JakeJones.Home.Core.csproj", "{3907EC11-0A68-487A-8159-099D2747472C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Core", "JakeJones.Home.Core\JakeJones.Home.Core.csproj", "{3907EC11-0A68-487A-8159-099D2747472C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JakeJones.Home.Core.Implementation", "JakeJones.Home.Core.Implementation\JakeJones.Home.Core.Implementation.csproj", "{F70C1399-4979-41F3-865E-0CEFE43473B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JakeJones.Home.Core.Implementation", "JakeJones.Home.Core.Implementation\JakeJones.Home.Core.Implementation.csproj", "{F70C1399-4979-41F3-865E-0CEFE43473B5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{A031C02B-BB75-44E3-82C1-B204A7E5006C}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

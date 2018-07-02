@@ -4,6 +4,6 @@ namespace JakeJones.Home.Blog.Resolvers
 {
 	public interface IBlogUrlResolver
 	{
-		string GetUrl(IPost post, bool relative = false);
+		string GetUrl(IPost post, bool absolute = false);
 	}
 }

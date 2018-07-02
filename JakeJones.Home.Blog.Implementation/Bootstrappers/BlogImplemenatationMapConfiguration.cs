@@ -5,10 +5,12 @@ using JakeJones.Home.Blog.Models;
 namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 {
 	public class BlogImplemenatationMapConfiguration : Profile
-    {
-        public BlogImplemenatationMapConfiguration()
-        {
-            CreateMap<IPost, PostViewModel>();
-        }
+	{
+		public BlogImplemenatationMapConfiguration()
+		{
+			CreateMap<IPost, PostViewModel>();
+			CreateMap<IPost, PostEditViewModel>();
+			CreateMap<PostEditViewModel, IPost>().As<Post>();
+		}
 	}
 }

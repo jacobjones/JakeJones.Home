@@ -7,7 +7,7 @@ namespace JakeJones.Home.Blog.Repositories
 {
 	public interface IPostRepository
 	{
-		Task<IEnumerable<IPost>> Get(int count, int skip = 0);
+		Task<IEnumerable<IPost>> Get(bool isPublished, int count, int skip = 0);
 
 		Task<IEnumerable<IPost>> GetByTag(string tag);
 
@@ -19,6 +19,6 @@ namespace JakeJones.Home.Blog.Repositories
 
 		Task Update(IPost post);
 
-		Task Delete(Guid id);
+		Task Delete(int id);
 	}
 }

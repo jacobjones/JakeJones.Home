@@ -10,22 +10,22 @@ namespace JakeJones.Home.Blog.Implementation.Resolvers
 {
 	internal class BlogUrlResolver : IBlogUrlResolver
 	{
-	    private readonly IActionContextAccessor _actionContextAccessor;
-	    private readonly IUrlHelperFactory _urlHelperFactory;
+		private readonly IActionContextAccessor _actionContextAccessor;
+		private readonly IUrlHelperFactory _urlHelperFactory;
 
-        public BlogUrlResolver(IActionContextAccessor actionContextAccessor, IUrlHelperFactory urlHelperFactory)
-        {
-            _actionContextAccessor = actionContextAccessor;
-            _urlHelperFactory = urlHelperFactory;
-        }
-
-		public string GetUrl(IPost post, bool relative = false)
+		public BlogUrlResolver(IActionContextAccessor actionContextAccessor, IUrlHelperFactory urlHelperFactory)
 		{
-		    var actionContext = _actionContextAccessor.ActionContext;
+			_actionContextAccessor = actionContextAccessor;
+			_urlHelperFactory = urlHelperFactory;
+		}
 
-            var urlHelper = _urlHelperFactory.GetUrlHelper(actionContext);
+		public string GetUrl(IPost post, bool absolute = false)
+		{
+			var actionContext = _actionContextAccessor.ActionContext;
 
-            var controllerName = nameof(BlogController);
+			var urlHelper = _urlHelperFactory.GetUrlHelper(actionContext);
+
+			var controllerName = nameof(BlogController);
 			controllerName = controllerName.Substring(0, controllerName.LastIndexOf("Controller", StringComparison.Ordinal));
 
 			var url = urlHelper.Action(nameof(Post), controllerName, new {segment = post.Segment});
@@ -35,27 +35,33 @@ namespace JakeJones.Home.Blog.Implementation.Resolvers
 				return null;
 			}
 
-		    var uri = new Uri(url, UriKind.RelativeOrAbsolute);
+			var uri = new Uri(url, UriKind.RelativeOrAbsolute);
 
-		    if (uri.IsAbsoluteUri)
-		    {
-		        return relative ? uri.PathAndQuery : url;
-		    }
+			if (uri.IsAbsoluteUri)
+			{
+				return absolute ? url : uri.PathAndQuery;
+			}
 
-		    if (relative)
-		    {
-		        return url;
-		    }
+			if (!absolute)
+			{
+				return url;
+			}
 
-            // Make this url absolute
-		    var uriBuilder = new UriBuilder
-		    {
-		        Scheme = actionContext.HttpContext.Request.Scheme,
-		        Host = actionContext.HttpContext.Request.Host.Value,
-		        Path = url
-		    };
+			// Make this url absolute
+			var uriBuilder = new UriBuilder
+			{
+				Scheme = actionContext.HttpContext.Request.Scheme,
+				Host = actionContext.HttpContext.Request.Host.Host,
+				Path = url
+			};
 
-		    return uriBuilder.ToString();
+			if (actionContext.HttpContext.Request.Host.Port.HasValue)
+			{
+				uriBuilder.Port = actionContext.HttpContext.Request.Host.Port.Value;
+
+			}
+
+			return uriBuilder.ToString();
 		}
 	}
 }

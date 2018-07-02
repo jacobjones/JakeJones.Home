@@ -21,24 +21,44 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			_mapper = mapper;
 		}
 
-		public async Task<IEnumerable<IPost>> Get(int count, int skip = 0)
+		public async Task<IEnumerable<IPost>> Get(bool isPublished, int count, int skip = 0)
 		{
-			return (await _context.Posts.Skip(0).Take(count).Skip(skip).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+			if (isPublished)
+			{
+				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Where(x => isPublished).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+			}
+
+			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 		}
 
 		public async Task<IEnumerable<IPost>> GetByTag(string tag)
 		{
+			if (string.IsNullOrEmpty(tag))
+			{
+				return null;
+			}
+
 			return (await _context.Posts.Where(x => x.Tags.Contains(tag, StringComparer.OrdinalIgnoreCase)).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 		}
 
 		public async Task<IPost> GetBySegment(string segment)
 		{
+			if (string.IsNullOrEmpty(segment))
+			{
+				return null;
+			}
+
 			return _mapper.Map<IPost>(
 				await _context.Posts.FirstOrDefaultAsync(x => x.Segment.Equals(segment, StringComparison.OrdinalIgnoreCase)));
 		}
 
 		public async Task<IPost> GetById(int id)
 		{
+			if (id <= 0)
+			{
+				return null;
+			}
+
 			var postEntity = await _context.Posts.FindAsync(id);
 
 			return postEntity == null ? null : _mapper.Map<IPost>(postEntity);
@@ -67,8 +87,13 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public async Task Delete(Guid id)
+		public async Task Delete(int id)
 		{
+			if (id <= 0)
+			{
+				return;
+			}
+
 			var postEntity = await _context.Posts.FindAsync(id);
 
 			if (postEntity == null)
