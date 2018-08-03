@@ -1,31 +1,90 @@
-html {
-  box-sizing: border-box; }
+/*********************
+BREAKPOINTS
+*********************/
+.post {
+  margin: 0 auto 150px;
+  padding: 0 18px;
+  min-height: 550px;
+  max-width: 680px; }
 
-*, *::after, *::before {
-  box-sizing: inherit; }
+/*********************
+BREAKPOINTS
+*********************/
 
-body {
-  height: 100%; }
+/*********************
+BREAKPOINTS
+*********************/
+/*body {
+	height: 100%;
+	background-color: #623742;
+}
 
 .body-content {
-  @inlcude outer-container(); }
+}
 
 .cool {
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 100%; }
-  .cool:last-child {
-    margin-right: 0; }
+	@include grid-container;
+}
+
+.main-logo {
+	width: 100px;
+}
 
 .floater {
-  background-color: red;
-  float: left;
-  display: block;
-  margin-right: 2.35765%;
-  width: 48.82117%; }
-  .floater:last-child {
-    margin-right: 0; }
+	@include grid-column(4);
+	@include grid-push(4);
+	text-align: center;
+	font-family: 'Space Mono', monospace;
+	text-transform: uppercase;
+	color: #f9e49c;
+
+	@include breakpoint(mobile) {
+		@include grid-column(12);
+	}
+}*/
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0; }
+
+h1 {
+  font-family: "brandon-text",sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #2b3e50;
+  line-height: 1.2; }
+
+h2 {
+  font-family: "brandon-text",sans-serif;
+  font-size: 1.5rem;
+  font-weight: bold; }
+
+h3 {
+  font-family: "brandon-grotesque",sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #e74c3c;
+  margin-bottom: 1.5rem; }
+
+h4 {
+  font-family: "brandon-text",sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.6); }
+
+/*********************
+BREAKPOINTS
+*********************/
+body, html {
+  margin: 0;
+  padding: 0;
+  height: 100%; }
 
 body {
-  width: 100%; }
+  font-size: 1rem;
+  color: #222;
+  background-color: #fff;
+  font-family: Helvetica,Arial,sans-serif;
+  font-weight: normal;
+  image-rendering: optimizeQuality;
+  text-rendering: optimizeLegibility; }

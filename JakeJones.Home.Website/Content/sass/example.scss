@@ -1,18 +1,31 @@
 ﻿@import "neat";
+@import "breakpoints";
 
-body {
+/*body {
 	height: 100%;
+	background-color: #623742;
 }
 
 .body-content {
-	@inlcude outer-container();
 }
 
 .cool {
-	@include span-columns(12);
+	@include grid-container;
+}
+
+.main-logo {
+	width: 100px;
 }
 
 .floater {
-	background-color: red;
-	@include span-columns(6 of 12);
-}
+	@include grid-column(4);
+	@include grid-push(4);
+	text-align: center;
+	font-family: 'Space Mono', monospace;
+	text-transform: uppercase;
+	color: #f9e49c;
+
+	@include breakpoint(mobile) {
+		@include grid-column(12);
+	}
+}*/

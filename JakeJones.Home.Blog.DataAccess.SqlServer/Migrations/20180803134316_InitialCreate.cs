@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
-    public partial class JakeJonesHomeBlogDataAccessSqlServer : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: false),
                     Excerpt = table.Column<string>(nullable: false),
                     IsPublished = table.Column<bool>(nullable: false),

@@ -1,0 +1,25 @@
+﻿@model JakeJones.Home.Blog.Implementation.Models.PostListItemViewModel
+
+@{
+	ViewData["Title"] = Model.Title;
+	ViewData["Description"] = Model.Excerpt;
+}
+
+
+<article class="post container" itemscope itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+	<header>
+		<h1 itemprop="name headline"><a href="@Model.AbsoluteUrl" rel="canonical" itemprop="url">@Model.Title</a></h1>
+		@if (Model.PublishDate.HasValue)
+		{
+			<time datetime="@Model.PublishDate.Value.ToString("s")" itemprop="datePublished">Published @Model.PublishDate.Value.ToString("MMM d, yyyy")</time>
+		}
+		
+		@if (User.Identity.IsAuthenticated)
+		{
+			<a asp-controller="Blog" asp-action="edit" asp-route-id="@Model.Id" title="Edit the post">Edit post</a>
+		}
+	</header>
+	<p>
+		@Model.Excerpt
+	</p>
+</article>

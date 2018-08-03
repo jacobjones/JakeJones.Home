@@ -41,11 +41,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\images\logo.png" />
     <None Include="wwwroot\lib\Chart.js\Chart.bundle.js" />
     <None Include="wwwroot\lib\Chart.js\Chart.bundle.min.js" />
     <None Include="wwwroot\lib\Chart.js\Chart.js" />
     <None Include="wwwroot\lib\Chart.js\Chart.min.js" />
     <None Include="wwwroot\lib\Chart.js\LICENSE.md" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Content\images\" />
   </ItemGroup>
 
 </Project>

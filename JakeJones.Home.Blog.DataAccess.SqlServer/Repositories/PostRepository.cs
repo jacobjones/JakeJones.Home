@@ -25,7 +25,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 		{
 			if (isPublished)
 			{
-				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Where(x => isPublished).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Where(x => x.IsPublished).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 			}
 
 			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));

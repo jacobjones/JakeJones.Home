@@ -36,19 +36,27 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 			ViewData["Title"] = "Blog";
 			ViewData["Description"] =  "Hmmmm";
-			ViewData["prev"] = $"/blog/{page + 1}/";
-			ViewData["next"] = $"/blog/{(page <= 1 ? null : page - 1 + "/")}";
 
-			IList<PostViewModel> models = new List<PostViewModel>();
+			IList<PostListItemViewModel> postModels = new List<PostListItemViewModel>();
 
 			foreach (var post in posts)
 			{
-				var model = _mapper.Map<PostViewModel>(post);
-				model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
-				models.Add(model);
+				var postModel = _mapper.Map<PostListItemViewModel>(post);
+				postModel.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
+				postModels.Add(postModel);
 			}
 
-			return View("~/Views/Blog/Index.cshtml", models);
+			var model = new PostListViewModel
+			{
+				Posts = postModels,
+				Pagination = new PaginationViewModel
+				{
+					PrevUrl = $"/blog/{(page <= 1 ? null : page - 1 + "/")}",
+					NextUrl = $"/blog/{page + 1}/"
+				}
+			};
+
+			return View("~/Views/Blog/Index.cshtml", model);
 		}
 
 		//[Route("/blog/category/{category}/{page:int?}")]

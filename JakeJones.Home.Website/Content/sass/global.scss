@@ -1,0 +1,18 @@
+﻿@import "neat";
+@import "breakpoints";
+
+body, html {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body {
+	font-size: 1rem;
+	color: #222;
+	background-color: #fff;
+	font-family: Helvetica,Arial,sans-serif;
+	font-weight: normal;
+	image-rendering: optimizeQuality;
+	text-rendering: optimizeLegibility;
+}

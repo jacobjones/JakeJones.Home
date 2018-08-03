@@ -9,7 +9,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
 	{
 		public static void Register(IServiceCollection services, string connectionString)
 		{
-			services.AddDbContext<BlogContext>(options => options.UseMySql(connectionString));
+			services.AddDbContext<BlogContext>(options => options.UseSqlServer(connectionString));
 
 			services.AddScoped<IPostRepository, PostRepository>();
 		}

@@ -1,22 +1,22 @@
-﻿@model IEnumerable<JakeJones.Home.Blog.Implementation.Models.PostViewModel>
+﻿@model JakeJones.Home.Blog.Implementation.Models.PostListViewModel
 
 @{
 	int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 
-@foreach (var post in Model)
+@foreach (var post in Model.Posts)
 {
-	await Html.RenderPartialAsync("Post", post);
+	await Html.RenderPartialAsync("PostListItem", post);
 }
 
 <nav class="pagination container" aria-label="Pagination">
-	@if (Model.Any())
+	@if (Model.Posts.Any())
 	{
-		<a rel="prev" href="@ViewData["prev"]" title="Older posts">&laquo; Older</a>
+		<a rel="prev" href="@Model.Pagination.PrevUrl" title="Older posts">&laquo; Older</a>
 	}
 	@if (currentPage > 1)
 	{
-		<a rel="next" href="@ViewData["next"]" title="Newer posts">Newer &raquo;</a>
+		<a rel="next" href="@Model.Pagination.PrevUrl" title="Newer posts">Newer &raquo;</a>
 	}
 </nav>
 

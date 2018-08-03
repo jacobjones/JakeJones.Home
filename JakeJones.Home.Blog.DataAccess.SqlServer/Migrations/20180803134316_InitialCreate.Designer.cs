@@ -11,21 +11,20 @@ using System;
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    [Migration("20180702161416_JakeJones.Home.Blog.DataAccess.SqlServer")]
-    partial class JakeJonesHomeBlogDataAccessSqlServer
+    [Migration("20180803134316_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
-                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011");
+                .HasAnnotation("ProductVersion", "2.0.2-rtm-10011")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("JakeJones.Home.Blog.DataAccess.SqlServer.Models.PostEntity", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Content")
                         .IsRequired();
