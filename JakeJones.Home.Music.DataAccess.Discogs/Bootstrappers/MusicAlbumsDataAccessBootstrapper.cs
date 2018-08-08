@@ -16,7 +16,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers
 			services.Configure<DiscogsOptions>(configuration.GetSection("discogs"));
 			services.AddSingleton<IDiscogsOptions>(x => x.GetService<IOptions<DiscogsOptions>>().Value);
 
-			services.AddSingleton<IAlbumRepository, AlbumCachingRepository>();
+			services.AddSingleton<IAlbumRepository, AlbumRepositoryCachingProxy>();
 			services.AddSingleton<IDiscogsClient, DiscogsClient>();
 		}
 	}

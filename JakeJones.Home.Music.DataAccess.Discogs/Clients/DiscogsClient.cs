@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Linq;
 using System.Net.Cache;
 using System.Threading.Tasks;
@@ -15,7 +14,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Clients
 		private readonly IDiscogsOptions _discogsOptions;
 		private readonly IRestClient _restClient;
 
-		private const string BaseUrl = "https://api.discogs.com/database/";
+		private const string BaseUrl = "https://api.discogs.com/";
 
 		public DiscogsClient(IDiscogsOptions discogsOptions)
 		{
@@ -55,7 +54,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Clients
 
 			// TODO: Handle exceptions/errors/timeouts!
 
-			return response.Data;
+			return response?.Data;
 		}
 	}
 }

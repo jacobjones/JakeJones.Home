@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.Managers;
@@ -18,32 +18,40 @@ namespace JakeJones.Home.Music.Implementation.Managers
 			_albumRepository = albumRepository;
 		}
 
-		public async Task<IDictionary<IAlbum, IList<ITrack>>> GetRecentTracks(int limit)
+		public async Task<IAlbumTrack> GetRecentTrackAsync()
 		{
-			var recentTracks = await _recentTracksRepository.GetRecentlyListenedTracks(limit);
+			// We pull 5 here to try and ensure we have one we can get an album for.
+			var recentTracks = await _recentTracksRepository.GetAsync(5);
 
 			if (recentTracks == null || !recentTracks.Any())
 			{
 				return null;
 			}
 
-			var recentTracksByAlbum = recentTracks.GroupBy(x => x.AlbumTitle);
+			var albumTracks = recentTracks.GroupBy(x => x.AlbumTitle);
 
-			IDictionary<IAlbum, IList<ITrack>> albumTracks = new Dictionary<IAlbum, IList<ITrack>>();
-
-			foreach (var album in recentTracksByAlbum)
+			foreach (var albumTrack in albumTracks)
 			{
-				var albumDetails = await _albumRepository.GetAlbum(album.First().Artist, album.Key);
+				var track = albumTrack.First();
 
-				if (albumDetails == null)
+				var album = await _albumRepository.GetAsync(track.Artist, track.AlbumTitle);
+
+				if (album == null)
 				{
 					continue;
 				}
 
-				albumTracks.Add(albumDetails, album.ToList());
+				// This album does not have a valid image
+				if (string.IsNullOrEmpty(album.ImageUrl) ||
+				    album.ImageUrl.EndsWith("spacer.gif", StringComparison.OrdinalIgnoreCase))
+				{
+					continue;
+				}
+
+				return new AlbumTrack(album, track);
 			}
 
-			return albumTracks;
+			return null;
 		}
 	}
 }

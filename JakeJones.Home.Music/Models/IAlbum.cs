@@ -7,7 +7,6 @@ namespace JakeJones.Home.Music.Models
 		string Artist { get; }
 		string Title { get; }
 		int Year { get; }
-		IReadOnlyCollection<string> Style { get; }
-		IReadOnlyCollection<string> Genre { get; }
+		string ImageUrl { get; }
 	}
 }

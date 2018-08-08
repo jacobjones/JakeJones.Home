@@ -1,6 +1,39 @@
 ﻿@import "neat";
 @import "breakpoints";
 
+.floater {
+	text-align: center;
+}
+
+.navbar-nav {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+
+	a {
+		text-transform: uppercase;
+		text-decoration: none;
+		background: none;
+		color: white;
+
+		&:hover {
+			background: white;
+			color: blue;
+		}
+	}
+}
+
+a {
+	text-transform: uppercase;
+	text-decoration: none;
+	background: white;
+	color: blue;
+
+	&:hover {
+		background: yellow;
+	}
+}
+
 /*body {
 	height: 100%;
 	background-color: #623742;

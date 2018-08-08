@@ -7,25 +7,25 @@ using JakeJones.Home.Music.DataAccess.LastFm.Models;
 using JakeJones.Home.Music.Models;
 using Microsoft.Extensions.Caching.Memory;
 
-namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories
+namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories.Caching
 {
-	public class RecentTracksCachingRepository : RecentTracksRepository
+	public class RecentTracksRepositoryCachingProxy : RecentTracksRepository
 	{
 		private readonly IMemoryCache _memoryCache;
 
-		public RecentTracksCachingRepository(IMemoryCache memoryCache, ILastFmClient lastFmApiConnector) : base(lastFmApiConnector)
+		public RecentTracksRepositoryCachingProxy(IMemoryCache memoryCache, ILastFmClient lastFmApiConnector) : base(lastFmApiConnector)
 		{
 			_memoryCache = memoryCache;
 		}
 
-		public override async Task<IReadOnlyCollection<ITrack>> GetRecentlyListenedTracks(int limit)
+		public override async Task<IReadOnlyCollection<ITrack>> GetAsync(int limit)
 		{
-			var cacheKey = $"{nameof(RecentTracksRepository)}:{nameof(GetRecentlyListenedTracks)}:{limit}";
+			var cacheKey = $"{nameof(RecentTracksRepository)}:{nameof(GetAsync)}:{limit}";
 
 			if (!_memoryCache.TryGetValue(cacheKey, out RecentTracks recentTracks))
 			{
 				// Nothing in the cache, so get the full list
-				var allRecentTracks = await base.GetRecentlyListenedTracks(limit);
+				var allRecentTracks = await base.GetAsync(limit);
 
 				if (allRecentTracks == null)
 				{
@@ -44,7 +44,7 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories
 			}
 
 			// Get any tracks that have been played after the last time we checked
-			var latestTracks = await GetRecentlyListenedTracks(limit, recentTracks.FetchedDate) ?? new List<ITrack>();
+			var latestTracks = await GetRecentlyListenedTracksAsync(limit, recentTracks.FetchedDate) ?? new List<ITrack>();
 			latestTracks = latestTracks.Concat(recentTracks.Tracks).Take(limit).ToList();
 
 			_memoryCache.Set(cacheKey, new RecentTracks(DateTime.UtcNow, latestTracks), DateTime.UtcNow.AddHours(1));

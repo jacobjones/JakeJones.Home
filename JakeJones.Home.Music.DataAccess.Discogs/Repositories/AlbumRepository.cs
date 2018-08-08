@@ -15,7 +15,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Repositories
 			_discogsClient = discogsClient;
 		}
 
-		public virtual async Task<IAlbum> GetAlbum(string artist, string title)
+		public virtual async Task<IAlbum> GetAsync(string artist, string title)
 		{
 			// Should only return one result
 			var searchResult = await _discogsClient.SearchByAlbum(artist, title, 1, 1);
@@ -27,7 +27,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Repositories
 				return null;
 			}
 
-			return new Album(artist, title, albumResult.Year, albumResult.Genre.AsReadOnly(), albumResult.Style.AsReadOnly());
+			return new Album(artist, title, albumResult.Year, albumResult.ImageUrl);
 		}
 	}
 }

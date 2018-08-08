@@ -5,6 +5,6 @@ namespace JakeJones.Home.Music.Repositories
 {
 	public interface IAlbumRepository
 	{
-		Task<IAlbum> GetAlbum(string artist, string title);
+		Task<IAlbum> GetAsync(string artist, string title);
 	}
 }

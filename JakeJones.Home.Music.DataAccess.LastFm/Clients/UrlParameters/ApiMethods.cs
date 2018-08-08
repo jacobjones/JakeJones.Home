@@ -1,4 +1,4 @@
-﻿namespace JakeJones.Home.Music.DataAccess.LastFm.Connector.UrlParameters
+﻿namespace JakeJones.Home.Music.DataAccess.LastFm.Clients.UrlParameters
 {
 	/// <summary>
 	/// Last.fm API Methods
@@ -6,5 +6,6 @@
 	internal static class ApiMethods
 	{
 		public const string RecentTracks = "user.getrecenttracks";
+		public const string GetAlbumInfo = "album.getinfo";
 	}
 }

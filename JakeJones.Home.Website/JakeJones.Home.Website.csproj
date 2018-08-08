@@ -32,6 +32,9 @@
     <ProjectReference Include="..\JakeJones.Home.Blog.DataAccess.SqlServer\JakeJones.Home.Blog.DataAccess.SqlServer.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Blog.Implementation\JakeJones.Home.Blog.Implementation.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Blog\JakeJones.Home.Blog.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Books.DataAccess.Goodreads\JakeJones.Home.Books.DataAccess.Goodreads.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Books.Implementation\JakeJones.Home.Books.Implementation.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Books\JakeJones.Home.Books.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Core.Implementation\JakeJones.Home.Core.Implementation.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Core\JakeJones.Home.Core.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music.DataAccess.Discogs\JakeJones.Home.Music.DataAccess.Discogs.csproj" />
@@ -41,7 +44,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\logo.png" />
     <None Include="wwwroot\lib\Chart.js\Chart.bundle.js" />
     <None Include="wwwroot\lib\Chart.js\Chart.bundle.min.js" />
     <None Include="wwwroot\lib\Chart.js\Chart.js" />

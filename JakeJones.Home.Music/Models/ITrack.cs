@@ -7,5 +7,6 @@ namespace JakeJones.Home.Music.Models
 		string Artist { get; }
 		string Title { get; }
 		string AlbumTitle { get; }
+		string AlbumMbid { get; }
 	}
 }

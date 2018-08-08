@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.DataAccess.LastFm.Clients;
-using JakeJones.Home.Music.DataAccess.LastFm.Connector;
-using JakeJones.Home.Music.DataAccess.LastFm.Models;
 using JakeJones.Home.Music.Models;
 using JakeJones.Home.Music.Repositories;
 
@@ -19,9 +17,10 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories
 		{
 			_lastFmApiConnector = lastFmApiConnector;
 		}
-		internal async Task<List<ITrack>> GetRecentlyListenedTracks(int limit, DateTime? from)
+
+		internal async Task<List<ITrack>> GetRecentlyListenedTracksAsync(int limit, DateTime? from)
 		{
-			var tracksResult = await _lastFmApiConnector.GetRecentTracks(Username, limit, from);
+			var tracksResult = await _lastFmApiConnector.GetRecentTracksAsync(Username, limit, from);
 
 			if (tracksResult?.RecentTracks?.Tracks == null)
 			{
@@ -30,19 +29,19 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories
 
 			// TODO: Handle exceptions
 
-			List<ITrack> tracks = new List<ITrack>();
+			var tracks = new List<ITrack>();
 
 			foreach (var track in tracksResult.RecentTracks.Tracks)
 			{
-				tracks.Add(new Track(track.Artist.Name, track.Name, track.Album.Name));
+				tracks.Add(new Track(track.Artist.Name, track.Name, track.Album.Name, track.Album.Mbid));
 			}
 
 			return tracks;
 		}
 
-		public virtual async Task<IReadOnlyCollection<ITrack>> GetRecentlyListenedTracks(int limit)
+		public virtual async Task<IReadOnlyCollection<ITrack>> GetAsync(int limit)
 		{
-			return (await GetRecentlyListenedTracks(limit, null)).AsReadOnly();
+			return (await GetRecentlyListenedTracksAsync(limit, null)).AsReadOnly();
 		}
 	}
 }

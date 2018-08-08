@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using RestSharp.Deserializers;
 
 namespace JakeJones.Home.Music.DataAccess.Discogs.Models
 {
@@ -7,7 +7,8 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Models
 		// This is a combination of the artist and album
 		public string Title { get; set; }
 		public int Year { get; set; }
-		public List<string> Style { get; set; }
-		public List<string> Genre { get; set; }
+
+		[DeserializeAs(Name = "cover_image")]
+		public string ImageUrl { get; set; }
 	}
 }

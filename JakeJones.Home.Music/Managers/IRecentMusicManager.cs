@@ -6,6 +6,6 @@ namespace JakeJones.Home.Music.Managers
 {
 	public interface IRecentMusicManager
 	{
-		Task<IDictionary<IAlbum, IList<ITrack>>> GetRecentTracks(int limit);
+		Task<IAlbumTrack> GetRecentTrackAsync();
 	}
 }

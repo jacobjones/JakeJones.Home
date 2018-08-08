@@ -1,7 +1,8 @@
 ﻿using AutoMapper;
 using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
 using JakeJones.Home.Blog.Implementation.Bootstrappers;
-using JakeJones.Home.Blog.Models;
+using JakeJones.Home.Books.DataAccess.Goodreads.Bootstrappers;
+using JakeJones.Home.Books.Implementation.Bootstrappers;
 using JakeJones.Home.Core.Implementation.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
@@ -9,10 +10,7 @@ using JakeJones.Home.Music.Implementation.Bootstrappers;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -53,6 +51,8 @@ namespace JakeJones.Home.Website
 			CoreImplementationBootstrapper.Register(services);
 			BlogImplementationBootstrapper.Register(services);
 			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
+			BooksDataAccessBootstrapper.Register(services);
+			BooksImplementationBootstrapper.Register(services);
 
 			MusicAlbumsDataAccessBootstrapper.Register(services);
 			MusicTracksDataAccessBootstrapper.Register(services);

@@ -5,6 +5,6 @@
 	/// </summary>
 	internal static class ApiMethods
 	{
-		public const string Search = "search";
+		public const string Search = "database/search";
 	}
 }

@@ -6,6 +6,6 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Clients
 {
 	public interface ILastFmClient
 	{
-		Task<RecentTracksResult> GetRecentTracks(string user, int limit, DateTime? from = null);
+		Task<RecentTracksResult> GetRecentTracksAsync(string user, int limit, DateTime? from = null);
 	}
 }
