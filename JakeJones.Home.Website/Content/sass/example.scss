@@ -34,6 +34,87 @@ a {
 	}
 }
 
+.current-book {
+	width: 180px;
+	height: 200px;
+	position: absolute;
+	top: 250px;
+	right: 200px;
+	
+	> img {
+		width: 100%;
+	}
+}
+
+.current-album {
+	width: 220px;
+	height: 220px;
+	position: absolute;
+	top: 490px;
+	left: 100px;
+
+	> img {
+		width: 100%;
+	}
+}
+
+.loader {
+	height: 100%;
+	width: 100%;
+	border: 4px white solid;
+	display: none;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	white-space: nowrap;
+
+	.loading & {
+		display: flex;
+	}
+
+	&-bar {
+		width: 100px;
+		margin-left: -20px;
+
+		&:before {
+			content: '[';
+			width: 10px;
+			display: inline-block;
+		}
+
+		&:after {
+			content: ']';
+			width: 10px;
+			display: inline-block;
+		}
+	}
+
+	.progress {
+		display: inline-block;
+		background-color: white;
+		width: 0;
+		margin-right: 100%;
+		animation: load 4s steps(8, end) infinite;
+	}
+}
+
+@keyframes load {
+	0% {
+		width: 0;
+		margin-right: 100%;
+	}
+
+	87.5% {
+		width: 100%;
+		margin-right: 0;
+	}
+
+	100% {
+		width: 100%;
+		margin-right: 0;
+	}
+}
+
 /*body {
 	height: 100%;
 	background-color: #623742;

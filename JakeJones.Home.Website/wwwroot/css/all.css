@@ -38,6 +38,64 @@ a {
   a:hover {
     background: yellow; }
 
+.current-book {
+  width: 180px;
+  height: 200px;
+  position: absolute;
+  top: 250px;
+  right: 200px; }
+  .current-book > img {
+    width: 100%; }
+
+.current-album {
+  width: 220px;
+  height: 220px;
+  position: absolute;
+  top: 490px;
+  left: 100px; }
+  .current-album > img {
+    width: 100%; }
+
+.loader {
+  height: 100%;
+  width: 100%;
+  border: 4px white solid;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  white-space: nowrap; }
+  .loading .loader {
+    display: flex; }
+  .loader-bar {
+    width: 100px;
+    margin-left: -20px; }
+    .loader-bar:before {
+      content: '[';
+      width: 10px;
+      display: inline-block; }
+    .loader-bar:after {
+      content: ']';
+      width: 10px;
+      display: inline-block; }
+  .loader .progress {
+    display: inline-block;
+    background-color: white;
+    width: 0;
+    margin-right: 100%;
+    animation: load 4s steps(8, end) infinite; }
+
+@keyframes load {
+  0% {
+    width: 0;
+    margin-right: 100%; }
+  87.5% {
+    width: 100%;
+    margin-right: 0; }
+  100% {
+    width: 100%;
+    margin-right: 0; } }
+
 /*body {
 	height: 100%;
 	background-color: #623742;
@@ -103,13 +161,12 @@ body, html {
   margin: 0;
   padding: 0;
   height: 100%;
-  background-color: white; }
+  background-color: blue; }
 
 body {
   font-size: .9rem;
-  color: #222;
   color: white;
-  background-color: white;
+  background-color: blue;
   font-family: 'Space Mono', monospace;
   font-weight: normal;
   image-rendering: optimizeQuality;

@@ -11,12 +11,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Content\js\example.js" />
+    <None Remove="Content\js\core.js" />
+    <None Remove="Content\js\home.js" />
     <None Remove="gulpfile.js" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Content\js\example.js" />
+    <Content Include="Content\js\home.js" />
+    <Content Include="Content\js\core.js" />
     <Content Include="gulpfile.js" />
   </ItemGroup>
 

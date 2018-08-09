@@ -1,10 +1,11 @@
 ﻿@{
 	ViewData["Title"] = "jakejon.es";
+	ViewData["BodyClass"] = "home";
 }
 
 <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 
-@*<div class="cool" style="z-index: 2; position: relative;">
+<div class="cool" style="z-index: 2; position: relative;">
 	<div class="floater">
 		<br />
 		<pre>
@@ -41,8 +42,17 @@
 
 </div>
 
-<img src="https://images-na.ssl-images-amazon.com/images/I/91n9BimBhJL.jpg" style="width: 180px; position: absolute; top: 250px; right: 200px;"/>
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/8/8b/Unknown-mortal-orchestra-album-cover.jpg/220px-Unknown-mortal-orchestra-album-cover.jpg" style="position: absolute; top: 490px; left: 100px;"/>
+<div class="current-book loading">
+	<img id="current-book" />
+	<div class="loader"><span class="loader-text">Loading book</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
+</div>
+
+<div class="current-album loading">
+	<img id="current-album" />
+	<div class="loader"><span class="loader-text">Loading track</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
+</div>
+
+
 <div style="width: 180px; position: absolute; top: 410px; right: 440px;">━━━━━━━━━━━━━━━━━━━━━━━━━━<span style="position: absolute; margin-top: 2px; margin-left: -1px;">▶</span></div>
 <div style="width: 180px; position: absolute; top: 515px; left: 330px;line-height: .9;">
 	<pre>
@@ -52,4 +62,4 @@
                ┃
 <span style="position: absolute; margin-top: 2px; margin-left: -5px;">◀</span>━━━━━━━━━━━━━━━━━━┛
 </pre>
-</div>*@
+</div>
