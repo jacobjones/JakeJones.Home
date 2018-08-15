@@ -14,7 +14,24 @@ BREAKPOINTS
 /*********************
 BREAKPOINTS
 *********************/
+.grabbable {
+  cursor: move;
+  /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab; }
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active, .grabbed {
+  cursor: grabbing;
+  cursor: -moz-grabbing;
+  cursor: -webkit-grabbing; }
+
 .floater {
+  margin: 0 auto 150px;
+  padding: 0 18px;
+  min-height: 550px;
+  max-width: 680px;
   text-align: center; }
 
 .navbar-nav {
@@ -160,8 +177,7 @@ BREAKPOINTS
 body, html {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background-color: blue; }
+  height: 100%; }
 
 body {
   font-size: .9rem;

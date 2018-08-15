@@ -13,10 +13,14 @@
   <ItemGroup>
     <None Remove="Content\js\core.js" />
     <None Remove="Content\js\home.js" />
+    <None Remove="Content\js\sdrag.js" />
+    <None Remove="Content\js\simple-connect.js" />
     <None Remove="gulpfile.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Content\js\sdrag.js" />
+    <Content Include="Content\js\simple-connect.js" />
     <Content Include="Content\js\home.js" />
     <Content Include="Content\js\core.js" />
     <Content Include="gulpfile.js" />

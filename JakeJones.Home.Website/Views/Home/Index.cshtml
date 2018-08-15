@@ -5,7 +5,6 @@
 
 <link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 
-<div class="cool" style="z-index: 2; position: relative;">
 	<div class="floater">
 		<br />
 		<pre>
@@ -24,14 +23,16 @@
 		currently working at <a href="#">Valtech NYC.</a>
 		<br />
 		<br />
-		<br />
-		i like reading.<br />
-		currently I'm reading.
-		<br />
-		<br />
-		<br />
-		i like music.<br />
-		currently I'm listening to.
+		<p id="book-text" style="display: inline-block;">
+			i like reading.<br />
+			currently I'm reading.
+		</p>
+			<br />
+			<br />
+		<p id="music-text" style="display: inline-block;">
+			i like music.<br />
+			currently I'm listening to.
+		</p>
 		<br />
 		<br />
 		<br />
@@ -40,26 +41,13 @@
 		why not checkout the <a href="#">full code here?</a>
 	</div>
 
-</div>
 
-<div class="current-book loading">
+<div class="current-book loading grabbable" id="current-book-wrapper">
 	<img id="current-book" />
 	<div class="loader"><span class="loader-text">Loading book</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
 </div>
 
-<div class="current-album loading">
+<div class="current-album loading" id="current-album-wrapper">
 	<img id="current-album" />
 	<div class="loader"><span class="loader-text">Loading track</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
-</div>
-
-
-<div style="width: 180px; position: absolute; top: 410px; right: 440px;">━━━━━━━━━━━━━━━━━━━━━━━━━━<span style="position: absolute; margin-top: 2px; margin-left: -1px;">▶</span></div>
-<div style="width: 180px; position: absolute; top: 515px; left: 330px;line-height: .9;">
-	<pre>
-               ┏━━━━━━━━━━
-               ┃
-               ┃
-               ┃
-<span style="position: absolute; margin-top: 2px; margin-left: -5px;">◀</span>━━━━━━━━━━━━━━━━━━┛
-</pre>
 </div>

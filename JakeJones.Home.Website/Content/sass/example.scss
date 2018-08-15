@@ -1,7 +1,25 @@
 ﻿@import "neat";
 @import "breakpoints";
 
+.grabbable {
+	cursor: move; /* fallback if grab cursor is unsupported */
+	cursor: grab;
+	cursor: -moz-grab;
+	cursor: -webkit-grab;
+}
+
+/* (Optional) Apply a "closed-hand" cursor during drag operation. */
+.grabbable:active, .grabbed {
+	cursor: grabbing;
+	cursor: -moz-grabbing;
+	cursor: -webkit-grabbing;
+}
+
 .floater {
+	margin: 0 auto 150px;
+	padding: 0 18px;
+	min-height: 550px;
+	max-width: 680px;
 	text-align: center;
 }
 
