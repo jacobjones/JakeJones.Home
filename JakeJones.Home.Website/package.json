@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"devDependencies": {
 		"del": "^3.0.0",
-		"gulp": "^3.9.1",
+		"gulp": "github:gulpjs/gulp#4.0",
 		"gulp-concat": "^2.6.1",
 		"gulp-cssmin": "^0.2.0",
 		"gulp-htmlmin": "^4.0.0",
@@ -12,6 +12,7 @@
 		"merge-stream": "^1.0.1"
 	},
 	"dependencies": {
-		"bourbon-neat": "^3.0.0"
+		"bourbon-neat": "^3.0.0",
+		"node-sass": "^4.9.3"
 	}
 }

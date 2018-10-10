@@ -1,6 +1,9 @@
 ﻿@model JakeJones.Home.Blog.Implementation.Models.PostEditViewModel
 @{
+	ViewData["BodyClass"] = "blog blog--post edit";
+
 	bool isNew = string.IsNullOrEmpty(Model.Title);
+	var host = Context.Request.Host.ToString();
 	ViewData["Title"] = "Edit " + (Model.Title ?? "new post");
 }
 
@@ -38,7 +41,7 @@
 	<input type="submit" value="Save" title="Save the post" />
 
 	<input asp-for="@Model.IsPublished" />
-		<label asp-for="@Model.IsPublished">Is published</label>
+	<label asp-for="@Model.IsPublished">Is published</label>
 
 	@if (!isNew)
 	{
@@ -46,7 +49,13 @@
 	}
 </form>
 
-@*@section Scripts {
-		<script src="~/lib/tinymce/tinymce.min.js"></script>
-		<script src="~/js/admin.js" async></script>
-	}*@
+@section Scripts {
+	<script src="//@host/lib/tinymce/tinymce.min.js"></script>
+
+	<environment include="Development">
+		<script src="~/js/admin/all.js" asp-append-version="true"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="~/js/admin/all.min.js" asp-append-version="true"></script>
+	</environment>
+}

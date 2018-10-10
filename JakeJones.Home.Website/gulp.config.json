@@ -9,10 +9,9 @@
 		"path": "wwwroot/css/"
 	},
 	"js": {
-		"all": [ "wwwroot/js/**/*.js", "!wwwroot/js/**/*.min.js" ],
-		"src": "Content/js/**/*.js",
+		"src": "Content/js",
 		"concat": "all.js",
 		"min": "all.min.js",
-		"path": "wwwroot/js/"
+		"path": "wwwroot/js"
 	}
 }

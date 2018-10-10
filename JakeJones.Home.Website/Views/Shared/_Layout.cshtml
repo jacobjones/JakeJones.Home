@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>@ViewData["Title"] - JakeJones.Home.Website</title>
+	<title>Jake Jones: @ViewData["Title"]</title>
 
 	<environment include="Development">
 		<link rel="stylesheet" href="~/css/all.css" />
@@ -11,12 +11,18 @@
 	<environment exclude="Development">
 		<link rel="stylesheet" href="~/css/all.min.css" asp-append-version="true" />
 	</environment>
+	
+	<link rel="stylesheet" href="~/lib/prism/prism.css" />
+
+	@RenderSection("Head", required: false)
 </head>
 <body class="@ViewData["BodyClass"]">
+	
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<ul class="nav navbar-nav">
 		<li><a asp-area="" asp-controller="Home" asp-action="Index">&nbsp;▶Home&nbsp;</a></li>
 		<li><a asp-area="" asp-controller="Blog" asp-action="Index">&nbsp;▶Blog&nbsp;</a></li>
-		<li><a asp-area="" asp-controller="Home" asp-action="Contact">&nbsp;▶Contact&nbsp;</a></li>
+		<li><a asp-area="" asp-controller="Home" asp-action="About">&nbsp;▶About&nbsp;</a></li>
 	</ul>
 
 	<main role="main">
@@ -24,13 +30,14 @@
 	</main>
 
 	<environment include="Development">
-		<script src="~/lib/Chart.js/Chart.js"></script>
 		<script src="~/js/all.js" asp-append-version="true"></script>
 	</environment>
 	<environment exclude="Development">
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js"></script>
 		<script src="~/js/all.min.js" asp-append-version="true"></script>
 	</environment>
+	
+	<script src="~/lib/prism/prism.js"></script>
+
 
 	@RenderSection("Scripts", required: false)
 </body>

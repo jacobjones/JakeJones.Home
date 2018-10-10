@@ -78,6 +78,11 @@ ready(function () {
 			simpleConnect.repaintConnection(bookConnector);
 		});
 
+		window.onresize = function () {
+			simpleConnect.repaintConnection(musicConnector);
+			simpleConnect.repaintConnection(bookConnector);
+		};
+
 		ajax.get("/api/books/current", function (book) {
 			var e = document.getElementById("current-book");
 
@@ -197,9 +202,6 @@ ready(function () {
 			if (e.currentTarget instanceof HTMLElement || e.currentTarget instanceof SVGElement) {
 				dragging = true;
 
-				el.classList.add('grabbed');
-				el.classList.remove('grabbable');
-
 				var rect = el.getBoundingClientRect();
 
 				startX = e.pageX - rect.left + window.pageXOffset;
@@ -217,8 +219,6 @@ ready(function () {
 			if (true === dragging) {
 				dragging = false;
 				window.removeEventListener("mousemove", move);
-				el.classList.add('grabbable');
-				el.classList.remove('grabbed');
 				onStop && onStop(el, e.pageX, startX, e.pageY, startY);
 			}
 		});

@@ -4,7 +4,6 @@ BREAKPOINTS
 .post {
   margin: 0 auto 150px;
   padding: 0 18px;
-  min-height: 550px;
   max-width: 680px; }
 
 /*********************
@@ -33,27 +32,6 @@ BREAKPOINTS
   min-height: 550px;
   max-width: 680px;
   text-align: center; }
-
-.navbar-nav {
-  list-style-type: none;
-  display: flex;
-  justify-content: space-around; }
-  .navbar-nav a {
-    text-transform: uppercase;
-    text-decoration: none;
-    background: none;
-    color: white; }
-    .navbar-nav a:hover {
-      background: white;
-      color: blue; }
-
-a {
-  text-transform: uppercase;
-  text-decoration: none;
-  background: white;
-  color: blue; }
-  a:hover {
-    background: yellow; }
 
 .current-book {
   width: 180px;
@@ -149,7 +127,6 @@ h1 {
   font-family: "brandon-text",sans-serif;
   font-size: 2rem;
   font-weight: bold;
-  color: #2b3e50;
   line-height: 1.2; }
 
 h2 {
@@ -162,7 +139,6 @@ h3 {
   font-size: 1.2rem;
   font-weight: 900;
   text-transform: uppercase;
-  color: #e74c3c;
   margin-bottom: 1.5rem; }
 
 h4 {
@@ -174,16 +150,111 @@ h4 {
 /*********************
 BREAKPOINTS
 *********************/
+/* Global Scheme */
+body.home ::selection {
+  background: white; }
+
+body.blog ::selection {
+  background: blue; }
+
+body.about ::selection {
+  background: blue; }
+
+body.home ::selection {
+  color: blue; }
+
+body.blog ::selection {
+  color: white; }
+
+body.about ::selection {
+  color: yellow; }
+
+body.home ::-moz-selection {
+  background: white; }
+
+body.blog ::-moz-selection {
+  background: blue; }
+
+body.about ::-moz-selection {
+  background: blue; }
+
+body.home ::-moz-selection {
+  color: blue; }
+
+body.blog ::-moz-selection {
+  color: white; }
+
+body.about ::-moz-selection {
+  color: yellow; }
+
 body, html {
   margin: 0;
-  padding: 0;
-  height: 100%; }
+  padding: 0; }
 
 body {
   font-size: .9rem;
-  color: white;
-  background-color: blue;
   font-family: 'Space Mono', monospace;
   font-weight: normal;
   image-rendering: optimizeQuality;
   text-rendering: optimizeLegibility; }
+  body.home {
+    background: blue; }
+  body.blog {
+    background: white; }
+  body.about {
+    background: yellow; }
+  body.home {
+    color: white; }
+  body.blog {
+    color: blue; }
+  body.about {
+    color: blue; }
+
+a {
+  text-transform: uppercase;
+  text-decoration: none; }
+  body.home a {
+    background: white; }
+  body.blog a {
+    background: blue; }
+  body.about a {
+    background: blue; }
+  body.home a {
+    color: blue; }
+  body.blog a {
+    color: white; }
+  body.about a {
+    color: yellow; }
+  body.home a:hover {
+    background: yellow; }
+  body.blog a:hover {
+    background: red; }
+  body.about a:hover {
+    background: white; }
+
+.navbar-nav {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around; }
+  .navbar-nav a {
+    text-transform: uppercase;
+    text-decoration: none;
+    background: none !important; }
+    body.home .navbar-nav a {
+      color: white; }
+    body.blog .navbar-nav a {
+      color: blue; }
+    body.about .navbar-nav a {
+      color: blue; }
+    body.home .navbar-nav a:hover {
+      background: white !important; }
+    body.blog .navbar-nav a:hover {
+      background: blue !important; }
+    body.about .navbar-nav a:hover {
+      background: blue !important; }
+    body.home .navbar-nav a:hover {
+      color: blue !important; }
+    body.blog .navbar-nav a:hover {
+      color: white !important; }
+    body.about .navbar-nav a:hover {
+      color: yellow !important; }

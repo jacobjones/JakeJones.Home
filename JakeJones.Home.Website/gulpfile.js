@@ -1,5 +1,7 @@
 ﻿/// <binding AfterBuild='sass, js' />
-var gulp	= require("gulp"),
+var fs = require("fs"),
+	path = require("path"),
+	gulp = require("gulp"),
 	concat	= require("gulp-concat"),
 	cssmin	= require("gulp-cssmin"),
 	htmlmin	= require("gulp-htmlmin"),
@@ -9,6 +11,14 @@ var gulp	= require("gulp"),
 	sass	= require("gulp-sass"),
 	neat	= require("bourbon-neat").includePaths,
 	config	= require("./gulp.config.json");
+
+function getFolders(dir) {
+	return fs.readdirSync(dir)
+		.filter(function (file) {
+			return fs.statSync(path.join(dir, file)).isDirectory();
+		});
+}
+
 
 gulp.task("sass:compile", function () {
 	return gulp.src(config.sass.src)
@@ -26,19 +36,40 @@ gulp.task("sass:minify", function () {
 		.pipe(gulp.dest(config.css.path));
 });
 
-gulp.task("sass", ["sass:compile", "sass:minify"]);
+gulp.task("sass", gulp.series("sass:compile", "sass:minify"));
 
 gulp.task("js:concat", function () {
-	return gulp.src(config.js.src)
+	var folders = getFolders(config.js.src);
+
+	var tasks = folders.map(function (folder) {
+		return gulp.src(path.join(config.js.src, folder, "/**/*.js"))
+			.pipe(concat(config.js.concat))
+			.pipe(gulp.dest(path.join(config.js.path, folder)));
+	});
+
+	var root = gulp.src(path.join(config.js.src, "/*.js"))
 		.pipe(concat(config.js.concat))
 		.pipe(gulp.dest(config.js.path));
+
+	return merge(tasks, root);
 });
 
 gulp.task("js:minify", function () {
-	return gulp.src(config.js.all)
+	var folders = getFolders(config.js.path);
+
+	var tasks = folders.map(function (folder) {
+		return gulp.src(path.join(config.js.path, folder, "/**/", config.js.concat))
+			.pipe(uglify())
+			.pipe(concat(config.js.min))
+			.pipe(gulp.dest(path.join(config.js.path, folder)));
+	});
+
+	var root = gulp.src(path.join(config.js.path, config.js.concat))
 		.pipe(uglify())
 		.pipe(concat(config.js.min))
 		.pipe(gulp.dest(config.js.path));
+
+	return merge(tasks, root);
 });
 
-gulp.task("js", ["js:concat", "js:minify"]);
+gulp.task("js", gulp.series("js:concat", "js:minify"));

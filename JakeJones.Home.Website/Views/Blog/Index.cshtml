@@ -1,6 +1,8 @@
 ﻿@model JakeJones.Home.Blog.Implementation.Models.PostListViewModel
 
 @{
+	ViewData["BodyClass"] = "blog";
+
 	int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 

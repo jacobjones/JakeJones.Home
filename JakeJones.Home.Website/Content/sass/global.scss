@@ -1,19 +1,116 @@
 ﻿@import "neat";
 @import "breakpoints";
 
+/* Global Scheme */
+$blue:   blue;
+$white:  white;
+$yellow: yellow;
+
+$background-color: (home: $blue, blog: $white, about: $yellow);
+$primary-color: (home: $white, blog: $blue, about: $blue);
+$secondary-color: (home: $yellow, blog: red, about: $white);
+
+$color: null !default;
+
+@mixin color($palette) {
+	@each $page, $clr in $palette {
+		@if (inspect(&) == '(body,)') {
+			&.#{$page} {
+				$color: $clr !global;
+				@content;
+			}
+		}
+		@else {
+			body.#{$page} & {
+				$color: $clr !global;
+				@content;
+			}
+		}
+	}
+}
+
+::selection {
+	@include color($primary-color) {
+		background: $color;
+	}
+
+	@include color($background-color) {
+		color: $color;
+	}
+}
+
+::-moz-selection {
+	@include color($primary-color) {
+		background: $color;
+	}
+
+	@include color($background-color) {
+		color: $color;
+	}
+}
+
 body, html {
 	margin: 0;
 	padding: 0;
-	height: 100%;
 }
 
-
 body {
+	@include color($background-color) {
+		background: $color;
+	}
+
+	@include color($primary-color) {
+		color: $color;
+	}
+
 	font-size: .9rem;
-	color: white;
-	background-color: blue;
 	font-family: 'Space Mono', monospace;
 	font-weight: normal;
 	image-rendering: optimizeQuality;
 	text-rendering: optimizeLegibility;
 }
+
+a {
+	text-transform: uppercase;
+	text-decoration: none;
+
+	@include color($primary-color) {
+		background: $color;
+	}
+
+	@include color($background-color) {
+		color: $color;
+	}
+
+	&:hover {
+		@include color($secondary-color) {
+			background: $color;
+		}
+	}
+}
+
+.navbar-nav {
+	list-style-type: none;
+	display: flex;
+	justify-content: space-around;
+
+	a {
+		text-transform: uppercase;
+		text-decoration: none;
+		background: none !important;
+
+		@include color($primary-color) {
+			color: $color;
+		}
+
+		&:hover {
+			@include color($primary-color) {
+				background: $color !important;
+			}
+			@include color($background-color) {
+				color: $color !important;
+			}
+		}
+	}
+}
+

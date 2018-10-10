@@ -35,6 +35,11 @@
 			simpleConnect.repaintConnection(bookConnector);
 		});
 
+		window.onresize = function () {
+			simpleConnect.repaintConnection(musicConnector);
+			simpleConnect.repaintConnection(bookConnector);
+		};
+
 		ajax.get("/api/books/current", function (book) {
 			var e = document.getElementById("current-book");
 

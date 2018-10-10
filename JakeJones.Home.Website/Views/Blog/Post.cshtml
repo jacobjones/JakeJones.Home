@@ -1,6 +1,8 @@
 ﻿@model JakeJones.Home.Blog.Implementation.Models.PostViewModel
 
 @{
+	ViewData["BodyClass"] = "blog blog--post";
+
 	ViewData["Title"] = Model.Title;
 	ViewData["Description"] = Model.Excerpt;
 }

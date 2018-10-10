@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-using JakeJones.Home.Website.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
 namespace JakeJones.Home.Website.Controllers
 {
@@ -11,23 +9,10 @@ namespace JakeJones.Home.Website.Controllers
 			return View();
 		}
 
+		[Route("about")]
 		public IActionResult About()
 		{
-			ViewData["Message"] = "Your application description page.";
-
 			return View();
-		}
-
-		public IActionResult Contact()
-		{
-			ViewData["Message"] = "Your contact page.";
-
-			return View();
-		}
-
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }
