@@ -18,6 +18,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="JakeJones.Home.Core.Implementation.Development.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="JakeJones.Home.Core.Implementation.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -6,7 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\all.min.js" />
+    <Content Remove="wwwroot\js\admin\all.js" />
+    <Content Remove="wwwroot\js\all.js" />
     <Content Remove="wwwroot\js\site.min.js" />
   </ItemGroup>
 
@@ -52,10 +53,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Content\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <None Include="wwwroot\images\jake.svg" />
+    <None Include="wwwroot\images\jones.svg" />
     <None Include="wwwroot\lib\tinymce\jquery.tinymce.min.js" />
     <None Include="wwwroot\lib\tinymce\langs\readme.md" />
     <None Include="wwwroot\lib\tinymce\plugins\advlist\plugin.min.js" />
@@ -113,6 +112,10 @@
     <Content Update="Views\Home\About.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Content\images\" />
   </ItemGroup>
 
 </Project>

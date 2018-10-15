@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Books.DataAccess.Goodreads.Clients;
@@ -22,7 +23,7 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Repositories
 		{
 			var books = await _goodreadsClient.GetBooksAsync(bookShelf.Equals(BookShelf.Read) ? BookShelves.Read : BookShelves.CurrentlyReading);
 
-			return books?.Select(x => new Book(x.Author, x.Title, x.Link, x.Image)).ToList();
+			return books?.Select(x => new Book(x.Author, x.Title, x.Link, x.Image, x.Read)).ToList();
 		}
 	}
 }

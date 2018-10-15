@@ -36,15 +36,15 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Clients
 				request.AddParameter("shelf", bookShelf);
 			}
 
-			var cool = await _restClient.ExecuteGetTaskAsync<BookshelfXmlModel>(request);
+			var result = await _restClient.ExecuteGetTaskAsync<BookshelfXmlModel>(request);
 
-			if (!cool.IsSuccessful)
+			if (!result.IsSuccessful)
 			{
 				// TODO: Log!
 				return null;
 			}
 
-			return cool?.Data?.Channel?.Items;
+			return result?.Data?.Channel?.Items;
 		}
 	}
 }

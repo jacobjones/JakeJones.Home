@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Books.Managers;
 using JakeJones.Home.Books.Models;
@@ -22,7 +23,7 @@ namespace JakeJones.Home.Books.Implementation.Managers
 
 			if (current == null)
 			{
-				return (await _bookRepository.GetAsync(BookShelf.Read))?.FirstOrDefault();
+				return (await _bookRepository.GetAsync(BookShelf.Read))?.OrderByDescending(x => x.Read ?? DateTime.MinValue).FirstOrDefault();
 			}
 
 			return current;

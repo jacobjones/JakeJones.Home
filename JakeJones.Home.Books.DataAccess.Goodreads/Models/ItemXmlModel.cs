@@ -1,4 +1,7 @@
-﻿using System.Xml.Serialization;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Xml.Serialization;
 
 namespace JakeJones.Home.Books.DataAccess.Goodreads.Models
 {
@@ -15,5 +18,11 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Models
 
 		[XmlElement("link")]
 		public string Link { get; set; }
+
+		[XmlIgnore]
+		public DateTime? Read => !string.IsNullOrWhiteSpace(UserReadAt) ? DateTime.Parse(UserReadAt) : (DateTime?) null;
+
+		[XmlElement("user_read_at")]
+		public string UserReadAt { get; set; }
 	}
 }

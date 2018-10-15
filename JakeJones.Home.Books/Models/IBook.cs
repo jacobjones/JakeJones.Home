@@ -1,4 +1,6 @@
-﻿namespace JakeJones.Home.Books.Models
+﻿using System;
+
+namespace JakeJones.Home.Books.Models
 {
 	public interface IBook
 	{
@@ -6,5 +8,6 @@
 		string Title { get; }
 		string Link { get; }
 		string ImageUrl { get; }
+		DateTime? Read { get; }
 	}
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using JakeJones.Home.Website.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace JakeJones.Home.Website.Controllers
 {
@@ -13,6 +15,11 @@ namespace JakeJones.Home.Website.Controllers
 		public IActionResult About()
 		{
 			return View();
+		}
+
+		public IActionResult Error()
+		{
+			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 		}
 	}
 }

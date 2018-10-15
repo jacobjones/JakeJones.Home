@@ -7,10 +7,13 @@ using JakeJones.Home.Core.Implementation.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
 using JakeJones.Home.Music.Implementation.Bootstrappers;
+using JakeJones.Home.Website.Infrastructure;
+using JakeJones.Home.Website.Infrastructure.Rewrite;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,12 +21,17 @@ namespace JakeJones.Home.Website
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration)
+		public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
 		{
 			Configuration = configuration;
+			HostingEnvironment = hostingEnvironment;
+			Scheduler = new PreventTimeOutScheduler();
 		}
 
 		public IConfiguration Configuration { get; }
+		private IHostingEnvironment HostingEnvironment { get; }
+
+		private PreventTimeOutScheduler Scheduler { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
@@ -48,7 +56,7 @@ namespace JakeJones.Home.Website
 				cfg.AddProfile<BlogImplemenatationMapConfiguration>();
 			});
 
-			CoreImplementationBootstrapper.Register(services);
+			CoreImplementationBootstrapper.Register(services, HostingEnvironment);
 			BlogImplementationBootstrapper.Register(services);
 			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
 			BooksDataAccessBootstrapper.Register(services);
@@ -60,7 +68,7 @@ namespace JakeJones.Home.Website
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
 		{
 			if (env.IsDevelopment())
 			{
@@ -71,6 +79,16 @@ namespace JakeJones.Home.Website
 			{
 				app.UseExceptionHandler("/Home/Error");
 			}
+
+			if (!env.IsDevelopment())
+			{
+				appLifetime.ApplicationStarted.Register(() => Scheduler.Start(60));
+				appLifetime.ApplicationStopping.Register(() => Scheduler.Stop());
+			}
+
+			var rewriteOptions = new RewriteOptions();
+			rewriteOptions.AddRedirectToNonWww();
+			app.UseRewriter(rewriteOptions);
 
 			app.UseStaticFiles();
 
