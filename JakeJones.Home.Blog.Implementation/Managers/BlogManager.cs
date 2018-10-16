@@ -42,7 +42,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 		public async Task AddOrUpdate(IPost post)
 		{
 			// Always set the last modified date
-			post.LastModified = DateTime.UtcNow;
+			post.LastModified = DateTimeOffset.UtcNow;
 
 			if (post.Id <= 0)
 			{
@@ -58,7 +58,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				// set the published date.
 				if (post.IsPublished && !existingPost.IsPublished && !existingPost.PublishDate.HasValue)
 				{
-					post.PublishDate = DateTime.UtcNow;
+					post.PublishDate = DateTimeOffset.UtcNow;
 				}
 
 				await _postRepository.Update(post);
@@ -87,7 +87,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 		{
 			if (post.IsPublished)
 			{
-				post.PublishDate = DateTime.UtcNow;
+				post.PublishDate = DateTimeOffset.UtcNow;
 			}
 
 			if (string.IsNullOrEmpty(post.Segment))

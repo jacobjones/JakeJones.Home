@@ -11,9 +11,10 @@ using System;
 namespace JakeJones.Home.Blog.DataAccess.SqlServer.Migrations
 {
     [DbContext(typeof(BlogContext))]
-    partial class BlogContextModelSnapshot : ModelSnapshot
+    [Migration("20181016152209_UseDateTimeOffset")]
+    partial class UseDateTimeOffset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

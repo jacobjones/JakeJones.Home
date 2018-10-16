@@ -15,9 +15,9 @@ namespace JakeJones.Home.Blog.Models
 
 		string Content { get; set; }
 
-		DateTime? PublishDate { get; set; }
+		DateTimeOffset? PublishDate { get; set; }
 
-		DateTime LastModified { get; set; }
+		DateTimeOffset LastModified { get; set; }
 
 		bool IsPublished { get; set; }
 

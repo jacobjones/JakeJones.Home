@@ -1,4 +1,6 @@
-﻿using JakeJones.Home.Blog.Configuration;
+﻿using JakeJones.Home.Blog.Builders;
+using JakeJones.Home.Blog.Configuration;
+using JakeJones.Home.Blog.Implementation.Builders;
 using JakeJones.Home.Blog.Implementation.Managers;
 using JakeJones.Home.Blog.Implementation.Resolvers;
 using JakeJones.Home.Blog.Managers;
@@ -14,6 +16,7 @@ namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 			services.AddSingleton<IBlogOptions, BlogOptions>();
 			services.AddSingleton<IBlogUrlResolver, BlogUrlResolver>();
 			services.AddScoped<IBlogManager, BlogManager>();
+			services.AddScoped<IBlogRssFeedBuilder, BlogRssFeedBuilder>();
 		}
 	}
 }

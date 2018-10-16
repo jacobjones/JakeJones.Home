@@ -42,9 +42,9 @@ namespace JakeJones.Home.Blog.Models
 		[Required]
 		public string Content { get; set; }
 
-		public DateTime? PublishDate { get; set; }
+		public DateTimeOffset? PublishDate { get; set; }
 
-		public DateTime LastModified { get; set; }
+		public DateTimeOffset LastModified { get; set; }
 
 		public bool IsPublished { get; set; }
 

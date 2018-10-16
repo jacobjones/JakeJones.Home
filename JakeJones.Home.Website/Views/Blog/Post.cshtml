@@ -1,4 +1,5 @@
-﻿@model JakeJones.Home.Blog.Implementation.Models.PostViewModel
+﻿@using System.Globalization
+@model JakeJones.Home.Blog.Implementation.Models.PostViewModel
 
 @{
 	ViewData["BodyClass"] = "blog blog--post";
@@ -12,7 +13,7 @@
 		<div class="post-meta">
 			@if (Model.PublishDate.HasValue)
 			{
-				<time datetime="@Model.PublishDate.Value.ToString("s")" itemprop="datePublished">@Model.PublishDate.Value.ToString("MMMM dd, yyyy")</time>
+				<time datetime="@Model.PublishDate.Value.ToString("s")" itemprop="datePublished">@Model.PublishDate.Value.ToString("MMMM dd, yyyy", new CultureInfo("en-US"))</time>
 			}
 			@if (User.Identity.IsAuthenticated)
 			{
