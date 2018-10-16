@@ -235,7 +235,8 @@ a {
 .navbar-nav {
   list-style-type: none;
   display: flex;
-  justify-content: space-around; }
+  justify-content: space-around;
+  margin-bottom: 60px; }
   .navbar-nav a {
     text-transform: uppercase;
     text-decoration: none;
