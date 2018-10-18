@@ -1,3 +1,21 @@
+ready(function () {
+	if (pageIs("blog--post")) {
+		var postId = document.getElementById('comments').dataset.postId;
+		var existingCommentsEl = document.getElementById('existingComments');
+
+		var commentTemplate = '<p><%this.author%></p><p><%this.content%></p>';
+
+		ajax.get("/blog/comment/" + postId, function (comments) {
+			var commentsHtml = "";
+
+			for (var i = 0; i < comments.length; i++) {
+				commentsHtml += TemplateEngine(commentTemplate, comments[i]);
+			}
+
+			existingCommentsEl.innerHTML = commentsHtml;
+		});
+	};
+});
 var ajax = {};
 
 ajax.get = function (url, callback) {
@@ -41,6 +59,23 @@ function loaded(el) {
 	if (el.parentNode.classList)
 		el.parentNode.classList.remove("loading");
 }
+
+// http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
+var TemplateEngine = function (html, options) {
+	var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
+	var add = function (line, js) {
+		js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
+			(code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+		return add;
+	};
+	while (match = re.exec(html)) {
+		add(html.slice(cursor, match.index))(match[1], true);
+		cursor = match.index + match[0].length;
+	}
+	add(html.substr(cursor, html.length - cursor));
+	code += 'return r.join("");';
+	return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
+};
 ready(function () {
 	if (pageIs("home")) {
 		var musicConnector = simpleConnect.connect("music-text", "current-album-wrapper", {

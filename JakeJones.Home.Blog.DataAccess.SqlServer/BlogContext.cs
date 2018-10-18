@@ -12,5 +12,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer
 		{ }
 
 		internal DbSet<PostEntity> Posts { get; set; }
+
+		internal DbSet<CommentEntity> Comments { get; set; }
 	}
 }

@@ -16,6 +16,7 @@ namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 			services.AddSingleton<IBlogOptions, BlogOptions>();
 			services.AddSingleton<IBlogUrlResolver, BlogUrlResolver>();
 			services.AddScoped<IBlogManager, BlogManager>();
+			services.AddScoped<ICommentManager, CommentManager>();
 			services.AddScoped<IBlogRssFeedBuilder, BlogRssFeedBuilder>();
 		}
 	}

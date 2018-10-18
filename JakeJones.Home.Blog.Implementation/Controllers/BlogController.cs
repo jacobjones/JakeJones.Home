@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using JakeJones.Home.Blog.Configuration;
@@ -18,13 +19,16 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		private readonly IBlogUrlResolver _blogUrlResolver;
 		private readonly IMapper _mapper;
 		private readonly IBlogManager _blogManager;
+		private readonly ICommentManager _commentManager;
 
-		public BlogController(IBlogOptions blogOptions, IBlogUrlResolver blogUrlResolver, IMapper mapper, IBlogManager blogManager)
+		public BlogController(IBlogOptions blogOptions, IBlogUrlResolver blogUrlResolver, IMapper mapper,
+			IBlogManager blogManager, ICommentManager commentManager)
 		{
 			_blogOptions = blogOptions;
 			_blogUrlResolver = blogUrlResolver;
 			_mapper = mapper;
 			_blogManager = blogManager;
+			_commentManager = commentManager;
 		}
 
 		[Route("{page:int?}")]
@@ -34,8 +38,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		{
 			var posts = await _blogManager.Get(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1));
 
-			//ViewData["Title"] = "Blog";
-			//ViewData["Description"] =  "Hmmmm";
+			ViewData["Title"] = "Blog";
 
 			IList<PostListItemViewModel> postModels = new List<PostListItemViewModel>();
 
@@ -59,21 +62,8 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			return View("~/Views/Blog/Index.cshtml", model);
 		}
 
-		//[Route("/blog/category/{category}/{page:int?}")]
-		//[OutputCache(Profile = "default")]
-		//public async Task<IActionResult> Category(string category, int page = 0)
-		//{
-		//	var posts = (await _blog.GetPostsByCategory(category)).Skip(_settings.Value.PostsPerPage * page).Take(_settings.Value.PostsPerPage);
-		//	ViewData["Title"] = _manifest.Name + " " + category;
-		//	ViewData["Description"] = $"Articles posted in the {category} category";
-		//	ViewData["prev"] = $"/blog/category/{category}/{page + 1}/";
-		//	ViewData["next"] = $"/blog/category/{category}/{(page <= 1 ? null : page - 1 + "/")}";
-		//	return View("~/Views/Blog/Index.cshtml", posts);
-		//}
-
 		[Route("{segment?}")]
 		[HttpGet]
-		//[OutputCache(Profile = "default")]
 		public async Task<IActionResult> Post(string segment)
 		{
 			var post = await _blogManager.GetBySegment(segment);
@@ -137,60 +127,52 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			return Redirect("/");
 		}
 
-		//[Route("/blog/comment/{postId}")]
-		//[HttpPost]
-		//public async Task<IActionResult> AddComment(string postId, Comment comment)
-		//{
-		//	var post = await _blog.GetPostById(postId);
+		[Route("/blog/comment/{postId}")]
+		[HttpGet]
+		public async Task<IActionResult> GetComments(int postId)
+		{
+			var comments = await _commentManager.GetByPostId(postId);
 
-		//	if (!ModelState.IsValid)
-		//	{
-		//		return View("Post", post);
-		//	}
+			return Ok(comments.Select(x => _mapper.Map<CommentViewModel>(x)));
+		}
 
-		//	if (post == null || !post.AreCommentsOpen(_settings.Value.CommentsCloseAfterDays))
-		//	{
-		//		return NotFound();
-		//	}
+		[Route("/blog/comment/{postId}")]
+		[HttpPost]
+		public async Task<IActionResult> AddComment(int postId, CommentViewModel model)
+		{
+			var post = await _blogManager.GetById(postId);
 
-		//	comment.IsAdmin = User.Identity.IsAuthenticated;
-		//	comment.Content = comment.Content.Trim();
-		//	comment.Author = comment.Author.Trim();
-		//	comment.Email = comment.Email.Trim();
+			//if (!ModelState.IsValid)
+			//{
+			//	return View("Post", post);
+			//}
 
-		//	// the website form key should have been removed by javascript
-		//	// unless the comment was posted by a spam robot
-		//	if (!Request.Form.ContainsKey("website"))
-		//	{
-		//		post.Comments.Add(comment);
-		//		await _blog.SavePost(post);
-		//	}
+			//if (post == null || !post.AreCommentsOpen(_settings.Value.CommentsCloseAfterDays))
+			//{
+			//	return NotFound();
+			//}
 
-		//	return Redirect(post.GetLink() + "#" + comment.ID);
-		//}
+			var comment = new Comment
+			{
+				PostId = postId,
+				Author = model.Author.Trim(),
+				Email = model.Email.Trim(),
+				Content = model.Content.Trim()
+			};
 
-		//[Route("/blog/comment/{postId}/{commentId}")]
-		//[Authorize]
-		//public async Task<IActionResult> DeleteComment(string postId, string commentId)
-		//{
-		//	var post = await _blog.GetPostById(postId);
+			await _commentManager.Add(comment);
 
-		//	if (post == null)
-		//	{
-		//		return NotFound();
-		//	}
+			// the website form key should have been removed by javascript
+			// unless the comment was posted by a spam robot
+			//if (!Request.Form.ContainsKey("website"))
+			//{
+			//	post.Comments.Add(comment);
+			//	await _blog.SavePost(post);
+			//}
 
-		//	var comment = post.Comments.FirstOrDefault(c => c.ID.Equals(commentId, StringComparison.OrdinalIgnoreCase));
+			return Redirect(_blogUrlResolver.GetUrl(post));
 
-		//	if (comment == null)
-		//	{
-		//		return NotFound();
-		//	}
-
-		//	post.Comments.Remove(comment);
-		//	await _blog.SavePost(post);
-
-		//	return Redirect(post.GetLink() + "#comments");
-		//}
+			//	return Redirect(post.GetEncodedLink() + "#" + comment.ID);
+		}
 	}
 }

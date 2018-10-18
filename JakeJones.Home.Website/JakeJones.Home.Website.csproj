@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <None Remove="Content\js\admin\edit.js" />
+    <None Remove="Content\js\blog-post.js" />
     <None Remove="Content\js\core.js" />
     <None Remove="Content\js\home.js" />
     <None Remove="Content\js\sdrag.js" />
@@ -22,6 +23,7 @@
 
   <ItemGroup>
     <Content Include="Content\js\admin\edit.js" />
+    <Content Include="Content\js\blog-post.js" />
     <Content Include="Content\js\sdrag.js" />
     <Content Include="Content\js\simple-connect.js" />
     <Content Include="Content\js\home.js" />

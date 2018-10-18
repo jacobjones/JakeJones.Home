@@ -54,21 +54,48 @@
 	</footer>
 </article>
 
+<section id="comments" data-post-id="@Model.Id">
+	<div class="container">
+		<h2>Comments</h2>
+		<div id="existingComments"></div>
+		<form method="post" asp-controller="Blog" asp-action="AddComment" asp-route-postid="@Model.Id" asp-antiforgery="false">
+			<h3>Post a comment</h3>
+			<br />
 
-@*await Html.RenderPartialAsync("_SocialSharing", Model.Title);
-await Html.RenderPartialAsync("Comments");
+			<label for="content">Comment</label>
+			<textarea id="content" name="content" rows="5" cols="100" onfocus="" required placeholder="Enter your comment here..."></textarea>
 
-@section Preload {
-	@* This lazy loads the stylesheet in a non-render blocking way 
-	<link rel="preload" href="~/css/comments.scss" as="style" />
-	<noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
-}*@
+			<div class="details">
+				<label for="author">Name</label>
+				<input id="author" name="author" placeholder="Your name" required />
+
+				<label for="email">E-mail</label>
+				<input id="email" name="email" placeholder="Example: mary@outlook.com" required />
+				<br />
+
+				<input type="submit" value="Post comment" />
+
+				<!-- This element is being removed by site.js. It is to prevent comment spam-->
+				<input type="hidden" name="website" />
+			</div>
+		</form>
+	</div>
+</section>
+
+		@*await Html.RenderPartialAsync("_SocialSharing", Model.Title);
+			await Html.RenderPartialAsync("Comments");
+
+			@section Preload {
+				@* This lazy loads the stylesheet in a non-render blocking way
+				<link rel="preload" href="~/css/comments.scss" as="style" />
+				<noscript><link rel="stylesheet" href="~/css/comments.scss" /></noscript>
+			}*@
 
 
-@*@if (User.Identity.IsAuthenticated)
-{
-	@section Scripts {
-		<script src="~/js/admin.js" async defer></script>
-		<link rel="stylesheet" href="~/css/admin.scss" />
-	}
-}*@
+		@*@if (User.Identity.IsAuthenticated)
+			{
+				@section Scripts {
+					<script src="~/js/admin.js" async defer></script>
+					<link rel="stylesheet" href="~/css/admin.scss" />
+				}
+			}*@
