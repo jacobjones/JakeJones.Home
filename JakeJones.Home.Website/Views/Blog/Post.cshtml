@@ -48,16 +48,42 @@
 			<span itemprop="commentCount">@Model.Comments.Count</span> @(Model.Comments.Count == 1 ? "comment" : "comments")
 		</a>*@
 		
-		<meta itemprop="url" rel="canonical"  />
+		<meta itemprop="url" rel="canonical" />
 		<meta itemprop="author" content="Jake Jones" />
 		<meta itemprop="dateModified" content="@Model.LastModified.ToString("s")" />
 	</footer>
 </article>
 
-<section id="comments" data-post-id="@Model.Id">
+<section id="comments">
 	<div class="container">
 		<h2>Comments</h2>
-		<div id="existingComments"></div>
+		@foreach (var comment in Model.Comments)
+		{
+			<article id="comment-@comment.Id" class="@(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+				<h3>
+					<time datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
+						<a href="#@comment.Id" title="Permalink (#@comment.Id)">@comment.PublishDate.ToString("MMMM d, yyyy", new CultureInfo("en-US"))</a>
+					</time>
+				</h3>
+
+				<div class="content">
+					<p itemprop="text">@comment.Content</p>
+					<span itemprop="name">@comment.Author</span>
+
+					@if (User.Identity.IsAuthenticated)
+					{
+						<a class="noline" href="mailto:@comment.Email" title="Send email to @comment.Email">&#x2709;</a>
+						@*<a class="delete noline" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.ID" asp-route-commentid="@comment.ID" asp-route-afrt="@ViewData["afrt"]" title="Delete the comment...">Delete...</a>*@
+					}
+				</div>
+			</article>
+		}
+
+		@if (Model.Comments.Count == 0)
+		{
+			<p>Be the first to post a comment</p>
+		}
+
 		<form method="post" asp-controller="Blog" asp-action="AddComment" asp-route-postid="@Model.Id" asp-antiforgery="false">
 			<h3>Post a comment</h3>
 			<br />
@@ -79,6 +105,11 @@
 				<input type="hidden" name="website" />
 			</div>
 		</form>
+
+		<noscript>
+			<br />
+			<p>Enable JavaScript to post comments on this blog.</p>
+		</noscript>
 	</div>
 </section>
 

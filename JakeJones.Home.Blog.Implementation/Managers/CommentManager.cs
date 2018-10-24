@@ -24,7 +24,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			return await _commentRepository.GetByPostId(id);
 		}
 
-		public async Task Add(IComment comment)
+		public async Task<int> Add(IComment comment)
 		{
 			if (comment == null)
 			{
@@ -36,7 +36,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			comment.IsAdmin = _userManager.IsAdmin();
 			comment.PublishDate = DateTimeOffset.UtcNow;
 
-			await _commentRepository.Add(comment);
+			return await _commentRepository.Add(comment);
 		}
 	}
 }

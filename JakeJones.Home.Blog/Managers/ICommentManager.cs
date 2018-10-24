@@ -8,7 +8,7 @@ namespace JakeJones.Home.Blog.Managers
 	{
 		Task<ICollection<IComment>> GetByPostId(int id);
 
-		Task Add(IComment comment);
+		Task<int> Add(IComment comment);
 
 		//Task Delete(int id);
 	}

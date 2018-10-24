@@ -1,21 +1,27 @@
-ready(function () {
-	if (pageIs("blog--post")) {
-		var postId = document.getElementById('comments').dataset.postId;
-		var existingCommentsEl = document.getElementById('existingComments');
+//ready(function () {
+//	if (pageIs("blog--post")) {
+//		var postId = document.getElementById('comments').dataset.postId;
+//		var existingCommentsEl = document.getElementById('existingComments');
 
-		var commentTemplate = '<p><%this.author%></p><p><%this.content%></p>';
+//		var commentTemplate = '<p id="<%this.id%>"><%this.author%></p><p><%this.content%></p>';
 
-		ajax.get("/blog/comment/" + postId, function (comments) {
-			var commentsHtml = "";
+//		ajax.get("/blog/comment/" + postId, function (comments) {
+//			var commentsHtml = "";
 
-			for (var i = 0; i < comments.length; i++) {
-				commentsHtml += TemplateEngine(commentTemplate, comments[i]);
-			}
+//			for (var i = 0; i < comments.length; i++) {
+//				commentsHtml += TemplateEngine(commentTemplate, comments[i]);
+//			}
 
-			existingCommentsEl.innerHTML = commentsHtml;
-		});
-	};
-});
+//			existingCommentsEl.innerHTML = commentsHtml;
+
+//			if (window.location.hash) {
+//				var hash = window.location.hash.substring(1);
+//				var offset = document.getElementById(hash).offsetTop;
+//				document.documentElement.scrollTop = offset;
+//			}
+//		});
+//	};
+//});
 var ajax = {};
 
 ajax.get = function (url, callback) {
@@ -60,22 +66,22 @@ function loaded(el) {
 		el.parentNode.classList.remove("loading");
 }
 
-// http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
-var TemplateEngine = function (html, options) {
-	var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
-	var add = function (line, js) {
-		js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
-			(code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
-		return add;
-	};
-	while (match = re.exec(html)) {
-		add(html.slice(cursor, match.index))(match[1], true);
-		cursor = match.index + match[0].length;
-	}
-	add(html.substr(cursor, html.length - cursor));
-	code += 'return r.join("");';
-	return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
-};
+//// http://krasimirtsonev.com/blog/article/Javascript-template-engine-in-just-20-line
+//var TemplateEngine = function (html, options) {
+//	var re = /<%([^%>]+)?%>/g, reExp = /(^( )?(if|for|else|switch|case|break|{|}))(.*)?/g, code = 'var r=[];\n', cursor = 0, match;
+//	var add = function (line, js) {
+//		js ? (code += line.match(reExp) ? line + '\n' : 'r.push(' + line + ');\n') :
+//			(code += line != '' ? 'r.push("' + line.replace(/"/g, '\\"') + '");\n' : '');
+//		return add;
+//	};
+//	while (match = re.exec(html)) {
+//		add(html.slice(cursor, match.index))(match[1], true);
+//		cursor = match.index + match[0].length;
+//	}
+//	add(html.substr(cursor, html.length - cursor));
+//	code += 'return r.join("");';
+//	return new Function(code.replace(/[\r\t\n]/g, '')).apply(options);
+//};
 ready(function () {
 	if (pageIs("home")) {
 		var musicConnector = simpleConnect.connect("music-text", "current-album-wrapper", {

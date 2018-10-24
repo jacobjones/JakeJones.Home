@@ -8,6 +8,6 @@ namespace JakeJones.Home.Blog.Repositories
 	{
 		Task<ICollection<IComment>> GetByPostId(int postId);
 
-		Task Add(IComment comment);
+		Task<int> Add(IComment comment);
 	}
 }

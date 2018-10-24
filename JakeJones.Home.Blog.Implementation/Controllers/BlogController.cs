@@ -73,8 +73,12 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				return NotFound();
 			}
 
+			// Get the comments for this post
+			var comments = await _commentManager.GetByPostId(post.Id);
+
 			var model = _mapper.Map<PostViewModel>(post);
 			model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
+			model.Comments = comments?.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
 
 			return View("~/Views/Blog/Post.cshtml", model);
 		}
@@ -128,24 +132,19 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		}
 
 		[Route("/blog/comment/{postId}")]
-		[HttpGet]
-		public async Task<IActionResult> GetComments(int postId)
-		{
-			var comments = await _commentManager.GetByPostId(postId);
-
-			return Ok(comments.Select(x => _mapper.Map<CommentViewModel>(x)));
-		}
-
-		[Route("/blog/comment/{postId}")]
 		[HttpPost]
-		public async Task<IActionResult> AddComment(int postId, CommentViewModel model)
+		public async Task<IActionResult> AddComment(int postId, CommentEditViewModel model)
 		{
 			var post = await _blogManager.GetById(postId);
 
-			//if (!ModelState.IsValid)
-			//{
-			//	return View("Post", post);
-			//}
+			//
+			// TODO: Check if post doesn't exist?
+
+			if (!ModelState.IsValid)
+			{
+
+				return View("Post", _mapper.Map<PostViewModel>(post));
+			}
 
 			//if (post == null || !post.AreCommentsOpen(_settings.Value.CommentsCloseAfterDays))
 			//{
@@ -160,7 +159,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				Content = model.Content.Trim()
 			};
 
-			await _commentManager.Add(comment);
+			var id = await _commentManager.Add(comment);
 
 			// the website form key should have been removed by javascript
 			// unless the comment was posted by a spam robot
@@ -170,9 +169,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			//	await _blog.SavePost(post);
 			//}
 
-			return Redirect(_blogUrlResolver.GetUrl(post));
-
-			//	return Redirect(post.GetEncodedLink() + "#" + comment.ID);
+			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comment-{id}");
 		}
 	}
 }

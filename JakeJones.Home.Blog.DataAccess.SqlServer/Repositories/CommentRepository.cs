@@ -27,14 +27,15 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			return comments.Select(x => _mapper.Map<IComment>(x)).ToList();
 		}
 
-		public async Task Add(IComment comment)
+		public async Task<int> Add(IComment comment)
 		{
 			var commentEntity = _mapper.Map<CommentEntity>(comment);
-			commentEntity.Post = new PostEntity {Id = comment.PostId};
 
 			await _context.AddAsync(commentEntity);
 
 			await _context.SaveChangesAsync();
+
+			return commentEntity.Id;
 		}
 	}
 }

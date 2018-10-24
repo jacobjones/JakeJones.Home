@@ -14,6 +14,7 @@ namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 			CreateMap<PostEditViewModel, IPost>().As<Post>();
 
 			CreateMap<IComment, CommentViewModel>();
+			CreateMap<IComment, CommentEditViewModel>();
 		}
 	}
 }
