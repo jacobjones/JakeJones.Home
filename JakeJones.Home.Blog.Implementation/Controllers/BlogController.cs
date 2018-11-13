@@ -34,7 +34,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		{
 			var posts = await _blogManager.Get(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1));
 
-			//ViewData["Title"] = "Blog";
+			ViewData["Title"] = "Blog";
 			//ViewData["Description"] =  "Hmmmm";
 
 			IList<PostListItemViewModel> postModels = new List<PostListItemViewModel>();
