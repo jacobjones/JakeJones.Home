@@ -327,3 +327,6 @@ ASALocalRun/
 *.json
 !gulp.config.json
 !package.json
+
+JakeJones.Home.Website/wwwroot/css/
+JakeJones.Home.Website/wwwroot/js/
