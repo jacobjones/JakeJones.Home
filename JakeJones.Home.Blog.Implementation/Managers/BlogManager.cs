@@ -60,6 +60,10 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				{
 					post.PublishDate = DateTimeOffset.UtcNow;
 				}
+				else
+				{
+					post.PublishDate = existingPost.PublishDate;
+				}
 
 				await _postRepository.Update(post);
 				return;
