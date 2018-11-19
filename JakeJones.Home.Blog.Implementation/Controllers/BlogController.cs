@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using JakeJones.Home.Blog.Configuration;
@@ -32,7 +33,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		//[OutputCache(Profile = "default")]
 		public async Task<IActionResult> Index([FromRoute]int page = 1)
 		{
-			var posts = await _blogManager.Get(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1));
+			var posts = (await _blogManager.Get(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1))).ToList();
 
 			ViewData["Title"] = "Blog";
 			//ViewData["Description"] =  "Hmmmm";
@@ -51,8 +52,10 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				Posts = postModels,
 				Pagination = new PaginationViewModel
 				{
-					PrevUrl = $"/blog/{(page <= 1 ? null : page - 1 + "/")}",
-					NextUrl = $"/blog/{page + 1}/"
+					PrevUrl = $"/blog/{page + 1}/",
+					ShowPrev = posts.Count == _blogOptions.PostsPerPage,
+					NextUrl = $"/blog/{(page <= 1 ? null : page - 1 + "/")}",
+					ShowNext = page > 1
 				}
 			};
 
