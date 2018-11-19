@@ -54,7 +54,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				{
 					PrevUrl = $"/blog/{page + 1}/",
 					ShowPrev = posts.Count == _blogOptions.PostsPerPage,
-					NextUrl = $"/blog/{(page <= 1 ? null : page - 1 + "/")}",
+					NextUrl = page == 2 ? "/blog/" : $"/blog/{page - 1}/",
 					ShowNext = page > 1
 				}
 			};
