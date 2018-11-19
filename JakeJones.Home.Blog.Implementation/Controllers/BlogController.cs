@@ -52,9 +52,9 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				Posts = postModels,
 				Pagination = new PaginationViewModel
 				{
-					PrevUrl = $"/blog/{page + 1}/",
+					PrevUrl = $"/blog/{page + 1}",
 					ShowPrev = posts.Count == _blogOptions.PostsPerPage,
-					NextUrl = page == 2 ? "/blog/" : $"/blog/{page - 1}/",
+					NextUrl = page == 2 ? "/blog" : $"/blog/{page - 1}",
 					ShowNext = page > 1
 				}
 			};
