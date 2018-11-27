@@ -2,8 +2,6 @@
 
 @{
 	ViewData["BodyClass"] = "blog";
-
-	int currentPage = int.Parse(ViewContext.RouteData.Values["page"] as string ?? "0");
 }
 
 @foreach (var post in Model.Posts)
@@ -12,13 +10,13 @@
 }
 
 <nav class="pagination container" aria-label="Pagination">
-	@if (Model.Posts.Any())
+	@if (Model.Pagination.ShowPrev)
 	{
 		<a rel="prev" href="@Model.Pagination.PrevUrl" title="Older posts">&laquo; Older</a>
 	}
-	@if (currentPage > 1)
+	@if (Model.Pagination.ShowNext)
 	{
-		<a rel="next" href="@Model.Pagination.PrevUrl" title="Newer posts">Newer &raquo;</a>
+		<a rel="next" href="@Model.Pagination.NextUrl" title="Newer posts">Newer &raquo;</a>
 	}
 </nav>
 
