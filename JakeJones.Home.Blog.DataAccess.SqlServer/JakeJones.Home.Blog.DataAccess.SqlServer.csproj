@@ -13,10 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Models\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\JakeJones.Home.Blog\JakeJones.Home.Blog.csproj" />
   </ItemGroup>
 

@@ -24,9 +24,12 @@ namespace JakeJones.Home.Core.Implementation.Bootstrappers
 			services.Configure<LoginOptions>(configuration.GetSection("user"));
 			services.AddSingleton<ILoginOptions>(x => x.GetService<IOptions<LoginOptions>>().Value);
 
+			services.AddSingleton<IHoneypotOptions>(x => x.GetService<IOptions<HoneypotOptions>>().Value);
+
 			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddSingleton<IUserManager, UserManager>();
+			services.AddSingleton<IHoneypotManager, HoneypotManager>();
 			services.AddSingleton<ISegmentGenerator, SegmentGenerator>();
 		}
 	}

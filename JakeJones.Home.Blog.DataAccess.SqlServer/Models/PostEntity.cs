@@ -32,9 +32,8 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Models
 
 		//TODO: Look into this
 		[NotMapped]
-		public IList<string> Tags { get; set; } = new List<string>();
+		public ICollection<string> Tags { get; } = new List<string>();
 
-		// TODO: Comments
-		//public IList<Comment> Comments { get; } = new List<Comment>();
+		public virtual ICollection<CommentEntity> Comments { get; } = new List<CommentEntity>();
 	}
 }

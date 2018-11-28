@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Books.Models;
 using JakeJones.Home.Books.Repositories;
-using JakeJones.Home.Books.Repositories.Properties;
 using Microsoft.Extensions.Caching.Memory;
 
 namespace JakeJones.Home.Books.Implementation.Managers.Caching

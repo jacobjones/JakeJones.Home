@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace JakeJones.Home.Blog.Implementation.Models
 {
@@ -12,5 +13,6 @@ namespace JakeJones.Home.Blog.Implementation.Models
 		public string Content { get; set; }
 		public DateTime? PublishDate { get; set; }
 		public DateTime LastModified { get; set; }
+		public ICollection<CommentViewModel> Comments { get; set; }
 	}
 }

@@ -58,7 +58,6 @@ namespace JakeJones.Home.Blog.Implementation.Resolvers
 			if (actionContext.HttpContext.Request.Host.Port.HasValue)
 			{
 				uriBuilder.Port = actionContext.HttpContext.Request.Host.Port.Value;
-
 			}
 
 			return uriBuilder.ToString();

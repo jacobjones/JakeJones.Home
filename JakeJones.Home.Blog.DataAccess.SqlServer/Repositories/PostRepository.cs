@@ -64,7 +64,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			return postEntity == null ? null : _mapper.Map<IPost>(postEntity);
 		}
 
-		public async Task Add(IPost post)
+		public virtual async Task Add(IPost post)
 		{
 			var postEntity = _mapper.Map<PostEntity>(post);
 

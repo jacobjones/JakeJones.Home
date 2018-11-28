@@ -15,6 +15,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
 			services.AddDbContext<BlogContext>(options => options.UseSqlServer(connectionString));
 
 			services.AddScoped<IPostRepository, PostRepositoryCachingProxy>();
+			services.AddScoped<ICommentRepository, CommentRepositoryCachingProxy>();
 		}
 	}
 }
