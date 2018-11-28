@@ -59,7 +59,7 @@
 		<h2>Comments</h2>
 		@foreach (var comment in Model.Comments)
 		{
-			<article id="comment-@comment.Id" class="comment @(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+			<article id="comment-@comment.Id" class="blog-comment @(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
 				<time datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
 					@comment.PublishDate.ToString("yyyy.MM.dd", new CultureInfo("en-US"))
 				</time>
