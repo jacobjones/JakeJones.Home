@@ -6,10 +6,10 @@ namespace JakeJones.Home.Blog.Managers
 {
 	public interface ICommentManager
 	{
-		Task<ICollection<IComment>> GetByPostId(int id);
+		Task<ICollection<IComment>> GetByPostIdAsync(int id);
 
-		Task<int> Add(IComment comment);
+		Task<int> AddAsync(IComment comment);
 
-		//Task Delete(int id);
+		Task DeleteAsync(int id);
 	}
 }

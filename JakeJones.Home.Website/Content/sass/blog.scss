@@ -1,5 +1,6 @@
 ﻿@import "neat";
 @import "breakpoints";
+@import "global";
 
 .post {
 	margin: 0 auto 150px;
@@ -8,9 +9,83 @@
 	max-width: 680px;
 }
 
+/* TODO: Got to start getting this CSS into shape! */
+
+.blog--post .post {
+	margin: 0 auto 50px;
+}
+
 .comments {
+	h2 {
+		margin-bottom: 30px;
+	}
+
+	p {
+		margin: 0;
+	}
+
 	margin: 0 auto 150px;
 	padding: 0 18px;
 	//min-height: 550px;
 	max-width: 680px;
+}
+
+.comment {
+	@include color($primary-color) {
+		border-bottom: 1px $color solid;
+	}
+
+	margin-bottom: 30px;
+	padding-bottom: 5px;
+
+	span {
+		font-weight: bold;
+		//text-transform: uppercase;
+	}
+}
+
+.hide {
+	display: none;
+}
+
+input {
+	margin-top: 10px;
+}
+
+textarea {
+	resize: none;
+	width: 100%;
+}
+
+.post-comment {
+	margin-top: 50px;
+}
+
+input[type=submit] {
+	left: 0;
+	width: 120px;
+	text-transform: uppercase;
+	cursor: pointer;
+	white-space: normal;
+	padding: 10px;
+
+	@include color($background-color) {
+		background-color: $color;
+	}
+
+	@include color($primary-color) {
+		color: $color;
+		border: 1px solid $color;
+	}
+
+	&:hover {
+		@include color($primary-color) {
+			background-color: $color;
+		}
+
+		@include color($background-color) {
+			color: $color;
+			border: 1px solid $color;
+		}
+	}
 }

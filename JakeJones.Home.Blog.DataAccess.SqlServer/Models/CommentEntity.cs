@@ -25,6 +25,8 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Models
 		[Required]
 		public DateTimeOffset PublishDate { get; set; }
 
+		public int PostId { get; set; }
+
 		public virtual PostEntity Post { get; set; }
 	}
 }

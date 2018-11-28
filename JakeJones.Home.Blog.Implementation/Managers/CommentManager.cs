@@ -19,24 +19,35 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			_userManager = userManager;
 		}
 
-		public async Task<ICollection<IComment>> GetByPostId(int id)
+		public async Task<ICollection<IComment>> GetByPostIdAsync(int id)
 		{
-			return await _commentRepository.GetByPostId(id);
+			return await _commentRepository.GetByPostIdAsync(id);
 		}
 
-		public async Task<int> Add(IComment comment)
+		public async Task<int> AddAsync(IComment comment)
 		{
 			if (comment == null)
 			{
 				throw new ArgumentNullException(nameof(comment));
 			}
 
-			// TODO: We should validate that the post exists here
-
 			comment.IsAdmin = _userManager.IsAdmin();
 			comment.PublishDate = DateTimeOffset.UtcNow;
 
-			return await _commentRepository.Add(comment);
+			return await _commentRepository.AddAsync(comment);
+		}
+
+		public async Task DeleteAsync(int id)
+		{
+			var comment = await _commentRepository.GetAsync(id);
+
+			// The comment doesn't exist already
+			if (comment == null)
+			{
+				return;
+			}
+
+			await _commentRepository.DeleteAsync(comment);
 		}
 	}
 }

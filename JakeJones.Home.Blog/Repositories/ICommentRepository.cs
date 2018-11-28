@@ -6,8 +6,12 @@ namespace JakeJones.Home.Blog.Repositories
 {
 	public interface ICommentRepository
 	{
-		Task<ICollection<IComment>> GetByPostId(int postId);
+		Task<IComment> GetAsync(int id);
 
-		Task<int> Add(IComment comment);
+		Task<ICollection<IComment>> GetByPostIdAsync(int postId);
+
+		Task<int> AddAsync(IComment comment);
+
+		Task DeleteAsync(IComment comment);
 	}
 }

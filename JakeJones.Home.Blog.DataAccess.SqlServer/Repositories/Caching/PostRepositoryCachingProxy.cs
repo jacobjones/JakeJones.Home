@@ -17,7 +17,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching
 
 		public override async Task<IEnumerable<IPost>> Get(bool isPublished, int count, int skip = 0)
 		{
-			var cacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(PostRepository)}:{isPublished}:{count}:{skip}";
+			var cacheKey = $"{nameof(PostRepository)}:{nameof(Get)}:{isPublished}:{count}:{skip}";
 
 			var posts = await _cache.GetAsync<IEnumerable<IPost>>(cacheKey);
 
@@ -35,8 +35,8 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching
 
 			foreach (var post in posts)
 			{
-				var segmentCacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetBySegment)}:{post.Segment}";
-				var idCacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetById)}:{post.Id}";
+				var segmentCacheKey = $"{nameof(PostRepository)}:{nameof(GetBySegment)}:{post.Segment}";
+				var idCacheKey = $"{nameof(PostRepository)}:{nameof(GetById)}:{post.Id}";
 
 				_cache.Add(segmentCacheKey, post);
 				_cache.Add(idCacheKey, post);
@@ -49,22 +49,22 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching
 
 		public override async Task<IPost> GetBySegment(string segment)
 		{
-			var cacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetBySegment)}:{segment}";
+			var cacheKey = $"{nameof(PostRepository)}:{nameof(GetBySegment)}:{segment}";
 
 			return await _cache.GetOrAddAsync(cacheKey, () => base.GetBySegment(segment));
 		}
 
 		public override async Task<IPost> GetById(int id)
 		{
-			var cacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetById)}:{id}";
+			var cacheKey = $"{nameof(PostRepository)}:{nameof(GetById)}:{id}";
 
 			return await _cache.GetOrAddAsync(cacheKey, () => base.GetById(id));
 		}
 
 		public override async Task Update(IPost post)
 		{
-			var segmentCacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetBySegment)}:{post.Segment}";
-			var idCacheKey  = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetById)}:{post.Id}";
+			var segmentCacheKey = $"{nameof(PostRepository)}:{nameof(GetBySegment)}:{post.Segment}";
+			var idCacheKey  = $"{nameof(PostRepository)}:{nameof(GetById)}:{post.Id}";
 
 			_cache.Remove(segmentCacheKey);
 			_cache.Remove(idCacheKey);
@@ -74,7 +74,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching
 
 		public override async Task Delete(int id)
 		{
-			var idCacheKey = $"{nameof(PostRepositoryCachingProxy)}:{nameof(GetById)}:{id}";
+			var idCacheKey = $"{nameof(PostRepository)}:{nameof(GetById)}:{id}";
 			_cache.Remove(idCacheKey);
 
 			await base.Delete(id);

@@ -59,12 +59,10 @@
 		<h2>Comments</h2>
 		@foreach (var comment in Model.Comments)
 		{
-			<article id="comment-@comment.Id" class="@(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
-				<h3>
-					<time datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
-						@comment.PublishDate.ToString("MMMM d, yyyy", new CultureInfo("en-US"))
-					</time>
-				</h3>
+			<article id="comment-@comment.Id" class="comment @(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+				<time datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
+					@comment.PublishDate.ToString("yyyy.MM.dd", new CultureInfo("en-US"))
+				</time>
 
 				<div class="content">
 					<p itemprop="text">@comment.Content</p>
@@ -73,7 +71,7 @@
 					@if (User.Identity.IsAuthenticated)
 					{
 						<a class="noline" href="mailto:@comment.Email" title="Send email to @comment.Email">&#x2709;</a>
-						@*<a class="delete noline" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.ID" asp-route-commentid="@comment.ID" asp-route-afrt="@ViewData["afrt"]" title="Delete the comment...">Delete...</a>*@
+						<a class="delete noline" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.Id" asp-route-commentid="@comment.Id" title="Delete the comment...">Delete</a>
 					}
 				</div>
 			</article>
@@ -81,29 +79,23 @@
 
 		@if (Model.Comments.Count == 0)
 		{
-			<p>Be the first to post a comment</p>
+			<p>There are zero comments 😢</p>
 		}
 
-		<form method="post" asp-controller="Blog" asp-action="AddComment" asp-route-postid="@Model.Id" asp-antiforgery="false">
-			<h3>Post a comment</h3>
-			<br />
-
+		<form class="post-comment" method="post" asp-controller="Blog" asp-action="AddComment" asp-route-postid="@Model.Id" asp-antiforgery="false">
 			<label for="content">Comment</label>
-			<textarea id="content" name="content" rows="5" cols="100" onfocus="" required placeholder="Enter your comment here..."></textarea>
+			<textarea id="content" name="content" rows="5" cols="100" onfocus="" required placeholder="Your comment"></textarea>
 
 			<div class="details">
 				<label for="author">Name</label>
 				<input id="author" name="author" placeholder="Your name" required />
 
 				<label for="email">E-mail</label>
-				<input id="email" name="email" placeholder="Example: mary@outlook.com" required />
-				<honeypot name="wow" class="hide"></honeypot>
+				<input id="email" name="email" placeholder="your@email.com" required />
+				<honeypot name="name" class="hide"></honeypot>
 				<br />
 
 				<input type="submit" value="Post comment" />
-
-				<!-- This element is being removed by site.js. It is to prevent comment spam-->
-				<!--<input type="hidden" name="website" />-->
 			</div>
 		</form>
 

@@ -25,7 +25,7 @@ namespace JakeJones.Home.Core.Implementation.Infrastructure.Mvc
 
 			var input = new TagBuilder("input");
 			input.MergeAttribute("name", name);
-			//input.MergeAttribute("id", name);
+			input.MergeAttribute("id", name);
 			input.MergeAttribute("type", "text");
 
 			if (_honeypotOptions.DisableAutocomplete)

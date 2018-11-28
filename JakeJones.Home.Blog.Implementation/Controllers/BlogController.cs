@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -80,7 +81,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			}
 
 			// Get the comments for this post
-			var comments = await _commentManager.GetByPostId(post.Id);
+			var comments = await _commentManager.GetByPostIdAsync(post.Id);
 
 			var model = _mapper.Map<PostViewModel>(post);
 			model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
@@ -141,11 +142,6 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddComment(int postId, CommentEditViewModel model)
 		{
-			if (_honeypotManager.IsTrapped())
-			{
-				var trapped = true;
-			}
-
 			var post = await _blogManager.GetById(postId);
 
 			if (post == null)
@@ -153,9 +149,13 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				return NotFound();
 			}
 
-			// the website form key should have been removed by javascript
-			// unless the comment was posted by a spam robot
-			if (!ModelState.IsValid || Request.Form.ContainsKey("website"))
+			if (_honeypotManager.IsTrapped())
+			{
+				// Treat this like a success
+				return Redirect(_blogUrlResolver.GetUrl(post));
+			}
+
+			if (!ModelState.IsValid)
 			{
 				// TODO: Get some validation feedback for the user in
 				return View("Post", await GetPostViewModelAsync(post));
@@ -174,15 +174,37 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				Content = model.Content.Trim()
 			};
 
-			var id = await _commentManager.Add(comment);
+			var id = await _commentManager.AddAsync(comment);
 
 			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comment-{id}");
+		}
+
+
+		[Route("/blog/comment/{postId}/delete/{commentId}")]
+		[Authorize]
+		public async Task<IActionResult> DeleteComment(int postId, int commentId)
+		{
+			var post = await _blogManager.GetById(postId);
+
+			if (post == null)
+			{
+				return NotFound();
+			}
+
+			if (commentId <= 0)
+			{
+				return NotFound();
+			}
+
+			await _commentManager.DeleteAsync(commentId);
+
+			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comments");
 		}
 
 		private async Task<PostViewModel> GetPostViewModelAsync(IPost post)
 		{
 			// Get the comments for this post
-			var comments = await _commentManager.GetByPostId(post.Id);
+			var comments = await _commentManager.GetByPostIdAsync(post.Id);
 
 			var model = _mapper.Map<PostViewModel>(post);
 			model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
