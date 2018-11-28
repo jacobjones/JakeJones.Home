@@ -25,7 +25,7 @@ namespace JakeJones.Home.Music.Implementation.Controllers.Api
 				return null;
 			}
 
-			return Ok(new TrackApiModel($"{track.Track.Artist} - {track.Track.Title}", track.Album.ImageUrl));
+			return Ok(new TrackApiModel($"{track.Artist} - {track.Title}", track.ImageUrl));
 		}
 	}
 }

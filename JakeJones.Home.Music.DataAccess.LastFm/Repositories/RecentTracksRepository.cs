@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.DataAccess.LastFm.Clients;
 using JakeJones.Home.Music.Models;
@@ -33,7 +34,17 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Repositories
 
 			foreach (var track in tracksResult.RecentTracks.Tracks)
 			{
-				tracks.Add(new Track(track.Artist.Name, track.Name, track.Album.Name, track.Album.Mbid));
+				var largestImage = track.Images?.OrderByDescending(x => (int)x.Size).FirstOrDefault();
+
+				if (largestImage != null && !string.IsNullOrEmpty(largestImage.Url))
+				{
+					tracks.Add(new Track(track.Artist.Name, track.Name, track.Album.Name, largestImage.Url));
+				}
+				else
+				{
+					tracks.Add(new Track(track.Artist.Name, track.Name, track.Album.Name));
+				}
+				
 			}
 
 			return tracks;

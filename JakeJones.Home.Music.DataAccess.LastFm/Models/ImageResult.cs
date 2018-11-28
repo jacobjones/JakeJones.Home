@@ -4,7 +4,7 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Models
 {
 	public class ImageResult
 	{
-		public string Size { get; set; }
+		public ImageSizeResult Size { get; set; }
 
 		[DeserializeAs(Name = "#text")]
 		public string Url { get; set; }
