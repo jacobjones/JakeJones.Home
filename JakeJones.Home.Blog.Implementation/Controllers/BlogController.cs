@@ -7,6 +7,7 @@ using JakeJones.Home.Blog.Implementation.Models;
 using JakeJones.Home.Blog.Managers;
 using JakeJones.Home.Blog.Models;
 using JakeJones.Home.Blog.Resolvers;
+using JakeJones.Home.Core.Managers;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,15 +21,17 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		private readonly IMapper _mapper;
 		private readonly IBlogManager _blogManager;
 		private readonly ICommentManager _commentManager;
+		private readonly IHoneypotManager _honeypotManager;
 
 		public BlogController(IBlogOptions blogOptions, IBlogUrlResolver blogUrlResolver, IMapper mapper,
-			IBlogManager blogManager, ICommentManager commentManager)
+			IBlogManager blogManager, ICommentManager commentManager, IHoneypotManager honeypotManager)
 		{
 			_blogOptions = blogOptions;
 			_blogUrlResolver = blogUrlResolver;
 			_mapper = mapper;
 			_blogManager = blogManager;
 			_commentManager = commentManager;
+			_honeypotManager = honeypotManager;
 		}
 
 		[Route("{page:int?}")]
@@ -83,7 +86,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
 			model.Comments = comments?.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
 
-			return View("~/Views/Blog/Post.cshtml", model);
+			return View("Post", model);
 		}
 
 		[Route("edit/{id?}")]
@@ -138,18 +141,27 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		[HttpPost]
 		public async Task<IActionResult> AddComment(int postId, CommentEditViewModel model)
 		{
-			var post = await _blogManager.GetById(postId);
-
-			//
-			// TODO: Check if post doesn't exist?
-
-			if (!ModelState.IsValid)
+			if (_honeypotManager.IsTrapped())
 			{
-
-				return View("Post", _mapper.Map<PostViewModel>(post));
+				var trapped = true;
 			}
 
-			//if (post == null || !post.AreCommentsOpen(_settings.Value.CommentsCloseAfterDays))
+			var post = await _blogManager.GetById(postId);
+
+			if (post == null)
+			{
+				return NotFound();
+			}
+
+			// the website form key should have been removed by javascript
+			// unless the comment was posted by a spam robot
+			if (!ModelState.IsValid || Request.Form.ContainsKey("website"))
+			{
+				// TODO: Get some validation feedback for the user in
+				return View("Post", await GetPostViewModelAsync(post));
+			}
+
+			//if (!post.AreCommentsOpen(_settings.Value.CommentsCloseAfterDays))
 			//{
 			//	return NotFound();
 			//}
@@ -164,15 +176,19 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 			var id = await _commentManager.Add(comment);
 
-			// the website form key should have been removed by javascript
-			// unless the comment was posted by a spam robot
-			//if (!Request.Form.ContainsKey("website"))
-			//{
-			//	post.Comments.Add(comment);
-			//	await _blog.SavePost(post);
-			//}
-
 			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comment-{id}");
+		}
+
+		private async Task<PostViewModel> GetPostViewModelAsync(IPost post)
+		{
+			// Get the comments for this post
+			var comments = await _commentManager.GetByPostId(post.Id);
+
+			var model = _mapper.Map<PostViewModel>(post);
+			model.AbsoluteUrl = _blogUrlResolver.GetUrl(post);
+			model.Comments = comments?.Select(x => _mapper.Map<CommentViewModel>(x)).ToList();
+
+			return model;
 		}
 	}
 }

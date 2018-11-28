@@ -54,7 +54,7 @@
 	</footer>
 </article>
 
-<section id="comments">
+<section class="comments" id="comments">
 	<div class="container">
 		<h2>Comments</h2>
 		@foreach (var comment in Model.Comments)
@@ -62,7 +62,7 @@
 			<article id="comment-@comment.Id" class="@(comment.IsAdmin ? "admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
 				<h3>
 					<time datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
-						<a href="#@comment.Id" title="Permalink (#@comment.Id)">@comment.PublishDate.ToString("MMMM d, yyyy", new CultureInfo("en-US"))</a>
+						@comment.PublishDate.ToString("MMMM d, yyyy", new CultureInfo("en-US"))
 					</time>
 				</h3>
 
@@ -97,12 +97,13 @@
 
 				<label for="email">E-mail</label>
 				<input id="email" name="email" placeholder="Example: mary@outlook.com" required />
+				<honeypot name="wow" class="hide"></honeypot>
 				<br />
 
 				<input type="submit" value="Post comment" />
 
 				<!-- This element is being removed by site.js. It is to prevent comment spam-->
-				<input type="hidden" name="website" />
+				<!--<input type="hidden" name="website" />-->
 			</div>
 		</form>
 

@@ -1,4 +1,5 @@
-﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching;
+﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Repositories;
+using JakeJones.Home.Blog.DataAccess.SqlServer.Repositories.Caching;
 using JakeJones.Home.Blog.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
