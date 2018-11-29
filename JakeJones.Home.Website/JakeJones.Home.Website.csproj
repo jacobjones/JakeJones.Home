@@ -6,36 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="wwwroot\blog-images\**" />
-    <Content Remove="wwwroot\blog-images\**" />
-    <EmbeddedResource Remove="wwwroot\blog-images\**" />
-    <None Remove="wwwroot\blog-images\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Remove="wwwroot\js\admin\all.js" />
-    <Content Remove="wwwroot\js\all.js" />
-    <Content Remove="wwwroot\js\site.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <None Remove="Content\js\admin\edit.js" />
-    <None Remove="Content\js\blog-post.js" />
-    <None Remove="Content\js\core.js" />
-    <None Remove="Content\js\home.js" />
-    <None Remove="Content\js\sdrag.js" />
-    <None Remove="Content\js\simple-connect.js" />
-    <None Remove="gulpfile.js" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Content\js\admin\edit.js" />
-    <Content Include="Content\js\blog-post.js" />
-    <Content Include="Content\js\sdrag.js" />
-    <Content Include="Content\js\simple-connect.js" />
-    <Content Include="Content\js\home.js" />
-    <Content Include="Content\js\core.js" />
-    <Content Include="gulpfile.js" />
+    <Content Update="wwwroot\blog-images\**\*" CopyToPublishDirectory="Never" />
+	<Content Update="wwwroot\css\**\all.css" CopyToPublishDirectory="Never" />
+	<Content Update="wwwroot\js\**\all.js" CopyToPublishDirectory="Never" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,69 +35,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="wwwroot\images\jake.svg" />
-    <None Include="wwwroot\images\jones.svg" />
-    <None Include="wwwroot\lib\tinymce\jquery.tinymce.min.js" />
-    <None Include="wwwroot\lib\tinymce\langs\readme.md" />
-    <None Include="wwwroot\lib\tinymce\plugins\advlist\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\anchor\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\autolink\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\autoresize\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\autosave\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\bbcode\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\charmap\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\codesample\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\code\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\colorpicker\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\contextmenu\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\directionality\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\emoticons\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\fullpage\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\fullscreen\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\help\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\hr\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\imagetools\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\image\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\importcss\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\insertdatetime\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\legacyoutput\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\link\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\lists\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\media\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\nonbreaking\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\noneditable\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\pagebreak\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\paste\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\preview\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\print\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\save\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\searchreplace\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\spellchecker\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\tabfocus\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\table\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\template\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\textcolor\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\textpattern\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\toc\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\visualblocks\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\visualchars\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\plugins\wordcount\plugin.min.js" />
-    <None Include="wwwroot\lib\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
-    <None Include="wwwroot\lib\tinymce\skins\lightgray\fonts\tinymce.svg" />
-    <None Include="wwwroot\lib\tinymce\themes\inlite\theme.min.js" />
-    <None Include="wwwroot\lib\tinymce\themes\mobile\theme.min.js" />
-    <None Include="wwwroot\lib\tinymce\themes\modern\theme.min.js" />
-    <None Include="wwwroot\lib\tinymce\tinymce.min.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Update="Views\Home\About.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Content\images\" />
   </ItemGroup>
 
 </Project>
