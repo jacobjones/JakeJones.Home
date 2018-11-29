@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using JakeJones.Home.Blog.Managers;
 using JakeJones.Home.Blog.Models;
 using JakeJones.Home.Blog.Repositories;
+using JakeJones.Home.Blog.Resolvers;
 using JakeJones.Home.Core.Managers;
 
 namespace JakeJones.Home.Blog.Implementation.Managers
@@ -12,11 +13,17 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 	{
 		private readonly ICommentRepository _commentRepository;
 		private readonly IUserManager _userManager;
+		private readonly INotificationManager _notificationManager;
+		private readonly IPostRepository _postRepository;
+		private readonly IBlogUrlResolver _blogUrlResolver;
 
-		public CommentManager(ICommentRepository commentRepository, IUserManager userManager)
+		public CommentManager(ICommentRepository commentRepository, IUserManager userManager, INotificationManager notificationManager, IPostRepository postRepository, IBlogUrlResolver blogUrlResolver)
 		{
 			_commentRepository = commentRepository;
 			_userManager = userManager;
+			_notificationManager = notificationManager;
+			_postRepository = postRepository;
+			_blogUrlResolver = blogUrlResolver;
 		}
 
 		public async Task<ICollection<IComment>> GetByPostIdAsync(int id)
@@ -31,10 +38,22 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				throw new ArgumentNullException(nameof(comment));
 			}
 
-			comment.IsAdmin = _userManager.IsAdmin();
+			var isAdmin = _userManager.IsAdmin();
+
+			comment.IsAdmin = isAdmin;
 			comment.PublishDate = DateTimeOffset.UtcNow;
 
-			return await _commentRepository.AddAsync(comment);
+			var commentId = await _commentRepository.AddAsync(comment);
+
+			if (isAdmin)
+			{
+				return commentId;
+			}
+
+			var post = await _postRepository.GetById(comment.PostId);
+			await _notificationManager.SendNotificationAsync($"{comment.Author} commented on a post.", $"{comment.Author} commented on {post.Title} ({_blogUrlResolver.GetUrl(post, true)}).");
+
+			return commentId;
 		}
 
 		public async Task DeleteAsync(int id)

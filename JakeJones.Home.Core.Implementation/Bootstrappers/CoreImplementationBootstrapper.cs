@@ -1,4 +1,5 @@
-﻿using JakeJones.Home.Core.Generators;
+﻿using JakeJones.Home.Core.Configuration;
+using JakeJones.Home.Core.Generators;
 using JakeJones.Home.Core.Implementation.Configuration;
 using JakeJones.Home.Core.Implementation.Generators;
 using JakeJones.Home.Core.Implementation.Managers;
@@ -24,12 +25,17 @@ namespace JakeJones.Home.Core.Implementation.Bootstrappers
 			services.Configure<LoginOptions>(configuration.GetSection("user"));
 			services.AddSingleton<ILoginOptions>(x => x.GetService<IOptions<LoginOptions>>().Value);
 
+			services.Configure<NotificationOptions>(configuration.GetSection("notification"));
+			services.AddSingleton<INotificationOptions>(x => x.GetService<IOptions<NotificationOptions>>().Value);
+
 			services.AddSingleton<IHoneypotOptions>(x => x.GetService<IOptions<HoneypotOptions>>().Value);
 
 			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 			services.AddSingleton<IUserManager, UserManager>();
 			services.AddSingleton<IHoneypotManager, HoneypotManager>();
+			services.AddSingleton<INotificationManager, EmailNotificationManager>();
+
 			services.AddSingleton<ISegmentGenerator, SegmentGenerator>();
 		}
 	}

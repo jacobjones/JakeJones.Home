@@ -1,4 +1,6 @@
-﻿namespace JakeJones.Home.Core.Implementation.Configuration
+﻿using JakeJones.Home.Core.Configuration;
+
+namespace JakeJones.Home.Core.Implementation.Configuration
 {
 	internal class HoneypotOptions : IHoneypotOptions
 	{

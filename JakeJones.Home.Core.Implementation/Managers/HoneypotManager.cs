@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-using JakeJones.Home.Core.Implementation.Configuration;
+using JakeJones.Home.Core.Configuration;
 using JakeJones.Home.Core.Managers;
 using Microsoft.AspNetCore.Http;
 
