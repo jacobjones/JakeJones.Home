@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\blog-images\**" />
+    <Content Remove="wwwroot\blog-images\**" />
+    <EmbeddedResource Remove="wwwroot\blog-images\**" />
+    <None Remove="wwwroot\blog-images\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="wwwroot\js\admin\all.js" />
     <Content Remove="wwwroot\js\all.js" />
     <Content Remove="wwwroot\js\site.min.js" />

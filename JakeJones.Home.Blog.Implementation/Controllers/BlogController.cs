@@ -205,7 +205,8 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 		[Route("/blog/image")]
 		[HttpPost]
-		public async Task<ActionResult> TinyMceUpload(IFormFile file)
+		[Authorize]
+		public async Task<ActionResult> UploadImage(IFormFile file)
 		{
 			var location = await _imageManager.SaveAsync(file);
 
