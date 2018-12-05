@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Net;
+using AutoMapper;
 using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
 using JakeJones.Home.Blog.Implementation.Bootstrappers;
 using JakeJones.Home.Books.DataAccess.Goodreads.Bootstrappers;
@@ -88,6 +89,7 @@ namespace JakeJones.Home.Website
 
 			var rewriteOptions = new RewriteOptions();
 			rewriteOptions.AddRedirectToNonWww();
+			rewriteOptions.AddRedirectToHttps((int)HttpStatusCode.MovedPermanently);
 			app.UseRewriter(rewriteOptions);
 
 			app.UseStaticFiles();
