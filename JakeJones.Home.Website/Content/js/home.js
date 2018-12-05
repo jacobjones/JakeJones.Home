@@ -7,6 +7,13 @@
 			offset: 20
 		});
 
+		var bookConnector = simpleConnect.connect("book-text", "current-book-wrapper", {
+			lineWidth: 2,
+			color: "#fff",
+			type: "horizontal",
+			offset: 20
+		});
+
 		document.getElementById('current-album-wrapper').sdrag(function () {
 			simpleConnect.repaintConnection(musicConnector);
 		});
@@ -21,14 +28,11 @@
 				e.alt = album.title;
 				e.title = album.title;
 				simpleConnect.repaintConnection(musicConnector);
+				setTimeout(function () {
+					simpleConnect.repaintConnection(bookConnector);
+					simpleConnect.repaintConnection(musicConnector);
+				}, 500);
 			}
-		});
-
-		var bookConnector = simpleConnect.connect("book-text", "current-book-wrapper", {
-			lineWidth: 2,
-			color: "#fff",
-			type: "horizontal",
-			offset: 20
 		});
 
 		document.getElementById('current-book-wrapper').sdrag(function () {
@@ -50,6 +54,10 @@
 				e.alt = book.title;
 				e.title = book.title;
 				simpleConnect.repaintConnection(bookConnector);
+				setTimeout(function () {
+					simpleConnect.repaintConnection(bookConnector);
+					simpleConnect.repaintConnection(musicConnector);
+				}, 500);
 			}
 		});
 	};
