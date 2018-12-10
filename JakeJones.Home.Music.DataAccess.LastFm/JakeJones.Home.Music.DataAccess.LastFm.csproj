@@ -19,9 +19,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="JakeJones.Home.Music.DataAccess.LastFm.json">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Update="JakeJonesHome.Music.DataAccess.LastFm.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

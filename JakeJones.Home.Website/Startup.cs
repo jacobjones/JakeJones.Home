@@ -29,7 +29,7 @@ namespace JakeJones.Home.Website
 			Scheduler = new PreventTimeOutScheduler();
 		}
 
-		public IConfiguration Configuration { get; }
+		private IConfiguration Configuration { get; }
 		private IHostingEnvironment HostingEnvironment { get; }
 
 		private PreventTimeOutScheduler Scheduler { get; }
@@ -57,14 +57,14 @@ namespace JakeJones.Home.Website
 				cfg.AddProfile<BlogImplemenatationMapConfiguration>();
 			});
 
-			CoreImplementationBootstrapper.Register(services, HostingEnvironment);
+			CoreImplementationBootstrapper.Register(services, Configuration, HostingEnvironment);
 			BlogImplementationBootstrapper.Register(services);
-			BlogDataAccessBootstrapper.Register(services, Configuration.GetConnectionString("DefaultConnection"));
+			BlogDataAccessBootstrapper.Register(services, Configuration);
 			BooksDataAccessBootstrapper.Register(services);
 			BooksImplementationBootstrapper.Register(services);
 
-			MusicAlbumsDataAccessBootstrapper.Register(services);
-			MusicTracksDataAccessBootstrapper.Register(services);
+			MusicAlbumsDataAccessBootstrapper.Register(services, Configuration);
+			MusicTracksDataAccessBootstrapper.Register(services, Configuration);
 			MusicImplementationBootstrapper.Register(services);
 		}
 
