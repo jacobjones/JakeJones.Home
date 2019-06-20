@@ -51,7 +51,12 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			}
 
 			var post = await _postRepository.GetById(comment.PostId);
-			await _notificationManager.SendNotificationAsync($"{comment.Author} commented on a post.", $"{comment.Author} commented on {post.Title} ({_blogUrlResolver.GetUrl(post, true)}).");
+
+			#pragma warning disable 4014
+			// Don't await the email notification to ensure we promptly update the UI
+			_notificationManager.SendNotificationAsync($"{comment.Author} commented on a post.",
+				$"{comment.Author} commented on {post.Title} ({_blogUrlResolver.GetUrl(post, true)}).");
+			#pragma warning restore 4014
 
 			return commentId;
 		}
