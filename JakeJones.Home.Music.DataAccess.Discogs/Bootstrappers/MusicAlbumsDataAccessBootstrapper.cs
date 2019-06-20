@@ -10,9 +10,8 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers
 {
 	public static class MusicAlbumsDataAccessBootstrapper
 	{
-		public static void Register(IServiceCollection services)
+		public static void Register(IServiceCollection services, IConfiguration configuration)
 		{
-			var configuration = new ConfigurationBuilder().AddJsonFile("JakeJones.Home.Music.DataAccess.Discogs.json").Build();
 			services.Configure<DiscogsOptions>(configuration.GetSection("discogs"));
 			services.AddSingleton<IDiscogsOptions>(x => x.GetService<IOptions<DiscogsOptions>>().Value);
 

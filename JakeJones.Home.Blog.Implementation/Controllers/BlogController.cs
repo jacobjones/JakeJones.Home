@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -10,6 +9,7 @@ using JakeJones.Home.Blog.Models;
 using JakeJones.Home.Blog.Resolvers;
 using JakeJones.Home.Core.Managers;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace JakeJones.Home.Blog.Implementation.Controllers
@@ -23,9 +23,10 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		private readonly IBlogManager _blogManager;
 		private readonly ICommentManager _commentManager;
 		private readonly IHoneypotManager _honeypotManager;
+		private readonly IImageManager _imageManager;
 
 		public BlogController(IBlogOptions blogOptions, IBlogUrlResolver blogUrlResolver, IMapper mapper,
-			IBlogManager blogManager, ICommentManager commentManager, IHoneypotManager honeypotManager)
+			IBlogManager blogManager, ICommentManager commentManager, IHoneypotManager honeypotManager, IImageManager imageManager)
 		{
 			_blogOptions = blogOptions;
 			_blogUrlResolver = blogUrlResolver;
@@ -33,6 +34,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			_blogManager = blogManager;
 			_commentManager = commentManager;
 			_honeypotManager = honeypotManager;
+			_imageManager = imageManager;
 		}
 
 		[Route("{page:int?}")]
@@ -199,6 +201,16 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			await _commentManager.DeleteAsync(commentId);
 
 			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comments");
+		}
+
+		[Route("/blog/image")]
+		[HttpPost]
+		[Authorize]
+		public async Task<ActionResult> UploadImage(IFormFile file)
+		{
+			var location = await _imageManager.SaveAsync(file);
+
+			return Json(new { location });
 		}
 
 		private async Task<PostViewModel> GetPostViewModelAsync(IPost post)

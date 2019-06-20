@@ -4,42 +4,39 @@
 }
 
 <div class="header" style="position: relative; z-index: 2; text-align: center;">
-	<img src="~/images/jake.svg" alt="Jake" style="height: 90px; display: inline-block; padding-right: 20px;" />
-	<img src="~/images/jones.svg" alt="Jones" style="height: 90px; display: inline-block;" />
+	<img src="~/images/jake.svg" alt="Jake" style="max-height: 90px; display: inline-block; max-width: calc(100% - 20px); padding: 0 10px;" />
+	<img src="~/images/jones.svg" alt="Jones" style="max-height: 90px; display: inline-block; max-width: calc(100% - 20px); padding: 0 10px;" />
 </div>
 
 <div class="floater">
-		<br />
-		<br />
-		I'm a Senior Episerver Developer.<br />
-		Currently working at <a href="https://www.valtech.com/">Valtech NYC.</a>
-		<br />
-		<br />
-		<p id="book-text" style="display: inline-block;">
-			I like reading.<br />
-			Currently I'm reading.
-		</p>
-			<br />
-			<br />
-		<p id="music-text" style="display: inline-block;">
-			I like music.<br />
-			Currently I'm listening to.
-		</p>
-		<br />
-		<br />
-		<br />
+	<br />
+	<br />
+	I'm a Senior Episerver Developer.<br />
+	Currently working at <a href="https://www.valtech.com/">Valtech NYC.</a>
+	<br />
+	<br />
+	<p id="book-text" style="display: inline-block;">
+		I like reading.<br />
+		Currently I'm reading.
+	</p><br />
+	<div class="current-book loading " id="current-book-wrapper">
+		<img id="current-book" />
+		<div class="loader"><span class="loader-text">Loading book</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
+	</div><br />
+	<p id="music-text" style="display: inline-block;">
+		I like music.<br />
+		Currently I'm listening to.
+	</p><br />
+	<div class="current-album loading" id="current-album-wrapper">
+		<img id="current-album" />
+		<div class="loader"><span class="loader-text">Loading track</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
+	</div><br />
+	<p style="display: inline-block;">
 		I like coding.<br />
 		This full website was build from scratch.<br />
 		Why not checkout the <a href="https://github.com/jacobjones/JakeJones.Home">full code here?</a>
-	</div>
-
-
-<div class="current-book loading " id="current-book-wrapper">
-	<img id="current-book" />
-	<div class="loader"><span class="loader-text">Loading book</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
+	</p>
 </div>
 
-<div class="current-album loading" id="current-album-wrapper">
-	<img id="current-album" />
-	<div class="loader"><span class="loader-text">Loading track</span><div class="loader-bar"><div class="progress">&nbsp;</div></div></div>
-</div>
+
+

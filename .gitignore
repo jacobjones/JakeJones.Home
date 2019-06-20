@@ -325,8 +325,10 @@ ASALocalRun/
 
 # JSON settings files
 *.json
+!JakeJones.Home.Website/appsettings.json
 !gulp.config.json
 !package.json
 
 JakeJones.Home.Website/wwwroot/css/
 JakeJones.Home.Website/wwwroot/js/
+JakeJones.Home.Website/wwwroot/blog-images/

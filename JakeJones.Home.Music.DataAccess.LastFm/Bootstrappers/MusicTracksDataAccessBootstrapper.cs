@@ -10,9 +10,8 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers
 {
 	public static class MusicTracksDataAccessBootstrapper
 	{
-		public static void Register(IServiceCollection services)
+		public static void Register(IServiceCollection services, IConfiguration configuration)
 		{
-			var configuration = new ConfigurationBuilder().AddJsonFile("JakeJones.Home.Music.DataAccess.LastFm.json").Build();
 			services.Configure<LastFmOptions>(configuration.GetSection("lastFm"));
 			services.AddSingleton<ILastFmOptions>(x => x.GetService<IOptions<LastFmOptions>>().Value);
 
