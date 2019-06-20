@@ -1,4 +1,4 @@
-﻿namespace JakeJones.Home.Core.Implementation.Configuration
+﻿namespace JakeJones.Home.Core.Configuration
 {
 	public interface IHoneypotOptions
 	{

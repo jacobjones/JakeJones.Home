@@ -1,4 +1,5 @@
-﻿using JakeJones.Home.Core.Implementation.Configuration;
+﻿using JakeJones.Home.Core.Configuration;
+using JakeJones.Home.Core.Implementation.Configuration;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
