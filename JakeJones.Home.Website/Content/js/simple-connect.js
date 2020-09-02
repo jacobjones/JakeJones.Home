@@ -55,12 +55,20 @@ simpleConnect._getPosition = function (elem, relativeElem) {
 simpleConnect._positionCanvas = function (canvas, elemA, elemB) {
 	var elemAPos = simpleConnect._getPosition(elemA);
 	var elemBPos = simpleConnect._getPosition(elemB);
+	var width = Math.max(elemAPos.right, elemBPos.right) - Math.min(elemAPos.left, elemBPos.left);
+	var height = Math.max(elemAPos.bottom, elemBPos.bottom) - Math.min(elemAPos.top, elemBPos.top);
+	var dpr = window.devicePixelRatio;
 
 	canvas.style.left = Math.min(elemAPos.left, elemBPos.left) + "px";
 	canvas.style.top = Math.min(elemAPos.top, elemBPos.top) + "px";
 
-	canvas.width = Math.max(elemAPos.right, elemBPos.right) - Math.min(elemAPos.left, elemBPos.left);
-	canvas.height = Math.max(elemAPos.bottom, elemBPos.bottom) - Math.min(elemAPos.top, elemBPos.top);
+	canvas.width = width * dpr;
+	canvas.height = height * dpr;
+
+	canvas.style.width = width + "px";
+	canvas.style.height = height + "px";
+
+	canvas.getContext('2d').scale(dpr, dpr);
 }
 
 /**

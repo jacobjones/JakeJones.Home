@@ -1,14 +1,14 @@
 ﻿ready(function () {
 	if (pageIs("home")) {
 		var musicConnector = simpleConnect.connect("music-text", "current-album-wrapper", {
-			lineWidth: 2,
+			lineWidth: 1,
 			color: "#fff",
 			type: "horizontal",
 			offset: 20
 		});
 
 		var bookConnector = simpleConnect.connect("book-text", "current-book-wrapper", {
-			lineWidth: 2,
+			lineWidth: 1,
 			color: "#fff",
 			type: "horizontal",
 			offset: 20

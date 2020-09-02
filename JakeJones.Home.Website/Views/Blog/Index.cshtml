@@ -4,20 +4,20 @@
 	ViewData["BodyClass"] = "blog";
 }
 
-@foreach (var post in Model.Posts)
-{
-	await Html.RenderPartialAsync("PostListItem", post);
-}
-
-<nav class="pagination container" aria-label="Pagination">
-	@if (Model.Pagination.ShowPrev)
+<div class="post-listing">
+	@foreach (var post in Model.Posts)
 	{
-		<a rel="prev" href="@Model.Pagination.PrevUrl" title="Older posts">&laquo; Older</a>
+		await Html.RenderPartialAsync("PostListItem", post);
 	}
-	@if (Model.Pagination.ShowNext)
-	{
-		<a rel="next" href="@Model.Pagination.NextUrl" title="Newer posts">Newer &raquo;</a>
-	}
-</nav>
 
-@*@{await Html.RenderPartialAsync("_SocialSharing", ViewData["Title"]);}*@
+	<nav class="pagination container" aria-label="Pagination">
+		@if (Model.Pagination.ShowPrev)
+		{
+			<a rel="prev" href="@Model.Pagination.PrevUrl" title="Older posts">&laquo; Older</a>
+		}
+		@if (Model.Pagination.ShowNext)
+		{
+			<a rel="next" href="@Model.Pagination.NextUrl" title="Newer posts">Newer &raquo;</a>
+		}
+	</nav>
+</div>

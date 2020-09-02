@@ -18,11 +18,11 @@
 </head>
 <body class="@ViewData["BodyClass"]">
 	
-	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
-	<ul class="nav navbar-nav">
-		<li><a asp-area="" asp-controller="Home" asp-action="Index">&nbsp;&#x25ba;Home&nbsp;</a></li>
-		<li><a asp-area="" asp-controller="Blog" asp-action="Index" asp-route-page="">&nbsp;&#x25ba;Blog&nbsp;</a></li>
-		<li><a asp-area="" asp-controller="Home" asp-action="About">&nbsp;&#x25ba;About&nbsp;</a></li>
+	<ul class="menu">
+		<li class="menu__item menu__item--primary"><a class="menu__link" asp-area="" asp-controller="Home" asp-action="Index">jakejon.es</a></li>
+		<li class="menu__item"><a class="menu__link" asp-area="" asp-controller="Blog" asp-action="Index" asp-route-page="">Blog</a></li>
+		<li class="menu__item"><a class="menu__link" asp-area="" asp-controller="Home" asp-action="About">About</a></li>
+		@*<li class="menu__item menu__item--search"><input class="menu__search" type="text" name="firstname" placeholder="Search"></li>*@
 	</ul>
 
 	<main role="main">

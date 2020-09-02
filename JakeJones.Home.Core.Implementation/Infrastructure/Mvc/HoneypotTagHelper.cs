@@ -1,5 +1,4 @@
 ﻿using JakeJones.Home.Core.Configuration;
-using JakeJones.Home.Core.Implementation.Configuration;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 
@@ -28,11 +27,14 @@ namespace JakeJones.Home.Core.Implementation.Infrastructure.Mvc
 			input.MergeAttribute("name", name);
 			input.MergeAttribute("id", name);
 			input.MergeAttribute("type", "text");
+			input.MergeAttribute("tabindex","-1");
 
 			if (_honeypotOptions.DisableAutocomplete)
 			{
 				input.MergeAttribute("autocomplete", "off");
 			}
+
+			input.TagRenderMode = TagRenderMode.SelfClosing;
 
 			output.Content.AppendHtml(input);
 		}
