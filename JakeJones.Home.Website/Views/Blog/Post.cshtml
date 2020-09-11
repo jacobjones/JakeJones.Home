@@ -58,19 +58,19 @@
 	<h2>Comments</h2>
 	@foreach (var comment in Model.Comments)
 	{
-		<article id="comment-@comment.Id" class="comment @(comment.IsAdmin ? "comment--admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
-			<time class="comment__date" datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
+		<article id="comment-@comment.Id" class="blog-comment @(comment.IsAdmin ? "blog-comment--admin" : null)" itemprop="comment" itemscope itemtype="http://schema.org/Comment">
+			<time class="blog-comment__date" datetime="@comment.PublishDate.ToString("s")" itemprop="datePublished">
 				@comment.PublishDate.ToString("yyyy.MM.dd", new CultureInfo("en-US"))
 			</time>
 
-			<div class="comment__details">
-				<p class="comment__content" itemprop="text">@comment.Content</p>
-				<span class="comment__author" itemprop="name">@comment.Author</span>
+			<div class="blog-comment__details">
+				<p class="blog-comment__content" itemprop="text">@comment.Content</p>
+				<span class="blog-comment__author" itemprop="name">@comment.Author</span>
 
 				@if (User.Identity.IsAuthenticated)
 				{
-					<a class="comment__email" href="mailto:@comment.Email" title="Send email to @comment.Email">&#x2709;</a>
-					<a class="comment__details" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.Id" asp-route-commentid="@comment.Id" title="Delete the comment...">Delete</a>
+					<a class="blog-comment__email" href="mailto:@comment.Email" title="Send email to @comment.Email">&#x2709;</a>
+					<a class="blog-commentt__details" asp-controller="Blog" asp-Action="DeleteComment" asp-route-postid="@Model.Id" asp-route-commentid="@comment.Id" title="Delete the comment...">Delete</a>
 				}
 			</div>
 		</article>

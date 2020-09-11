@@ -33,7 +33,7 @@
 	max-width: 680px;
 }
 
-.comment {
+.blog-comment {
 	@include color($primary-color) {
 		border-bottom: 1px solid $color;
 	}
