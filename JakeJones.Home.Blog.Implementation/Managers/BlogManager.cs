@@ -22,24 +22,24 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			_userManager = userManager;
 		}
 
-		public async Task<IEnumerable<IPost>> Get(int count, int skip = 0)
+		public async Task<IEnumerable<IPost>> GetAsync(int count, int skip = 0)
 		{
 			var isPublished = !_userManager.IsAdmin();
 
-			return await _postRepository.Get(isPublished, count, skip);
+			return await _postRepository.GetAsync(isPublished, count, skip);
 		}
 
-		public async Task<IPost> GetBySegment(string segment)
+		public async Task<IPost> GetBySegmentAsync(string segment)
 		{
-			return await _postRepository.GetBySegment(segment);
+			return await _postRepository.GetBySegmentAsync(segment);
 		}
 
-		public async Task<IPost> GetById(int id)
+		public async Task<IPost> GetByIdAsync(int id)
 		{
-			return await _postRepository.GetById(id);
+			return await _postRepository.GetByIdAsync(id);
 		}
 
-		public async Task AddOrUpdate(IPost post)
+		public async Task AddOrUpdateAsync(IPost post)
 		{
 			// Always set the last modified date
 			post.LastModified = DateTimeOffset.UtcNow;
@@ -50,7 +50,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				return;
 			}
 
-			var existingPost = await _postRepository.GetById(post.Id);
+			var existingPost = await _postRepository.GetByIdAsync(post.Id);
 
 			if (existingPost != null)
 			{
@@ -65,16 +65,16 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 					post.PublishDate = existingPost.PublishDate;
 				}
 
-				await _postRepository.Update(post);
+				await _postRepository.UpdateAsync(post);
 				return;
 			}
 
 			await Add(post);
 		}
 
-		public async Task Delete(int id)
+		public async Task DeleteAsync(int id)
 		{
-			await _postRepository.Delete(id);
+			await _postRepository.DeleteAsync(id);
 		}
 
 		public bool IsVisibleToUser(IPost post)
@@ -99,7 +99,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				post.Segment = _segmentGenerator.Get(post.Title);
 			}
 
-			await _postRepository.Add(post);
+			await _postRepository.AddAsync(post);
 		}
 	}
 }

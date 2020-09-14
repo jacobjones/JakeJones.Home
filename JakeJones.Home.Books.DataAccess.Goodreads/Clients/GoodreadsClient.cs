@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Net.Cache;
 using System.Threading.Tasks;
 using JakeJones.Home.Books.DataAccess.Goodreads.Models;
@@ -24,7 +23,7 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Clients
 			// Parsing the item array gave issues with the RestSharp XmlDeserializer,
 			// unfortunately this means we have to utilise the .Net one.
 			_restClient.ClearHandlers();
-			_restClient.AddHandler("application/xml", new DotNetXmlDeserializer());
+			_restClient.AddHandler("application/xml", () => new DotNetXmlDeserializer());
 		}
 
 		public async Task<ICollection<ItemXmlModel>> GetBooksAsync(string bookShelf)
@@ -36,7 +35,7 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Clients
 				request.AddParameter("shelf", bookShelf);
 			}
 
-			var result = await _restClient.ExecuteGetTaskAsync<BookshelfXmlModel>(request);
+			var result = await _restClient.ExecuteGetAsync<BookshelfXmlModel>(request);
 
 			if (!result.IsSuccessful)
 			{

@@ -15,7 +15,7 @@ namespace JakeJones.Home.Core.Implementation.Bootstrappers
 {
 	public static class CoreImplementationBootstrapper
 	{
-		public static void Register(IServiceCollection services, IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+		public static void Register(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
 		{
 			services.Configure<LoginOptions>(configuration.GetSection("user"));
 			services.AddSingleton<ILoginOptions>(x => x.GetService<IOptions<LoginOptions>>().Value);

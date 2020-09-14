@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using JakeJones.Home.Blog.Models;
 
@@ -7,18 +6,18 @@ namespace JakeJones.Home.Blog.Repositories
 {
 	public interface IPostRepository
 	{
-		Task<IEnumerable<IPost>> Get(bool isPublished, int count, int skip = 0);
+		Task<IEnumerable<IPost>> GetAsync(bool isPublished, int count, int skip = 0);
 
-		Task<IEnumerable<IPost>> GetByTag(string tag);
+		Task<IEnumerable<IPost>> GetByTagAsync(string tag);
 
-		Task<IPost> GetBySegment(string segment);
+		Task<IPost> GetBySegmentAsync(string segment);
 
-		Task<IPost> GetById(int id);
+		Task<IPost> GetByIdAsync(int id);
 
-		Task Add(IPost post);
+		Task AddAsync(IPost post);
 
-		Task Update(IPost post);
+		Task UpdateAsync(IPost post);
 
-		Task Delete(int id);
+		Task DeleteAsync(int id);
 	}
 }

@@ -4,6 +4,6 @@ namespace JakeJones.Home.Blog.Builders
 {
 	public interface IBlogRssFeedBuilder
 	{
-		Task<string> Build();
+		Task<string> BuildAsync();
 	}
 }

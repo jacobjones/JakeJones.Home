@@ -42,7 +42,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		//[OutputCache(Profile = "default")]
 		public async Task<IActionResult> Index([FromRoute]int page = 1)
 		{
-			var posts = (await _blogManager.Get(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1))).ToList();
+			var posts = (await _blogManager.GetAsync(_blogOptions.PostsPerPage, _blogOptions.PostsPerPage * (page - 1))).ToList();
 
 			ViewData["Title"] = "Blog";
 			//ViewData["Description"] =  "Hmmmm";
@@ -73,9 +73,9 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 		[Route("{segment?}")]
 		[HttpGet]
-		public async Task<IActionResult> Post(string segment)
+		public async Task<IActionResult> PostAsync(string segment)
 		{
-			var post = await _blogManager.GetBySegment(segment);
+			var post = await _blogManager.GetBySegmentAsync(segment);
 
 			if (post == null || !_blogManager.IsVisibleToUser(post))
 			{
@@ -94,14 +94,14 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 		[Route("edit/{id?}")]
 		[HttpGet, Authorize]
-		public async Task<IActionResult> Edit(int? id)
+		public async Task<IActionResult> EditAsync(int? id)
 		{
 			if (!id.HasValue)
 			{
 				return View("~/Views/Blog/Edit.cshtml", new PostEditViewModel { IsNew = true });
 			}
 
-			var post = await _blogManager.GetById(id.Value);
+			var post = await _blogManager.GetByIdAsync(id.Value);
 
 			if (post == null)
 			{
@@ -116,7 +116,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 
 		[Route("{segment?}")]
 		[HttpPost, Authorize, AutoValidateAntiforgeryToken]
-		public async Task<IActionResult> UpdatePost(PostEditViewModel model)
+		public async Task<IActionResult> UpdatePostAsync(PostEditViewModel model)
 		{
 			if (!ModelState.IsValid)
 			{
@@ -126,25 +126,25 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			// Map this out to a post
 			var post = _mapper.Map<IPost>(model);
 
-			await _blogManager.AddOrUpdate(post);
+			await _blogManager.AddOrUpdateAsync(post);
 
 			return Redirect(_blogUrlResolver.GetUrl(post));
 		}
 
 		[Route("/blog/delete/{id}")]
 		[HttpPost, Authorize, AutoValidateAntiforgeryToken]
-		public async Task<IActionResult> DeletePost(int id)
+		public async Task<IActionResult> DeletePostAsync(int id)
 		{
 			//TODO: Maybe should check success here?
-			await _blogManager.Delete(id);
+			await _blogManager.DeleteAsync(id);
 			return Redirect("/");
 		}
 
 		[Route("/blog/comment/{postId}")]
 		[HttpPost]
-		public async Task<IActionResult> AddComment(int postId, CommentEditViewModel model)
+		public async Task<IActionResult> AddCommentAsync(int postId, CommentEditViewModel model)
 		{
-			var post = await _blogManager.GetById(postId);
+			var post = await _blogManager.GetByIdAsync(postId);
 
 			if (post == null)
 			{
@@ -181,12 +181,11 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 			return Redirect($"{_blogUrlResolver.GetUrl(post)}#comment-{id}");
 		}
 
-
 		[Route("/blog/comment/{postId}/delete/{commentId}")]
 		[Authorize]
-		public async Task<IActionResult> DeleteComment(int postId, int commentId)
+		public async Task<IActionResult> DeleteCommentAsync(int postId, int commentId)
 		{
-			var post = await _blogManager.GetById(postId);
+			var post = await _blogManager.GetByIdAsync(postId);
 
 			if (post == null)
 			{
@@ -206,7 +205,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 		[Route("/blog/image")]
 		[HttpPost]
 		[Authorize]
-		public async Task<ActionResult> UploadImage(IFormFile file)
+		public async Task<ActionResult> UploadImageAsync(IFormFile file)
 		{
 			var location = await _imageManager.SaveAsync(file);
 

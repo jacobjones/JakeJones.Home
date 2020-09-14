@@ -50,7 +50,7 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 				return commentId;
 			}
 
-			var post = await _postRepository.GetById(comment.PostId);
+			var post = await _postRepository.GetByIdAsync(comment.PostId);
 
 			#pragma warning disable 4014
 			// Don't await the email notification to ensure we promptly update the UI

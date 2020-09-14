@@ -1,5 +1,4 @@
-﻿using System.Net;
-using AutoMapper;
+﻿using AutoMapper;
 using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
 using JakeJones.Home.Blog.Implementation.Bootstrappers;
 using JakeJones.Home.Books.DataAccess.Goodreads.Bootstrappers;
@@ -17,27 +16,29 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace JakeJones.Home.Website
 {
 	public class Startup
 	{
-		public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
+		public Startup(IConfiguration configuration, IWebHostEnvironment env)
 		{
 			Configuration = configuration;
-			HostingEnvironment = hostingEnvironment;
+			Environment = env;
 			Scheduler = new PreventTimeOutScheduler();
 		}
 
 		private IConfiguration Configuration { get; }
-		private IHostingEnvironment HostingEnvironment { get; }
+		private IWebHostEnvironment Environment { get; }
 
 		private PreventTimeOutScheduler Scheduler { get; }
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			services.AddMvc();
+			services.AddControllersWithViews();
+			services.AddRazorPages();
 
 			// Cookie authentication.
 			services
@@ -50,14 +51,16 @@ namespace JakeJones.Home.Website
 
 			services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
 
-			// Add all out AutoMapper configurations
+			services.AddRouting(options => options.LowercaseUrls = true);
+
+			// Add all our AutoMapper configurations
 			services.AddAutoMapper(cfg =>
 			{
 				cfg.AddProfile<BlogDataAccessMapConfiguration>();
 				cfg.AddProfile<BlogImplemenatationMapConfiguration>();
 			});
 
-			CoreImplementationBootstrapper.Register(services, Configuration, HostingEnvironment);
+			CoreImplementationBootstrapper.Register(services, Configuration, Environment);
 			BlogImplementationBootstrapper.Register(services);
 			BlogDataAccessBootstrapper.Register(services, Configuration);
 			BooksDataAccessBootstrapper.Register(services);
@@ -69,7 +72,7 @@ namespace JakeJones.Home.Website
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IHostingEnvironment env, IApplicationLifetime appLifetime)
+		public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IHostApplicationLifetime appLifetime)
 		{
 			if (env.IsDevelopment())
 			{
@@ -79,6 +82,7 @@ namespace JakeJones.Home.Website
 			else
 			{
 				app.UseExceptionHandler("/Home/Error");
+				app.UseHsts();
 			}
 
 			if (!env.IsDevelopment())
@@ -87,20 +91,23 @@ namespace JakeJones.Home.Website
 				appLifetime.ApplicationStopping.Register(() => Scheduler.Stop());
 			}
 
+			app.UseHttpsRedirection();
+
 			var rewriteOptions = new RewriteOptions();
 			rewriteOptions.AddRedirectToNonWww();
-			rewriteOptions.AddRedirectToHttps((int)HttpStatusCode.MovedPermanently);
 			app.UseRewriter(rewriteOptions);
 
 			app.UseStaticFiles();
 
 			app.UseAuthentication();
 
-			app.UseMvc(routes =>
+			app.UseRouting();
+
+			app.UseAuthorization();
+
+			app.UseEndpoints(endpoints =>
 			{
-				routes.MapRoute(
-					name: "default",
-					template: "{controller=Home}/{action=Index}/{id?}");
+				endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 			});
 		}
 	}

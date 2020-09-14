@@ -14,9 +14,9 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 		public const string ImageFolder = "blog-images";
 		private readonly string _path;
 
-		public ImageManager(IHostingEnvironment hostingEnvironment)
+		public ImageManager(IWebHostEnvironment env)
 		{
-			_path = Path.Combine(hostingEnvironment.WebRootPath, ImageFolder);
+			_path = Path.Combine(env.WebRootPath, ImageFolder);
 		}
 
 		public async Task<string> SaveAsync(IFormFile file)

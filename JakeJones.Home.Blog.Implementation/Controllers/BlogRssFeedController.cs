@@ -26,7 +26,7 @@ namespace JakeJones.Home.Blog.Implementation.Controllers
 				Charset = Encoding.UTF8.WebName
 			};
 
-			return Content(await _blogRssFeedBuilder.Build(), mediaType);
+			return Content(await _blogRssFeedBuilder.BuildAsync(), mediaType);
 		}
 		
 	}

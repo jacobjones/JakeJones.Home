@@ -40,7 +40,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Clients
 			request.AddParameter("per_page", perPage);
 			request.AddParameter("page", currentPage);
 
-			var response = await _restClient.ExecuteGetTaskAsync<SearchResult>(request);
+			var response = await _restClient.ExecuteGetAsync<SearchResult>(request);
 
 			var remainingHeader = response?.Headers?.FirstOrDefault(x => x.Name.Equals("X-Discogs-Ratelimit-Remaining", StringComparison.Ordinal));
 

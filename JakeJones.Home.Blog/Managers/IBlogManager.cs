@@ -6,15 +6,15 @@ namespace JakeJones.Home.Blog.Managers
 {
 	public interface IBlogManager
 	{
-		Task<IEnumerable<IPost>> Get(int count, int skip = 0);
+		Task<IEnumerable<IPost>> GetAsync(int count, int skip = 0);
 
-		Task<IPost> GetBySegment(string segment);
+		Task<IPost> GetBySegmentAsync(string segment);
 
-		Task<IPost> GetById(int id);
+		Task<IPost> GetByIdAsync(int id);
 
-		Task AddOrUpdate(IPost post);
+		Task AddOrUpdateAsync(IPost post);
 
-		Task Delete(int id);
+		Task DeleteAsync(int id);
 
 		bool IsVisibleToUser(IPost post);
 	}

@@ -45,7 +45,7 @@ namespace JakeJones.Home.Music.DataAccess.LastFm.Clients
 				request.AddParameter("from", ((DateTimeOffset)from).ToUnixTimeSeconds());
 			}
 
-			var response = await _restClient.ExecuteGetTaskAsync<RecentTracksResult>(request);
+			var response = await _restClient.ExecuteGetAsync<RecentTracksResult>(request);
 
 			// TODO: Handle exceptions/errors/timeouts!
 

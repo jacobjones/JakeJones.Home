@@ -24,11 +24,11 @@ namespace JakeJones.Home.Blog.Implementation.Builders
 			_blogUrlResolver = blogUrlResolver;
 		}
 
-		public async Task<string> Build()
+		public async Task<string> BuildAsync()
 		{
 			// Get the last 10 posts
 			// TODO: Move to config
-			var posts = await _blogManager.Get(10);
+			var posts = await _blogManager.GetAsync(10);
 
 			var stringWriter = new StringWriterWithEncoding(Encoding.UTF8);
 

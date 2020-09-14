@@ -21,17 +21,17 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			_mapper = mapper;
 		}
 
-		public virtual async Task<IEnumerable<IPost>> Get(bool isPublished, int count, int skip = 0)
+		public virtual async Task<IEnumerable<IPost>> GetAsync(bool isPublished, int count, int skip = 0)
 		{
 			if (isPublished)
 			{
-				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Where(x => x.IsPublished).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTimeOffset.MaxValue).Where(x => x.IsPublished).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 			}
 
-			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTime.MaxValue).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTimeOffset.MaxValue).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 		}
 
-		public async Task<IEnumerable<IPost>> GetByTag(string tag)
+		public async Task<IEnumerable<IPost>> GetByTagAsync(string tag)
 		{
 			if (string.IsNullOrEmpty(tag))
 			{
@@ -41,7 +41,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			return (await _context.Posts.Where(x => x.Tags.Contains(tag, StringComparer.OrdinalIgnoreCase)).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 		}
 
-		public virtual async Task<IPost> GetBySegment(string segment)
+		public virtual async Task<IPost> GetBySegmentAsync(string segment)
 		{
 			if (string.IsNullOrEmpty(segment))
 			{
@@ -49,10 +49,10 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			}
 
 			return _mapper.Map<IPost>(
-				await _context.Posts.FirstOrDefaultAsync(x => x.Segment.Equals(segment, StringComparison.OrdinalIgnoreCase)));
+				await _context.Posts.FirstOrDefaultAsync(x => x.Segment.ToLower() == segment.ToLower()));
 		}
 
-		public virtual async Task<IPost> GetById(int id)
+		public virtual async Task<IPost> GetByIdAsync(int id)
 		{
 			if (id <= 0)
 			{
@@ -64,7 +64,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			return postEntity == null ? null : _mapper.Map<IPost>(postEntity);
 		}
 
-		public virtual async Task Add(IPost post)
+		public virtual async Task AddAsync(IPost post)
 		{
 			var postEntity = _mapper.Map<PostEntity>(post);
 
@@ -73,7 +73,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public virtual async Task Update(IPost post)
+		public virtual async Task UpdateAsync(IPost post)
 		{
 			var postEntity = _mapper.Map<PostEntity>(post);
 
@@ -87,7 +87,7 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			await _context.SaveChangesAsync();
 		}
 
-		public virtual async Task Delete(int id)
+		public virtual async Task DeleteAsync(int id)
 		{
 			if (id <= 0)
 			{
