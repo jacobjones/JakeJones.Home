@@ -30,9 +30,14 @@
 
 .floater {
 	max-width: 680px;
+	max-width: unquote("min(680px, 100%)");
 	text-align: center;
 	margin: auto;
 	margin: 50px 0 50px;
+
+	&--left {
+		text-align: left;
+	}
 }
 
 .current-book {

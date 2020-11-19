@@ -82,45 +82,8 @@
 		}
 	}
 
-	&__text {
-		padding: 0 1rem;
-		height: 2rem;
-		max-width: 100%;
-		box-sizing: border-box;
-
-		@include color($primary-color) {
-			border: 1px solid $color;
-		}
-	}
-
 	&__button {
 		left: 0;
-		max-width: 100%;
 		width: 150px;
-		cursor: pointer;
-		white-space: normal;
-		padding: .5rem 1rem;
-		box-sizing: border-box;
-		display: block;
-
-		@include color($background-color) {
-			background-color: $color;
-		}
-
-		@include color($primary-color) {
-			color: $color;
-			border: 1px solid $color;
-		}
-
-		&:hover {
-			@include color($primary-color) {
-				background-color: $color;
-			}
-
-			@include color($background-color) {
-				color: $color;
-				border: 1px solid $color;
-			}
-		}
 	}
 }

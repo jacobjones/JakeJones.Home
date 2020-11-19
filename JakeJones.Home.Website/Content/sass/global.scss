@@ -5,10 +5,11 @@
 $blue:   blue;
 $white:  white;
 $yellow: yellow;
+$red: red;
 
-$background-color: (home: $blue, blog: $white, about: $yellow);
-$primary-color: (home: $white, blog: $blue, about: $blue);
-$secondary-color: (home: $yellow, blog: red, about: red);
+$background-color: (home: $blue, blog: $white, about: $yellow, login: $yellow);
+$primary-color: (home: $white, blog: $blue, about: $blue, login: $blue);
+$secondary-color: (home: $yellow, blog: $red, about: $red, login: $red);
 
 $color: null !default;
 

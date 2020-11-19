@@ -3,16 +3,16 @@
 	"version": "1.0.0",
 	"devDependencies": {
 		"del": "^3.0.0",
-		"gulp": "github:gulpjs/gulp#4.0",
+		"gulp": "^4.0.2",
 		"gulp-concat": "^2.6.1",
 		"gulp-cssmin": "^0.2.0",
 		"gulp-htmlmin": "^4.0.0",
-		"gulp-sass": "^3.2.1",
+		"gulp-sass": "^4.1.0",
 		"gulp-uglify": "^3.0.0",
-		"merge-stream": "^1.0.1"
+		"merge-stream": "^1.0.1",
+		"node-sass": "^4.14.1"
 	},
 	"dependencies": {
-		"bourbon-neat": "^3.0.0",
-		"node-sass": "^4.9.3"
+		"bourbon-neat": "^3.0.0"
 	}
 }

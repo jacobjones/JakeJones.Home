@@ -1,0 +1,30 @@
+﻿@import "global";
+
+.login-form {
+	padding: 0 18px;
+
+	&__validation {
+		text-align: center;
+
+		> ul {
+			list-style: none;
+			padding: 0;
+			width: 100%;
+			margin: 0 0 1rem;
+
+			@include color($secondary-color) {
+				background: $color;
+			}
+
+			@include color($background-color) {
+				color: $color;
+			}
+		}
+	}
+
+	&__group {
+		margin-bottom: 1rem;
+		display: block;
+		max-width: 100%;
+	}
+}

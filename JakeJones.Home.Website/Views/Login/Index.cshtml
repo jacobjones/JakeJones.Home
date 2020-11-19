@@ -1,20 +1,29 @@
 ﻿@model JakeJones.Home.Core.Implementation.Models.LoginViewModel
 @{
 	ViewData["Title"] = "Login";
-	ViewData["Description"] = $"Sign in to the website";
+	ViewData["Description"] = "Sign in to the website";
+	ViewData["BodyClass"] = "login";
 }
 
-<form method="post" id="login" aria-labelledby="legend" asp-route-returnUrl="@ViewData["ReturnUrl"]">
-	<div asp-validation-summary="All"></div>
-	<fieldset>
-		<legend id="legend">Sign in</legend>
+<div class="floater-outer">
+	<div class="floater floater--left">
+		<form method="post" class="login-form" id="login" aria-labelledby="legend" asp-route-returnUrl="@ViewData["ReturnUrl"]">
+			<div class="login-form__validation" asp-validation-summary="All"></div>
+			<fieldset>
+				<legend>Login</legend>
 
-		<input asp-for="Username" aria-label="Username" autofocus required placeholder="Username" />
-		<input asp-for="Password" aria-label="Password" required placeholder="Password" />
-
-		<input asp-for="RememberMe" />
-		<label asp-for="RememberMe">Remember me</label>
-
-		<input type="submit" value="Sign in" />
-	</fieldset>
-</form>
+				<div class="login-form__group">
+					<input asp-for="Username" class="login-form__text" aria-label="Username" autofocus required placeholder="Username" />
+				</div>
+				<div class="login-form__group">
+					<input asp-for="Password" class="login-form__text" aria-label="Password" required placeholder="Password" />
+				</div>
+				<div class="login-form__group">
+					<input asp-for="RememberMe" checked />
+					<label asp-for="RememberMe">Remember me</label>
+				</div>
+				<input type="submit" class="login-form__button" value="Sign in" />
+			</fieldset>
+		</form>
+	</div>
+</div>
