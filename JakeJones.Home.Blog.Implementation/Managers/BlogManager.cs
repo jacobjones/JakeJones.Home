@@ -29,6 +29,11 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 			return await _postRepository.GetAsync(isPublished, count, skip);
 		}
 
+		public async Task<IEnumerable<IPost>> GetAllAsync(bool isPublished)
+		{
+			return await _postRepository.GetAllAsync(isPublished);
+		}
+
 		public async Task<IPost> GetBySegmentAsync(string segment)
 		{
 			return await _postRepository.GetBySegmentAsync(segment);

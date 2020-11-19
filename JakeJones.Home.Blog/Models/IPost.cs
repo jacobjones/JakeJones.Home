@@ -1,8 +1,12 @@
-﻿using System;
+﻿using JakeJones.Home.Core.Infrastructure.Json;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace JakeJones.Home.Blog.Models
 {
+	// This is required because of a bug with NEST versions < 6
+	[JsonConverter(typeof(ConcreteTypeConverter<Post>))]
 	public interface IPost
 	{
 		int Id { get; set; }

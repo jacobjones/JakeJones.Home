@@ -7,6 +7,7 @@ using JakeJones.Home.Core.Implementation.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
 using JakeJones.Home.Music.Implementation.Bootstrappers;
+using JakeJones.Home.Search.DataAccess.Elasticsearch.Bootstrappers;
 using JakeJones.Home.Website.Infrastructure;
 using JakeJones.Home.Website.Infrastructure.Rewrite;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -65,6 +66,7 @@ namespace JakeJones.Home.Website
 			BlogDataAccessBootstrapper.Register(services, Configuration);
 			BooksDataAccessBootstrapper.Register(services);
 			BooksImplementationBootstrapper.Register(services);
+			SearchDataAccessBootstrapper.Register(services, Configuration);
 
 			MusicAlbumsDataAccessBootstrapper.Register(services, Configuration);
 			MusicTracksDataAccessBootstrapper.Register(services, Configuration);

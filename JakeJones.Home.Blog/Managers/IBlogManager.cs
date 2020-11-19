@@ -8,6 +8,8 @@ namespace JakeJones.Home.Blog.Managers
 	{
 		Task<IEnumerable<IPost>> GetAsync(int count, int skip = 0);
 
+		Task<IEnumerable<IPost>> GetAllAsync(bool isPublished);
+
 		Task<IPost> GetBySegmentAsync(string segment);
 
 		Task<IPost> GetByIdAsync(int id);

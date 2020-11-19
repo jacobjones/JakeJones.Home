@@ -8,6 +8,8 @@ namespace JakeJones.Home.Blog.Repositories
 	{
 		Task<IEnumerable<IPost>> GetAsync(bool isPublished, int count, int skip = 0);
 
+		Task<IEnumerable<IPost>> GetAllAsync(bool isPublished);
+
 		Task<IEnumerable<IPost>> GetByTagAsync(string tag);
 
 		Task<IPost> GetBySegmentAsync(string segment);

@@ -29,6 +29,9 @@
     <ProjectReference Include="..\JakeJones.Home.Music.DataAccess.LastFm\JakeJones.Home.Music.DataAccess.LastFm.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music.Implementation\JakeJones.Home.Music.Implementation.csproj" />
     <ProjectReference Include="..\JakeJones.Home.Music\JakeJones.Home.Music.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Search.DataAccess.Elasticsearch\JakeJones.Home.Search.DataAccess.Elasticsearch.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Search.Implementation\JakeJones.Home.Search.Implementation.csproj" />
+    <ProjectReference Include="..\JakeJones.Home.Search\JakeJones.Home.Search.csproj" />
   </ItemGroup>
 
   <ItemGroup>

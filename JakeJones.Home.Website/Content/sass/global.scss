@@ -101,14 +101,14 @@ a {
 
 	&__item {
 		&--primary {
-			/*width: 40%;
-			flex: 0 0 40%;*/
+			width: 40%;
+			flex: 0 0 40%;
 			border-left-width: 0;
 
-			/*@include breakpoint(mobile) {
+			@include breakpoint(mobile) {
 				width: auto;
 				flex: 1;
-			}*/
+			}
 		}
 
 		&--search {

@@ -31,6 +31,18 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTimeOffset.MaxValue).Skip(skip).Take(count).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
 		}
 
+		public virtual async Task<IEnumerable<IPost>> GetAllAsync(bool isPublished)
+		{
+			if (isPublished)
+			{
+				return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTimeOffset.MaxValue)
+					.Where(x => x.IsPublished).ToListAsync()).Select(x => _mapper.Map<IPost>(x));
+			}
+
+			return (await _context.Posts.OrderByDescending(x => x.PublishDate ?? DateTimeOffset.MaxValue).ToListAsync())
+				.Select(x => _mapper.Map<IPost>(x));
+		}
+
 		public async Task<IEnumerable<IPost>> GetByTagAsync(string tag)
 		{
 			if (string.IsNullOrEmpty(tag))
