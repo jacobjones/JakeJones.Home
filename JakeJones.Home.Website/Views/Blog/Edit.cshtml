@@ -1,6 +1,6 @@
 ﻿@model JakeJones.Home.Blog.Implementation.Models.PostEditViewModel
 @{
-	ViewData["BodyClass"] = "blog blog--post edit";
+	ViewData["BodyClass"] = "blog blog--edit";
 
 	bool isNew = string.IsNullOrEmpty(Model.Title);
 	var host = Context.Request.Host.ToString();
@@ -11,41 +11,44 @@
 		<link rel="stylesheet" href="~/css/admin.scss" />
 	}*@
 
-<form method="post" id="edit" class="container" asp-controller="Blog" asp-action="UpdatePost">
-	<div asp-validation-summary="All"></div>
+<form class="blog-form" method="post" id="edit" class="container" asp-controller="Blog" asp-action="UpdatePost">
+	<div class="blog-form__validation" asp-validation-summary="All"></div>
 	<input type="hidden" asp-for="@Model.Id" />
 
-	<label asp-for="@Model.Title" class="label">Title</label>
-	<input asp-for="@Model.Title" required placeholder="Title of blog post" aria-describedby="desc_title" />
-	<span class="desc" id="desc_title">The title as it appears on the website</span>
-	<br />
+	<div class="blog-form__group">
+		<label class="blog-form__label" asp-for="@Model.Title" class="label">Title</label>
+		<input class="blog-form__text" asp-for="@Model.Title" required placeholder="Title of blog post" aria-describedby="desc_title" />
+	</div>
 
-	<label asp-for="@Model.Segment" class="label">Slug</label>
-	<input asp-for="@Model.Segment" placeholder="The URL name" aria-describedby="desc_slug" />
-	<span class="desc" id="desc_slug">The part of the URL that identifies this blog post</span>
-	<br />
+	<div class="blog-form__group">
+		<label class="blog-form__label" asp-for="@Model.Segment" class="label">Slug</label>
+		<input  class="blog-form__text" asp-for="@Model.Segment" placeholder="The URL name" aria-describedby="desc_slug" />
+	</div>
 
 	@*<label for="categories" class="label">Tags</label>
 		<input type="text" name="categories" id="categories" value="@string.Join(", ", Model.Categories)" aria-describedby="desc_categories" />
 		<span class="desc" id="desc_categories">A comma separated list of keywords</span>
 		<br />*@
 
-	<label asp-for="@Model.Excerpt" class="label">Excerpt</label>
-	<textarea asp-for="@Model.Excerpt" rows="3" placeholder="Short description of blog post" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
-	<span class="desc" id="desc_excerpt">A brief description of the content of the post</span>
-	<br />
+	<div class="blog-form__group">
+		<label class="blog-form__label" asp-for="@Model.Excerpt" class="label">Excerpt</label>
+		<textarea  class="blog-form__textarea" asp-for="@Model.Excerpt" rows="3" placeholder="Short description of blog post" aria-describedby="desc_excerpt">@Model.Excerpt</textarea>
+	</div>
 
-	<textarea asp-for="@Model.Content" rows="20" aria-label="Content">@Model.Content</textarea>
-	<br />
+	<div class="blog-form__group blog-form__group--labelless">
+		<textarea asp-for="@Model.Content" rows="20" aria-label="Content">@Model.Content</textarea>
+	</div>
 
-	<input type="submit" value="Save" title="Save the post" />
+	<input class="blog-form__button blog-form__button--save" type="submit" value="💾 Save" title="Save the post" />
 
-	<input asp-for="@Model.IsPublished" />
-	<label asp-for="@Model.IsPublished">Is published</label>
+	<div class="blog-form__group blog-form__group--publish">
+		<input asp-for="@Model.IsPublished" />
+		<label asp-for="@Model.IsPublished">Published</label>
+	</div>
 
 	@if (!isNew)
 	{
-		<input type="submit" value="Delete..." class="delete" title="Delete the post..." asp-action="Delete" asp-route-id="@Model.Id" />
+		<input class="blog-form__button blog-form__button--delete" type="submit" value="🗑️ Delete" title="Delete the post..." asp-action="Delete" asp-route-id="@Model.Id" />
 	}
 </form>
 

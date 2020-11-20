@@ -1,0 +1,59 @@
+﻿@import "breakpoints";
+
+.blog--edit {
+	margin: calc(2rem + 50px) auto 150px;
+	padding: 0 18px;
+	max-width: 900px;
+
+	@include breakpoint(mobile) {
+		margin-top: calc(4rem + 50px);
+	}
+}
+
+.blog-form {
+	&__group {
+		margin-bottom: 1rem;
+		display: block;
+		max-width: 100%;
+
+		&--publish {
+			float: left;
+			margin-top: .6rem;
+			margin-left: 1rem;
+		}
+	}
+
+	&__label {
+		vertical-align: top;
+		margin-bottom: .5rem;
+		margin-top: .5rem;
+		display: inline-block;
+		min-width: 4rem;
+		line-height: 1rem;
+	}
+
+	&__text {
+		width: 30rem;
+		max-width: 100%;
+	}
+
+	&__textarea {
+		width: 30rem;
+		max-width: 100%;
+	}
+
+	&__button {
+		&--save {
+			float: left;
+		}
+
+		&--delete {
+			float: right;
+		}
+	}
+}
+
+/* Make sure we're not screwing up our font in TinyMCE*/
+.mce-container, .mce-container *, .mce-widget, .mce-widget *, .mce-reset {
+	font-feature-settings: normal;
+}

@@ -1,8 +1,8 @@
 ﻿ready(function () {
-	if (pageIs("edit")) {
+	if (pageIs("blog--edit")) {
 		tinymce.init({
 			selector: '#Content',
-			autoresize_min_height: 200,
+			autoresize_min_height: 500,
 			plugins: 'codesample autosave preview searchreplace visualchars image link media fullscreen code codesample table hr pagebreak autoresize nonbreaking anchor insertdatetime advlist lists textcolor wordcount imagetools colorpicker',
 			menubar: "edit view format insert table",
 			toolbar1: 'codesample | formatselect | bold italic blockquote forecolor backcolor | imageupload link | alignleft aligncenter alignright  | numlist bullist outdent indent | fullscreen',
