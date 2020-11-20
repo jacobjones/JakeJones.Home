@@ -10,7 +10,7 @@
 			autoresize_bottom_margin: 0,
 			paste_data_images: false,
 			image_advtab: true,
-			//file_picker_types: 'image',
+			image_dimensions: false,
 			relative_urls: false,
 			convert_urls: false,
 			branding: false,
