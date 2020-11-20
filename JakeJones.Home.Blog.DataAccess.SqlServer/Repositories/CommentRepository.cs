@@ -74,5 +74,18 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Repositories
 			_context.Comments.Remove(commentEntity);
 			await _context.SaveChangesAsync();
 		}
+
+		public virtual async Task DeleteByPostIdAsync(int postId)
+		{
+			var comments = await _context.Comments.Where(x => x.Post.Id == postId).ToListAsync();
+
+			if (comments == null)
+			{
+				return;
+			}
+
+			_context.Comments.RemoveRange(comments);
+			await _context.SaveChangesAsync();
+		}
 	}
 }

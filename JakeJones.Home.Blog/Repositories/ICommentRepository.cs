@@ -13,5 +13,7 @@ namespace JakeJones.Home.Blog.Repositories
 		Task<int> AddAsync(IComment comment);
 
 		Task DeleteAsync(IComment comment);
+
+		Task DeleteByPostIdAsync(int postId);
 	}
 }

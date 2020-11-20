@@ -12,12 +12,15 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 	internal class BlogManager : IBlogManager
 	{
 		private readonly IPostRepository _postRepository;
+		private readonly ICommentRepository _commentRepository;
 		private readonly ISegmentGenerator _segmentGenerator;
 		private readonly IUserManager _userManager;
 
-		public BlogManager(IPostRepository postRepository, ISegmentGenerator segmentGenerator, IUserManager userManager)
+		public BlogManager(IPostRepository postRepository, ICommentRepository commentRepository,
+			ISegmentGenerator segmentGenerator, IUserManager userManager)
 		{
 			_postRepository = postRepository;
+			_commentRepository = commentRepository;
 			_segmentGenerator = segmentGenerator;
 			_userManager = userManager;
 		}
@@ -74,6 +77,8 @@ namespace JakeJones.Home.Blog.Implementation.Managers
 
 		public async Task DeleteAsync(int id)
 		{
+			await _commentRepository.DeleteByPostIdAsync(id);
+
 			await _postRepository.DeleteAsync(id);
 		}
 
