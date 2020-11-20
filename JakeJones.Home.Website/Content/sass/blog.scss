@@ -20,8 +20,26 @@
 }
 
 .post-entry {
+	/* Default styling for images inserted via TinyMCE */
 	img {
 		max-width: 100%;
+	}
+}
+
+/* An overlay that reveals on hover */
+.overlay-container {
+	position: relative;
+
+	&__overlay {
+		transition: .8s ease;
+		position: absolute;
+		top: 0;
+		left: 0;
+		opacity: 0;
+
+		:hover > & {
+			opacity: 1;
+		}
 	}
 }
 
