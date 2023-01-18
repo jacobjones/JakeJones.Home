@@ -52,7 +52,6 @@ BenchmarkDotNet.Artifacts/
 project.lock.json
 project.fragment.lock.json
 artifacts/
-**/Properties/launchSettings.json
 
 # StyleCop
 StyleCopReport.xml
@@ -324,10 +323,8 @@ ASALocalRun/
 *.nvuser
 
 # JSON settings files
-*.json
-!JakeJones.Home.Website/appsettings.json
-!gulp.config.json
-!package.json
+JakeJones.Home.Website/appsettings.Development.json
+
 
 JakeJones.Home.Website/wwwroot/css/
 JakeJones.Home.Website/wwwroot/js/
