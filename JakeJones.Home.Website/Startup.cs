@@ -8,10 +8,10 @@ using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
 using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
 using JakeJones.Home.Music.Implementation.Bootstrappers;
 using JakeJones.Home.Website.Infrastructure;
-using JakeJones.Home.Website.Infrastructure.Rewrite;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.Extensions.Configuration;
@@ -94,7 +94,7 @@ namespace JakeJones.Home.Website
 			app.UseHttpsRedirection();
 
 			var rewriteOptions = new RewriteOptions();
-			rewriteOptions.AddRedirectToNonWww();
+			rewriteOptions.AddRedirectToNonWww(StatusCodes.Status301MovedPermanently);
 			app.UseRewriter(rewriteOptions);
 
 			app.UseStaticFiles();

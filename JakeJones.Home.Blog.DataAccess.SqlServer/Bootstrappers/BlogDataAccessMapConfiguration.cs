@@ -9,10 +9,13 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
 		public BlogDataAccessMapConfiguration()
 		{
 			CreateMap<IPost, PostEntity>();
+			
+			CreateMap<PostEntity, Post>();
 			CreateMap<PostEntity, IPost>().As<Post>();
-
+			
 			CreateMap<IComment, CommentEntity>();
 
+			CreateMap<CommentEntity, Comment>();
 			CreateMap<CommentEntity, IComment>()
 				.As<Comment>();
 		}
