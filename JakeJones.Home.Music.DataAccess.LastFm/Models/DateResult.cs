@@ -1,11 +1,11 @@
 ﻿using System;
-using RestSharp.Deserializers;
+using System.Text.Json.Serialization;
 
 namespace JakeJones.Home.Music.DataAccess.LastFm.Models
 {
 	public class DateResult
 	{
-		[DeserializeAs(Name = "uts")]
+		[JsonPropertyName("uts")]
 		public DateTime Played { get; set; }
 	}
 }

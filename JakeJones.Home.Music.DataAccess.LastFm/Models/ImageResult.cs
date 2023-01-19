@@ -1,12 +1,14 @@
-﻿using RestSharp.Deserializers;
+﻿
+using System.Text.Json.Serialization;
 
 namespace JakeJones.Home.Music.DataAccess.LastFm.Models
 {
 	public class ImageResult
 	{
-		public ImageSizeResult Size { get; set; }
+		[JsonPropertyName("size")]
+		public ImageSizeResult? Size { get; set; }
 
-		[DeserializeAs(Name = "#text")]
+		[JsonPropertyName("#text")]
 		public string Url { get; set; }
 	}
 }

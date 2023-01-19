@@ -1,12 +1,13 @@
-﻿using RestSharp.Deserializers;
+﻿using System.Text.Json.Serialization;
 
 namespace JakeJones.Home.Music.DataAccess.LastFm.Models
 {
 	public class ArtistResult
 	{
+		[JsonPropertyName("mbid")]
 		public string Mbid { get; set; }
 
-		[DeserializeAs(Name = "#text")]
+		[JsonPropertyName("#text")]
 		public string Name { get; set; }
 	}
 }

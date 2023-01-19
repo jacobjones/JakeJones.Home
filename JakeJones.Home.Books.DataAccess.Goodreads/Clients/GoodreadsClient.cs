@@ -20,13 +20,6 @@ namespace JakeJones.Home.Books.DataAccess.Goodreads.Clients
 			};
 
 			_restClient = new RestClient(options);
-
-			//_restClient.Options.ConfigureMessageHandler
-
-			// Parsing the item array gave issues with the RestSharp XmlDeserializer,
-			// unfortunately this means we have to utilise the .Net one.
-			//_restClient.ClearHandlers();
-			//_restClient.AddHandler("application/xml", () => new DotNetXmlDeserializer());
 		}
 
 		public async Task<ICollection<ItemXmlModel>> GetBooksAsync(string bookShelf)

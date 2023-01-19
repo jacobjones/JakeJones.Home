@@ -323,7 +323,7 @@ ASALocalRun/
 *.nvuser
 
 # JSON settings files
-JakeJones.Home.Website/appsettings.Development.json
+JakeJones.Home.Website/appsettings.*.json
 
 
 JakeJones.Home.Website/wwwroot/css/
