@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net.Cache;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using JakeJones.Home.Music.DataAccess.Discogs.Clients.UrlParameters;
 using JakeJones.Home.Music.DataAccess.Discogs.Configuration;
@@ -12,7 +13,7 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Clients
 	internal class DiscogsClient : IDiscogsClient
 	{
 		private readonly IDiscogsOptions _discogsOptions;
-		private readonly IRestClient _restClient;
+		private readonly RestClient _restClient;
 
 		private const string BaseUrl = "https://api.discogs.com/";
 
@@ -20,17 +21,19 @@ namespace JakeJones.Home.Music.DataAccess.Discogs.Clients
 		{
 			_discogsOptions = discogsOptions;
 
-			_restClient = new RestClient(BaseUrl)
+			var options = new RestClientOptions(BaseUrl)
 			{
-				CachePolicy = new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore),
+				CachePolicy = new CacheControlHeaderValue {NoCache = true, NoStore = true},
 				UserAgent = _discogsOptions.UserAgent,
-				Timeout = _discogsOptions.Timeout
+				MaxTimeout = _discogsOptions.Timeout
 			};
+
+			_restClient = new RestClient(options);
 		}
 
 		public async Task<SearchResult> SearchByAlbum(string artist, string title, int perPage, int currentPage)
 		{
-			var request = new RestRequest(ApiMethods.Search, Method.GET);
+			var request = new RestRequest(ApiMethods.Search);
 
 			request.AddParameter("key", _discogsOptions.ApiKey);
 			request.AddParameter("secret", _discogsOptions.ApiSecret);
