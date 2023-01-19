@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
+﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
 using JakeJones.Home.Blog.Implementation.Bootstrappers;
 using JakeJones.Home.Books.DataAccess.Goodreads.Bootstrappers;
 using JakeJones.Home.Books.Implementation.Bootstrappers;

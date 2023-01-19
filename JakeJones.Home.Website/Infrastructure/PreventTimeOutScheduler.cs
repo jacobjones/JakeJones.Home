@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Net;
+using System.Net.Http;
 using System.Threading;
 
 namespace JakeJones.Home.Website.Infrastructure
@@ -12,14 +12,21 @@ namespace JakeJones.Home.Website.Infrastructure
 		private bool _cancelled;
 		private int _pingFrequency = 60;
 
-		private readonly AutoResetEvent _waitHandle = new AutoResetEvent(false);
-		private readonly object _syncLock = new object();
+		private readonly AutoResetEvent _waitHandle = new(false);
+		private readonly object _syncLock = new();
+
+		private HttpClient _httpClient;
 
 		public void Start(int pingFrequency)
 		{
 			_pingFrequency = pingFrequency;
 			_cancelled = false;
 
+			_httpClient = new HttpClient
+			{
+				BaseAddress = new Uri("https://jakejon.es")
+			};
+			
 			var thread = new Thread(Run);
 			thread.Start();
 		}
@@ -32,9 +39,10 @@ namespace JakeJones.Home.Website.Infrastructure
 				{
 					return;
 				}
-
+				
 				_cancelled = true;
 				_waitHandle.Set();
+				_httpClient.Dispose();
 			}
 		}
 
@@ -47,11 +55,12 @@ namespace JakeJones.Home.Website.Infrastructure
 				_waitHandle.WaitOne(_pingFrequency * 1000, true);
 			}
 		}
-		public void PingServer()
+
+		private void PingServer()
 		{
 			try
 			{
-				new WebClient().DownloadString("http://jakejon.es/about");
+				_httpClient.GetStringAsync("about");
 			}
 			catch (Exception)
 			{
