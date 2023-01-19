@@ -2,13 +2,15 @@
 using JakeJones.Home.Music.Managers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JakeJones.Home.Music.Implementation.Bootstrappers
+namespace JakeJones.Home.Music.Implementation
 {
-	public static class MusicImplementationBootstrapper
+	public static class ServiceCollectionExtensions
 	{
-		public static void Register(IServiceCollection services)
+		public static IServiceCollection AddMusic(this IServiceCollection services)
 		{
 			services.AddSingleton<IRecentMusicManager, RecentMusicManager>();
+
+			return services;
 		}
 	}
 }

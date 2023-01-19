@@ -2,7 +2,7 @@
 using JakeJones.Home.Blog.DataAccess.SqlServer.Models;
 using JakeJones.Home.Blog.Models;
 
-namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
+namespace JakeJones.Home.Blog.DataAccess.SqlServer.Configuration
 {
 	public class BlogDataAccessMapConfiguration : Profile
 	{

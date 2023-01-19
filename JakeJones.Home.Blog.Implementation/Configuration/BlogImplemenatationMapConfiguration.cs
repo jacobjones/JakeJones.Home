@@ -1,13 +1,13 @@
-﻿using AutoMapper;
+﻿using System;
+using AutoMapper;
 using JakeJones.Home.Blog.Implementation.Models;
 using JakeJones.Home.Blog.Models;
-using System;
 
-namespace JakeJones.Home.Blog.Implementation.Bootstrappers
+namespace JakeJones.Home.Blog.Implementation.Configuration
 {
-	public class BlogImplemenatationMapConfiguration : Profile
+	public class BlogImplementationMapConfiguration : Profile
 	{
-		public BlogImplemenatationMapConfiguration()
+		public BlogImplementationMapConfiguration()
 		{
 			CreateMap<DateTimeOffset, DateTime>().ConvertUsing(new DateTimeOffsetConverter());
 			CreateMap<DateTimeOffset?, DateTime?>().ConvertUsing(new NullableDateTimeOffsetConverter());

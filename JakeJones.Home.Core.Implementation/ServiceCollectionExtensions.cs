@@ -11,19 +11,19 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
 
-namespace JakeJones.Home.Core.Implementation.Bootstrappers
+namespace JakeJones.Home.Core.Implementation
 {
-	public static class CoreImplementationBootstrapper
+	public static class ServiceCollectionExtensions
 	{
-		public static void Register(IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
+		public static IServiceCollection AddCore(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment env)
 		{
 			services.Configure<LoginOptions>(configuration.GetSection("user"));
-			services.AddSingleton<ILoginOptions>(x => x.GetService<IOptions<LoginOptions>>().Value);
+			services.AddSingleton<ILoginOptions>(x => x.GetRequiredService<IOptions<LoginOptions>>().Value);
 
 			services.Configure<NotificationOptions>(configuration.GetSection("notification"));
-			services.AddSingleton<INotificationOptions>(x => x.GetService<IOptions<NotificationOptions>>().Value);
+			services.AddSingleton<INotificationOptions>(x => x.GetRequiredService<IOptions<NotificationOptions>>().Value);
 
-			services.AddSingleton<IHoneypotOptions>(x => x.GetService<IOptions<HoneypotOptions>>().Value);
+			services.AddSingleton<IHoneypotOptions>(x => x.GetRequiredService<IOptions<HoneypotOptions>>().Value);
 
 			services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -32,6 +32,8 @@ namespace JakeJones.Home.Core.Implementation.Bootstrappers
 			services.AddSingleton<INotificationManager, EmailNotificationManager>();
 
 			services.AddSingleton<ISegmentGenerator, SegmentGenerator>();
+
+			return services;
 		}
 	}
 }

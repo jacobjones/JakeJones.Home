@@ -1,11 +1,13 @@
-﻿using JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers;
-using JakeJones.Home.Blog.Implementation.Bootstrappers;
-using JakeJones.Home.Books.DataAccess.Goodreads.Bootstrappers;
-using JakeJones.Home.Books.Implementation.Bootstrappers;
-using JakeJones.Home.Core.Implementation.Bootstrappers;
-using JakeJones.Home.Music.DataAccess.Discogs.Bootstrappers;
-using JakeJones.Home.Music.DataAccess.LastFm.Bootstrappers;
-using JakeJones.Home.Music.Implementation.Bootstrappers;
+﻿using JakeJones.Home.Blog.DataAccess.SqlServer;
+using JakeJones.Home.Blog.DataAccess.SqlServer.Configuration;
+using JakeJones.Home.Blog.Implementation;
+using JakeJones.Home.Blog.Implementation.Configuration;
+using JakeJones.Home.Books.DataAccess.Goodreads;
+using JakeJones.Home.Books.Implementation;
+using JakeJones.Home.Core.Implementation;
+using JakeJones.Home.Music.DataAccess.Discogs;
+using JakeJones.Home.Music.DataAccess.LastFm;
+using JakeJones.Home.Music.Implementation;
 using JakeJones.Home.Website.Infrastructure;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
@@ -56,18 +58,17 @@ namespace JakeJones.Home.Website
 			services.AddAutoMapper(cfg =>
 			{
 				cfg.AddProfile<BlogDataAccessMapConfiguration>();
-				cfg.AddProfile<BlogImplemenatationMapConfiguration>();
+				cfg.AddProfile<BlogImplementationMapConfiguration>();
 			});
 
-			CoreImplementationBootstrapper.Register(services, Configuration, Environment);
-			BlogImplementationBootstrapper.Register(services);
-			BlogDataAccessBootstrapper.Register(services, Configuration);
-			BooksDataAccessBootstrapper.Register(services);
-			BooksImplementationBootstrapper.Register(services);
-
-			MusicAlbumsDataAccessBootstrapper.Register(services, Configuration);
-			MusicTracksDataAccessBootstrapper.Register(services, Configuration);
-			MusicImplementationBootstrapper.Register(services);
+			services.AddCore(Configuration, Environment);
+			services.AddBlog();
+			services.AddBlogDataAccess(Configuration);
+			services.AddBooks();
+			services.AddBooksDataAccess();
+			services.AddMusic();
+			services.AddMusicAlbumsDataAccess(Configuration);
+			services.AddMusicTracksDataAccess(Configuration);
 		}
 
 		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

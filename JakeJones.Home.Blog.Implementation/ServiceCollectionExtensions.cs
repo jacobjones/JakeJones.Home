@@ -7,11 +7,11 @@ using JakeJones.Home.Blog.Managers;
 using JakeJones.Home.Blog.Resolvers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JakeJones.Home.Blog.Implementation.Bootstrappers
+namespace JakeJones.Home.Blog.Implementation
 {
-	public static class BlogImplementationBootstrapper
+	public static class ServiceCollectionExtensions
 	{
-		public static void Register(IServiceCollection services)
+		public static IServiceCollection AddBlog(this IServiceCollection services)
 		{
 			services.AddSingleton<IBlogOptions, BlogOptions>();
 			services.AddSingleton<IBlogUrlResolver, BlogUrlResolver>();
@@ -19,6 +19,8 @@ namespace JakeJones.Home.Blog.Implementation.Bootstrappers
 			services.AddScoped<IBlogManager, BlogManager>();
 			services.AddScoped<ICommentManager, CommentManager>();
 			services.AddScoped<IBlogRssFeedBuilder, BlogRssFeedBuilder>();
+
+			return services;
 		}
 	}
 }

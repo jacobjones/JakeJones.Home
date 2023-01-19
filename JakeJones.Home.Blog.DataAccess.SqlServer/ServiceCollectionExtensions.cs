@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
+namespace JakeJones.Home.Blog.DataAccess.SqlServer
 {
-	public static class BlogDataAccessBootstrapper
+	public static class ServiceCollectionExtensions
 	{
-		public static void Register(IServiceCollection services, IConfiguration configuration)
+		public static IServiceCollection AddBlogDataAccess(this IServiceCollection services, IConfiguration configuration)
 		{
 			// TODO: Move this out eventually
 			services.AddLazyCache();
@@ -17,6 +17,8 @@ namespace JakeJones.Home.Blog.DataAccess.SqlServer.Bootstrappers
 
 			services.AddScoped<IPostRepository, PostRepositoryCachingProxy>();
 			services.AddScoped<ICommentRepository, CommentRepositoryCachingProxy>();
+
+			return services;
 		}
 	}
 }
